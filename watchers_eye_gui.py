@@ -72,7 +72,18 @@ class PriceWorker(QObject):
                             {"id": mod1, "disabled": False},
                             {"id": mod2, "disabled": False}
                         ]
-                    }]
+                    }],
+                    "filters": {        
+                        "trade_filters": {
+                            "disabled": False,
+                            "filters": {
+                                "price": {
+                                    "option": "divine"
+                                }
+                            }
+                        }
+
+                    }
                 },
                 "sort": {"price": "asc"}
             }
