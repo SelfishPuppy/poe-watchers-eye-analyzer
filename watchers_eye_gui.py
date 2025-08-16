@@ -2,7 +2,6 @@ import sys
 import asyncio
 import aiohttp
 import json
-from time import time, sleep
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QPushButton,
     QTableWidget, QTableWidgetItem, QLabel, QMessageBox, QTextEdit, QHBoxLayout
@@ -23,6 +22,7 @@ class PriceWorker(QObject):
         self.running = True
         self.paused = False
         self.single_mode = False
+        self.results = []
 
     def start(self):
         asyncio.run(self.sequential_fetch_loop())
@@ -47,14 +47,16 @@ class PriceWorker(QObject):
                     mod1 = mod
                     self.status_update.emit(f"Fetching: {MOD_NAMES[mod1]}")
                     avg_price = await self.query_price_single(session, mod1)
-                    self.result_ready.emit(avg_price if avg_price else 0.0, MOD_NAMES[mod1], "-")
-                    self.save_to_file(mod1, None, avg_price if avg_price else 0.0)
+                    self.result_ready.emit(avg_price or 0.0, MOD_NAMES[mod1], "-")
+                    self.add_result(mod1, None, avg_price or 0.0)
                 else:
                     mod1, mod2 = mod
                     self.status_update.emit(f"Fetching: {MOD_NAMES[mod1]} + {MOD_NAMES[mod2]}")
                     avg_price = await self.query_price(session, mod1, mod2)
-                    self.result_ready.emit(avg_price if avg_price else 0.0, MOD_NAMES[mod1], MOD_NAMES[mod2])
-                    self.save_to_file(mod1, mod2, avg_price if avg_price else 0.0)
+                    self.result_ready.emit(avg_price or 0.0, MOD_NAMES[mod1], MOD_NAMES[mod2])
+                    self.add_result(mod1, mod2, avg_price or 0.0)
+
+                self.update_results_file()
 
                 for remaining in range(10, 0, -1):
                     self.countdown_update.emit(remaining)
@@ -73,24 +75,26 @@ class PriceWorker(QObject):
                             {"id": mod2, "disabled": False}
                         ]
                     }],
-                    "filters": {        
+                    "filters": {
                         "trade_filters": {
                             "disabled": False,
                             "filters": {
-                                "price": {
-                                    "option": "divine"
-                                }
+                                "price": {"option": "divine"}
                             }
                         }
-
                     }
                 },
                 "sort": {"price": "asc"}
             }
             url = "https://www.pathofexile.com/api/trade/search/Mercenaries"
-            self.debug_message.emit(f"\n[SEARCH] {MOD_NAMES[mod1]} + {MOD_NAMES[mod2]}\n{json.dumps(payload)}")
+            self.debug_message.emit(f"\\n[SEARCH] {MOD_NAMES[mod1]} + {MOD_NAMES[mod2]}\\n{json.dumps(payload)}")
 
             async with session.post(url, json=payload) as r:
+                if r.status == 429:
+                    wait_time = int(r.headers.get("Retry-After", 10))
+                    self.debug_message.emit(f"Rate limit hit. Waiting {wait_time}s...")
+                    await asyncio.sleep(wait_time)
+                    return await self.query_price(session, mod1, mod2)
                 if r.status != 200:
                     self.debug_message.emit(f"Search Error: {r.status}")
                     return None
@@ -104,19 +108,21 @@ class PriceWorker(QObject):
             self.debug_message.emit(f"[FETCH] {fetch_url}")
 
             async with session.get(fetch_url) as r:
+                if r.status == 429:
+                    wait_time = int(r.headers.get("Retry-After", 10))
+                    self.debug_message.emit(f"Rate limit hit (fetch). Waiting {wait_time}s...")
+                    await asyncio.sleep(wait_time)
+                    return await self.query_price(session, mod1, mod2)
                 if r.status != 200:
                     self.debug_message.emit(f"Fetch Error: {r.status}")
                     return None
                 data = await r.json()
 
-            prices = []
-            for item in data.get("result", []):
-                try:
-                    price = item["listing"]["price"]
-                    if price["currency"] == "divine":
-                        prices.append(price["amount"])
-                except KeyError:
-                    continue
+            prices = [
+                item["listing"]["price"]["amount"]
+                for item in data.get("result", [])
+                if item["listing"]["price"]["currency"] == "divine"
+            ]
 
             return sum(prices) / len(prices) if prices else None
 
@@ -131,9 +137,7 @@ class PriceWorker(QObject):
                     "status": {"option": "online"},
                     "stats": [{
                         "type": "and",
-                        "filters": [
-                            {"id": mod1, "disabled": False}
-                        ]
+                        "filters": [{"id": mod1, "disabled": False}]
                     }],
                     "filters": {
                         "misc_filters": {
@@ -143,24 +147,25 @@ class PriceWorker(QObject):
                                 "ilvl": {"min": 86}
                             }
                         },
-                        
                         "trade_filters": {
                             "disabled": False,
                             "filters": {
-                                "price": {
-                                    "option": "divine"
-                                }
+                                "price": {"option": "divine"}
                             }
                         }
-
                     }
                 },
                 "sort": {"price": "asc"}
             }
             url = "https://www.pathofexile.com/api/trade/search/Mercenaries"
-            self.debug_message.emit(f"\n[SEARCH SINGLE] {MOD_NAMES[mod1]}\n{json.dumps(payload)}")
+            self.debug_message.emit(f"\\n[SEARCH SINGLE] {MOD_NAMES[mod1]}\\n{json.dumps(payload)}")
 
             async with session.post(url, json=payload) as r:
+                if r.status == 429:
+                    wait_time = int(r.headers.get("Retry-After", 10))
+                    self.debug_message.emit(f"Rate limit hit. Waiting {wait_time}s...")
+                    await asyncio.sleep(wait_time)
+                    return await self.query_price_single(session, mod1)
                 if r.status != 200:
                     self.debug_message.emit(f"Search Error: {r.status}")
                     return None
@@ -174,19 +179,21 @@ class PriceWorker(QObject):
             self.debug_message.emit(f"[FETCH SINGLE] {fetch_url}")
 
             async with session.get(fetch_url) as r:
+                if r.status == 429:
+                    wait_time = int(r.headers.get("Retry-After", 10))
+                    self.debug_message.emit(f"Rate limit hit (fetch). Waiting {wait_time}s...")
+                    await asyncio.sleep(wait_time)
+                    return await self.query_price_single(session, mod1)
                 if r.status != 200:
                     self.debug_message.emit(f"Fetch Error: {r.status}")
                     return None
                 data = await r.json()
 
-            prices = []
-            for item in data.get("result", []):
-                try:
-                    price = item["listing"]["price"]
-                    if price["currency"] == "divine":
-                        prices.append(price["amount"])
-                except KeyError:
-                    continue
+            prices = [
+                item["listing"]["price"]["amount"]
+                for item in data.get("result", [])
+                if item["listing"]["price"]["currency"] == "divine"
+            ]
 
             return sum(prices) / len(prices) if prices else None
 
@@ -194,17 +201,20 @@ class PriceWorker(QObject):
             self.debug_message.emit(f"Exception: {str(e)}")
             return None
 
-    def save_to_file(self, mod1, mod2, avg_price):
-        entry = {
+    def add_result(self, mod1, mod2, avg_price):
+        self.results.append({
             "mod1": MOD_NAMES[mod1],
             "mod2": MOD_NAMES[mod2] if mod2 else None,
             "avg_price": round(avg_price, 2)
-        }
+        })
+
+    def update_results_file(self):
         try:
-            with open("watcher_prices.json", "a", encoding="utf-8") as f:
-                f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+            with open("watcher_prices.json", "w", encoding="utf-8") as f:
+                json.dump(self.results, f, ensure_ascii=False, indent=2)
+            self.debug_message.emit("✅ Saved watcher_prices.json")
         except Exception as e:
-            self.debug_message.emit(f"File write error: {str(e)}")
+            self.debug_message.emit(f"❌ File write error: {str(e)}")
 
     def stop(self):
         self.running = False
@@ -316,7 +326,7 @@ class PriceFetcher(QWidget):
         self.countdown_label.setText(f"Waiting: {seconds}s")
 
     def collect_debug(self, message):
-        self.debug_info += message + "\n"
+        self.debug_info += message + "\\n"
 
     def show_debug_info(self):
         msg = QMessageBox()
