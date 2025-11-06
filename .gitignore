@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .env
 .DS_Store
+config/google_credentials.json
+config/google_token.json
+config/google_sheets_config.json

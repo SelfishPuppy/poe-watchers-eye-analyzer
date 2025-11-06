@@ -9,11 +9,9 @@
 # UI structure left unchanged
 
 import sys
-import os
 import asyncio
 import sqlite3
 import aiohttp
-import json
 import time
 import uuid
 from datetime import datetime
@@ -30,11 +28,10 @@ from watchers_eye_db import ensure_database, export_batch_to_csv
 
 DIVINE_TO_CHAOS_RATE = 100.0
 SINGLE_MODS = list(MOD_NAMES.keys())
-DOUBLE_RESULTS_FILE = "watcher_prices_double.json"
-SINGLE_RESULTS_FILE = "watcher_prices_single.json"
 NAME_TO_MOD_ID = {name: mod_id for mod_id, name in MOD_NAMES.items()}
 DATABASE_PATH = Path("data/watchers_eye.db")
 EXPORT_DIR = Path("exports")
+UPLOAD_ERROR_LOG = Path("watcher_upload_errors.log")
 
 class PriceWorker(QObject):
     result_ready = pyqtSignal(float, float, str, str, int)
@@ -85,6 +82,10 @@ class PriceWorker(QObject):
         self._db_conn = None
         self._batch_finalized = False
         self.export_dir = EXPORT_DIR
+        self.upload_error_log = UPLOAD_ERROR_LOG
+        self.single_price_lookup = {}
+        self.latest_single_batch_id = None
+        self.resuming_existing_batch = False
 
     def prepare_for_run(self):
         """Load previously saved results and cache completed modifier keys."""
@@ -96,32 +97,42 @@ class PriceWorker(QObject):
         self.batch_id = self._generate_batch_id()
         self.batch_started_at = datetime.utcnow().isoformat()
         self._batch_finalized = False
-        results_file = self._current_results_file()
-        loaded_results = []
-        if os.path.exists(results_file):
-            try:
-                with open(results_file, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                if isinstance(data, list):
-                    loaded_results = data
-                    for entry in data:
-                        key = self._extract_key_from_entry(entry)
-                        if key:
-                            self.completed_keys.add(key)
-                else:
-                    self._emit_debug(f"Ignoring malformed results file: {results_file}")
-            except Exception as exc:
-                self._emit_debug(f"Failed to load cached results: {exc}")
-        self.results = list(loaded_results)
+        if not self.single_mode:
+            self._load_latest_single_prices()
+        else:
+            self.single_price_lookup = {}
+            self.latest_single_batch_id = None
+        display_results = []
+        resume_info = self._get_unfinished_batch_info()
+
+        if resume_info:
+            self.resuming_existing_batch = True
+            self.batch_id = resume_info["batch_id"]
+            self.batch_started_at = resume_info["started_at"]
+            self.league = resume_info["league"]
+            self.divine_to_chaos_rate = resume_info["divine_rate"]
+            self.results = self._load_batch_results(self.batch_id, use_mode=self.single_mode)
+            display_results = list(self.results)
+            for entry in self.results:
+                key = self._extract_key_from_entry(entry)
+                if key:
+                    self.completed_keys.add(key)
+            self._emit_debug(f"Resuming unfinished batch {self.batch_id}.")
+        else:
+            self.batch_id = self._generate_batch_id()
+            self.batch_started_at = datetime.utcnow().isoformat()
+            self.results = []
+            latest_batch = self._get_latest_batch_info()
+            if latest_batch:
+                display_results = self._load_batch_results(latest_batch["batch_id"], use_mode=self.single_mode)
+            self._emit_debug(f"Starting new batch {self.batch_id} for league={self.league}.")
+            self.resuming_existing_batch = False
+
         self._emit_debug(
             f"Prepared run with {len(self.completed_keys)} previously completed modifiers "
             f"(single_mode={self.single_mode}, rate={self.divine_to_chaos_rate})."
         )
-        self._emit_debug(f"Starting new batch {self.batch_id} for league={self.league}.")
-        return list(self.results)
-
-    def _current_results_file(self):
-        return SINGLE_RESULTS_FILE if self.single_mode else DOUBLE_RESULTS_FILE
+        return list(display_results)
 
     def _emit_debug(self, message):
         timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -221,6 +232,9 @@ class PriceWorker(QObject):
     def _create_batch_record(self):
         if not self._db_conn or not self.batch_id:
             return
+        if getattr(self, "resuming_existing_batch", False):
+            self._emit_debug(f"Using existing batch record {self.batch_id}.")
+            return
         run_mode = "single" if self.single_mode else "double"
         started_at = self.batch_started_at or datetime.utcnow().isoformat()
         try:
@@ -264,6 +278,224 @@ class PriceWorker(QObject):
         except Exception as exc:
             self._emit_debug(f"Failed to export batch {self.batch_id}: {exc}")
             return None
+
+    def _sync_to_google_sheets(self, csv_path):
+        mode = "single" if self.single_mode else "double"
+        try:
+            from google_drive_sync import (
+                GoogleSheetsConfigError,
+                upload_csv_to_google_sheet,
+            )
+        except ImportError as exc:
+            message = f"Google sync skipped (missing dependency): {exc}"
+            self._emit_debug(message)
+            self._write_upload_error(message)
+            return
+
+        try:
+            upload_csv_to_google_sheet(csv_path, mode)
+            self._emit_debug(f"Uploaded {csv_path} to Google Sheets ({mode} sheet).")
+        except GoogleSheetsConfigError as exc:
+            message = f"Google Sheets configuration error: {exc}"
+            self._emit_debug(message)
+            self._write_upload_error(message)
+        except Exception as exc:
+            message = f"Google Sheets upload failed: {exc}"
+            self._emit_debug(message)
+            self._write_upload_error(message)
+
+    def _write_upload_error(self, message):
+        try:
+            timestamp = datetime.utcnow().isoformat()
+            with open(self.upload_error_log, "a", encoding="utf-8") as log_file:
+                log_file.write(f"[{timestamp}] {message}\n")
+        except Exception:
+            pass
+
+    def _load_latest_single_prices(self):
+        self.single_price_lookup = {}
+        self.latest_single_batch_id = None
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                row = conn.execute(
+                    """
+                    SELECT batch_id
+                    FROM batches
+                    WHERE run_mode = 'single' AND finished_at IS NOT NULL
+                    ORDER BY started_at DESC
+                    LIMIT 1
+                    """
+                ).fetchone()
+                if not row:
+                    self._emit_debug("No completed single batches available for fallback pricing.")
+                    return
+                batch_id = row[0]
+                data = conn.execute(
+                    """
+                    SELECT mod_id, avg_divine, avg_chaos
+                    FROM prices_single
+                    WHERE batch_id = ?
+                    ORDER BY recorded_at DESC
+                    """,
+                    (batch_id,),
+                ).fetchall()
+        except Exception as exc:
+            self._emit_debug(f"Failed to load fallback single prices: {exc}")
+            return
+
+        for mod_id, avg_div, avg_chaos in data:
+            if mod_id not in self.single_price_lookup:
+                self.single_price_lookup[mod_id] = (float(avg_div), float(avg_chaos))
+        self.latest_single_batch_id = batch_id
+        self._emit_debug(
+            f"Loaded {len(self.single_price_lookup)} fallback single prices from batch {batch_id}."
+        )
+
+    def _get_unfinished_batch_info(self):
+        return self._fetch_batch_info(unfinished_only=True)
+
+    def _get_latest_batch_info(self):
+        return self._fetch_batch_info(unfinished_only=False)
+
+    def _fetch_batch_info(self, unfinished_only):
+        mode = "single" if self.single_mode else "double"
+        query = """
+            SELECT batch_id, league, divine_rate, started_at, finished_at
+            FROM batches
+            WHERE run_mode = ?
+        """
+        params = [mode]
+        if unfinished_only is True:
+            query += " AND finished_at IS NULL"
+        query += " ORDER BY started_at DESC LIMIT 1"
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                row = conn.execute(query, params).fetchone()
+        except Exception as exc:
+            self._emit_debug(f"Failed to fetch batch info: {exc}")
+            return None
+        if not row:
+            return None
+        return {
+            "batch_id": row[0],
+            "league": row[1],
+            "divine_rate": row[2],
+            "started_at": row[3],
+            "finished_at": row[4],
+        }
+
+    def _load_batch_results(self, batch_id, use_mode=None):
+        if not batch_id:
+            return []
+        mode = self.single_mode if use_mode is None else use_mode
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                rate_row = conn.execute(
+                    "SELECT divine_rate FROM batches WHERE batch_id = ?",
+                    (batch_id,),
+                ).fetchone()
+                batch_rate = float(rate_row[0]) if rate_row and rate_row[0] is not None else self.divine_to_chaos_rate
+                if mode:
+                    rows = conn.execute(
+                        """
+                        SELECT mod_id, mod_name, avg_divine, avg_chaos, recorded_at
+                        FROM prices_single
+                        WHERE batch_id = ?
+                        ORDER BY recorded_at ASC
+                        """,
+                        (batch_id,),
+                    ).fetchall()
+                    return [
+                        {
+                            "mod1_id": mod_id,
+                            "mod1_name": mod_name,
+                            "mod2_id": None,
+                            "mod2_name": "-",
+                            "avg_price_divine": float(avg_div),
+                            "avg_price_chaos": float(avg_chaos),
+                            "divine_to_chaos_rate": batch_rate,
+                            "recorded_at": recorded_at,
+                            "batch_id": batch_id,
+                            "proxy_index": -1,
+                        }
+                        for mod_id, mod_name, avg_div, avg_chaos, recorded_at in rows
+                    ]
+                else:
+                    rows = conn.execute(
+                        """
+                        SELECT mod1_id, mod2_id, mod1_name, mod2_name,
+                               avg_divine, avg_chaos, recorded_at
+                        FROM prices_double
+                        WHERE batch_id = ?
+                        ORDER BY recorded_at ASC
+                        """,
+                        (batch_id,),
+                    ).fetchall()
+                    return [
+                        {
+                            "mod1_id": mod1,
+                            "mod1_name": mod1_name,
+                            "mod2_id": mod2,
+                            "mod2_name": mod2_name,
+                            "avg_price_divine": float(avg_div),
+                            "avg_price_chaos": float(avg_chaos),
+                            "divine_to_chaos_rate": batch_rate,
+                            "recorded_at": recorded_at,
+                            "batch_id": batch_id,
+                            "proxy_index": -1,
+                        }
+                        for mod1, mod2, mod1_name, mod2_name, avg_div, avg_chaos, recorded_at in rows
+                    ]
+        except Exception as exc:
+            self._emit_debug(f"Failed to load batch results for {batch_id}: {exc}")
+            return []
+
+    def _get_latest_single_price(self, mod_id):
+        if self.single_price_lookup:
+            price = self.single_price_lookup.get(mod_id)
+            if price:
+                return price
+        if not self._db_conn:
+            return None
+        try:
+            row = self._db_conn.execute(
+                """
+                SELECT avg_divine, avg_chaos
+                FROM prices_single
+                WHERE mod_id = ?
+                ORDER BY recorded_at DESC
+                LIMIT 1
+                """,
+                (mod_id,),
+            ).fetchone()
+        except Exception as exc:
+            self._emit_debug(f"Failed to load single price for {mod_id}: {exc}")
+            return None
+        if not row:
+            return None
+        return float(row[0]), float(row[1])
+
+    def _fallback_double_price(self, mod1, mod2):
+        price1 = self._get_latest_single_price(mod1)
+        price2 = self._get_latest_single_price(mod2)
+        candidates = []
+        if price1:
+            candidates.append(("mod1", *price1))
+        if price2:
+            candidates.append(("mod2", *price2))
+        if not candidates:
+            self._emit_debug(
+                f"No fallback single prices available for "
+                f"{MOD_NAMES.get(mod1)} + {MOD_NAMES.get(mod2)}"
+            )
+            return None
+        best = max(candidates, key=lambda item: (item[1], item[2]))
+        source, divine, chaos = best
+        self._emit_debug(
+            f"Using fallback ({source}) single price for "
+            f"{MOD_NAMES.get(mod1)} + {MOD_NAMES.get(mod2)}: {divine:.2f} div."
+        )
+        return float(divine), float(chaos)
 
     def load_proxies(self):
         try:
@@ -425,7 +657,6 @@ class PriceWorker(QObject):
                     self._emit_debug(f"Proxy {idx} completed fetch for {job_desc} with result: {avg_div:.2f} div.")
                     self.result_ready.emit(avg_div, avg_chaos, m1_name, m2_name, idx)
                     self.add_result(mod1, mod2 if not self.single_mode else None, avg_div, avg_chaos, idx)
-                    self.update_results_file()
                     self._set_proxy_state(idx, "ok")
                 else:
                     self._emit_debug(f"Proxy {idx} returned no price for {job_desc}")
@@ -493,7 +724,6 @@ class PriceWorker(QObject):
                     if avg_div is not None:
                         self.result_ready.emit(avg_div, avg_chaos, m1_name, m2_name, -1)
                         self.add_result(mod1, mod2 if not self.single_mode else None, avg_div, avg_chaos, None)
-                        self.update_results_file()
                     else:
                         self._emit_debug(f"Direct worker returned no price for {job_desc}")
                 except Exception as e:
@@ -589,6 +819,7 @@ class PriceWorker(QObject):
             export_path = self._export_batch_results()
             if export_path:
                 self.status_update.emit(f"Exported batch data to {export_path}")
+                self._sync_to_google_sheets(export_path)
 
     def start(self):
         # create and set event loop for thread
@@ -656,6 +887,9 @@ class PriceWorker(QObject):
 
             if not search_data.get("result"):
                 self._emit_debug(f"No search results for {job_desc}.")
+                fallback = self._fallback_double_price(mod1, mod2)
+                if fallback:
+                    return fallback
                 return None, None
 
             ids = search_data["result"][:self.listing_count]
@@ -693,6 +927,9 @@ class PriceWorker(QObject):
 
             if not prices_divine:
                 self._emit_debug(f"No prices parsed for {job_desc}.")
+                fallback = self._fallback_double_price(mod1, mod2)
+                if fallback:
+                    return fallback
                 return None, None
 
             avg_divine = sum(prices_divine) / len(prices_divine)
@@ -838,14 +1075,6 @@ class PriceWorker(QObject):
                     self._persist_double_price(mod1, mod2, avg_price_div, avg_price_chaos, recorded_at)
             except Exception as exc:
                 self._emit_debug(f"Database persistence failed for {key}: {exc}")
-
-    def update_results_file(self):
-        try:
-            with open(self._current_results_file(), "w", encoding="utf-8") as f:
-                json.dump(self.results, f, ensure_ascii=False, indent=2)
-            self._emit_debug(f"Saved {self._current_results_file()}")
-        except Exception as e:
-            self._emit_debug(f"File write error: {e}")
 
     def stop(self):
         self.running = False
