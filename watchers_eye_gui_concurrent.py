@@ -405,6 +405,7 @@ class PriceWorker(QObject):
                 break
 
             start_ts = time.time()
+            to_sleep = 0
             job_desc = ""
             retry_item = False
             try:
@@ -446,10 +447,10 @@ class PriceWorker(QObject):
                 # ensure at least proxy_loop_period seconds between requests per proxy
                 elapsed = time.time() - start_ts
                 to_sleep = max(0, self.proxy_loop_period - elapsed)
-                # if we are stopping, break early
-                if not self.running:
-                    break
-                await asyncio.sleep(to_sleep)
+
+            if not self.running:
+                break
+            await asyncio.sleep(to_sleep)
 
     async def _direct_worker(self):
         """Fallback worker when not using proxies. Multiple workers will process queue with a small sleep between tasks."""
@@ -473,6 +474,7 @@ class PriceWorker(QObject):
                     self.queue.task_done()
                     break
                 start_ts = time.time()
+                to_sleep = 0
                 job_desc = ""
                 retry_item = False
                 try:
@@ -504,7 +506,10 @@ class PriceWorker(QObject):
                         self._emit_debug(f"Requeued job {job_desc or item} after direct worker error.")
                     elapsed = time.time() - start_ts
                     # keep direct workers modestly paced
-                    await asyncio.sleep(max(0.5, 1.0 - elapsed))
+                    to_sleep = max(0.5, 1.0 - elapsed)
+                if not self.running:
+                    break
+                await asyncio.sleep(to_sleep)
         finally:
             try:
                 await session.close()

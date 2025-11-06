@@ -1320,3 +1320,842 @@
 [2025-11-06 13:58:59] Worker stopped and sessions closed
 [2025-11-06 13:58:59] Batch 20251106-115737-single-5b04 finalized at 2025-11-06T11:58:59.100179.
 [2025-11-06 13:58:59] Database connection closed.
+[2025-11-06 20:44:31] Failed to load cached results: Expecting value: line 1 column 1 (char 0)
+[2025-11-06 20:44:31] Prepared run with 0 previously completed modifiers (single_mode=True, rate=145.0).
+[2025-11-06 20:44:31] Starting new batch 20251106-184431-single-70b7 for league=Keepers.
+[2025-11-06 20:44:31] Queue populated with 87 items
+[2025-11-06 20:44:31] Opened database connection at data\watchers_eye.db.
+[2025-11-06 20:44:32] Batch 20251106-184431-single-70b7 recorded in database.
+[2025-11-06 20:44:32] Loaded 10 proxies
+[2025-11-06 20:44:32] Started 10 proxy workers
+[2025-11-06 20:44:32] Run started for 87 modifiers (single_mode=True, proxies=on, rate=145.0).
+[2025-11-06 20:44:32] Proxy worker 0 starting. Loop period=10s
+[2025-11-06 20:44:32] Created persistent session for proxy 0 (142.111.48.253:7030)
+[2025-11-06 20:44:32] Proxy 0 state -> ok
+[2025-11-06 20:44:32] [SEARCH SINGLE] proxy=0 +#% to Critical Strike Multiplier while affected by Precision
+[2025-11-06 20:44:32] Proxy worker 1 starting. Loop period=10s
+[2025-11-06 20:44:32] Created persistent session for proxy 1 (31.59.20.176:6754)
+[2025-11-06 20:44:32] Proxy 1 state -> ok
+[2025-11-06 20:44:32] [SEARCH SINGLE] proxy=1 #% increased Attack Speed while affected by Precision
+[2025-11-06 20:44:32] Proxy worker 2 starting. Loop period=10s
+[2025-11-06 20:44:32] Created persistent session for proxy 2 (23.95.150.145:6114)
+[2025-11-06 20:44:32] Proxy 2 state -> ok
+[2025-11-06 20:44:32] [SEARCH SINGLE] proxy=2 #% increased Attack Damage while affected by Precision
+[2025-11-06 20:44:32] Proxy worker 3 starting. Loop period=10s
+[2025-11-06 20:44:32] Created persistent session for proxy 3 (198.23.239.134:6540)
+[2025-11-06 20:44:32] Proxy 3 state -> ok
+[2025-11-06 20:44:32] [SEARCH SINGLE] proxy=3 #% increased Lightning Damage while affected by Wrath
+[2025-11-06 20:44:32] Proxy worker 4 starting. Loop period=10s
+[2025-11-06 20:44:32] Created persistent session for proxy 4 (45.38.107.97:6014)
+[2025-11-06 20:44:32] Proxy 4 state -> ok
+[2025-11-06 20:44:32] [SEARCH SINGLE] proxy=4 #% of Physical Damage Converted to Lightning Damage while affected by Wrath
+[2025-11-06 20:44:32] Proxy worker 5 starting. Loop period=10s
+[2025-11-06 20:44:32] Created persistent session for proxy 5 (107.172.163.27:6543)
+[2025-11-06 20:44:32] Proxy 5 state -> ok
+[2025-11-06 20:44:32] [SEARCH SINGLE] proxy=5 #% increased Critical Strike Chance while affected by Wrath
+[2025-11-06 20:44:32] Proxy worker 6 starting. Loop period=10s
+[2025-11-06 20:44:32] Created persistent session for proxy 6 (64.137.96.74:6641)
+[2025-11-06 20:44:32] Proxy 6 state -> ok
+[2025-11-06 20:44:32] [SEARCH SINGLE] proxy=6 Damage Penetrates #% Lightning Resistance while affected by Wrath
+[2025-11-06 20:44:32] Proxy worker 7 starting. Loop period=10s
+[2025-11-06 20:44:32] Created persistent session for proxy 7 (216.10.27.159:6837)
+[2025-11-06 20:44:32] Proxy 7 state -> ok
+[2025-11-06 20:44:32] [SEARCH SINGLE] proxy=7 Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath
+[2025-11-06 20:44:32] Proxy worker 8 starting. Loop period=10s
+[2025-11-06 20:44:32] Created persistent session for proxy 8 (142.111.67.146:5611)
+[2025-11-06 20:44:32] Proxy 8 state -> ok
+[2025-11-06 20:44:32] [SEARCH SINGLE] proxy=8 +#% to Critical Strike Chance while affected by Hatred
+[2025-11-06 20:44:32] Proxy worker 9 starting. Loop period=10s
+[2025-11-06 20:44:32] Created persistent session for proxy 9 (142.147.128.93:6593)
+[2025-11-06 20:44:32] Proxy 9 state -> ok
+[2025-11-06 20:44:32] [SEARCH SINGLE] proxy=9 Adds # to # Cold Damage while affected by Hatred
+[2025-11-06 20:44:32] [SEARCH SINGLE RESP] proxy=1 status=200 for #% increased Attack Speed while affected by Precision
+[2025-11-06 20:44:32] [SEARCH SINGLE RESP] proxy=4 status=200 for #% of Physical Damage Converted to Lightning Damage while affected by Wrath
+[2025-11-06 20:44:32] [SEARCH SINGLE RESP] proxy=6 status=200 for Damage Penetrates #% Lightning Resistance while affected by Wrath
+[2025-11-06 20:44:33] [FETCH SINGLE RESP] proxy=4 status=200 for #% of Physical Damage Converted to Lightning Damage while affected by Wrath
+[2025-11-06 20:44:33] [AVG SINGLE] #% of Physical Damage Converted to Lightning Damage while affected by Wrath: 0.57 div (83.0 chaos)
+[2025-11-06 20:44:33] Proxy 4 completed fetch for #% of Physical Damage Converted to Lightning Damage while affected by Wrath with result: 0.57 div.
+[2025-11-06 20:44:33] Saved watcher_prices_single.json
+[2025-11-06 20:44:33] [SEARCH SINGLE RESP] proxy=3 status=200 for #% increased Lightning Damage while affected by Wrath
+[2025-11-06 20:44:33] [SEARCH SINGLE RESP] proxy=9 status=200 for Adds # to # Cold Damage while affected by Hatred
+[2025-11-06 20:44:33] [SEARCH SINGLE RESP] proxy=2 status=200 for #% increased Attack Damage while affected by Precision
+[2025-11-06 20:44:33] [SEARCH SINGLE RESP] proxy=5 status=200 for #% increased Critical Strike Chance while affected by Wrath
+[2025-11-06 20:44:33] [FETCH SINGLE RESP] proxy=1 status=200 for #% increased Attack Speed while affected by Precision
+[2025-11-06 20:44:33] [AVG SINGLE] #% increased Attack Speed while affected by Precision: 1.77 div (256.0 chaos)
+[2025-11-06 20:44:33] Proxy 1 completed fetch for #% increased Attack Speed while affected by Precision with result: 1.77 div.
+[2025-11-06 20:44:33] Saved watcher_prices_single.json
+[2025-11-06 20:44:33] [FETCH SINGLE RESP] proxy=6 status=200 for Damage Penetrates #% Lightning Resistance while affected by Wrath
+[2025-11-06 20:44:33] [AVG SINGLE] Damage Penetrates #% Lightning Resistance while affected by Wrath: 2.00 div (290.0 chaos)
+[2025-11-06 20:44:33] Proxy 6 completed fetch for Damage Penetrates #% Lightning Resistance while affected by Wrath with result: 2.00 div.
+[2025-11-06 20:44:33] Saved watcher_prices_single.json
+[2025-11-06 20:44:33] [FETCH SINGLE RESP] proxy=3 status=200 for #% increased Lightning Damage while affected by Wrath
+[2025-11-06 20:44:33] [AVG SINGLE] #% increased Lightning Damage while affected by Wrath: 0.79 div (115.0 chaos)
+[2025-11-06 20:44:33] Proxy 3 completed fetch for #% increased Lightning Damage while affected by Wrath with result: 0.79 div.
+[2025-11-06 20:44:33] Saved watcher_prices_single.json
+[2025-11-06 20:44:33] [SEARCH SINGLE RESP] proxy=0 status=200 for +#% to Critical Strike Multiplier while affected by Precision
+[2025-11-06 20:44:33] [FETCH SINGLE RESP] proxy=9 status=200 for Adds # to # Cold Damage while affected by Hatred
+[2025-11-06 20:44:33] [AVG SINGLE] Adds # to # Cold Damage while affected by Hatred: 0.86 div (124.0 chaos)
+[2025-11-06 20:44:33] Proxy 9 completed fetch for Adds # to # Cold Damage while affected by Hatred with result: 0.86 div.
+[2025-11-06 20:44:33] Saved watcher_prices_single.json
+[2025-11-06 20:44:33] [FETCH SINGLE RESP] proxy=5 status=200 for #% increased Critical Strike Chance while affected by Wrath
+[2025-11-06 20:44:33] [AVG SINGLE] #% increased Critical Strike Chance while affected by Wrath: 0.91 div (132.0 chaos)
+[2025-11-06 20:44:33] Proxy 5 completed fetch for #% increased Critical Strike Chance while affected by Wrath with result: 0.91 div.
+[2025-11-06 20:44:33] Saved watcher_prices_single.json
+[2025-11-06 20:44:33] [FETCH SINGLE RESP] proxy=2 status=200 for #% increased Attack Damage while affected by Precision
+[2025-11-06 20:44:33] [AVG SINGLE] #% increased Attack Damage while affected by Precision: 1.80 div (261.0 chaos)
+[2025-11-06 20:44:33] Proxy 2 completed fetch for #% increased Attack Damage while affected by Precision with result: 1.80 div.
+[2025-11-06 20:44:33] Saved watcher_prices_single.json
+[2025-11-06 20:44:33] [SEARCH SINGLE RESP] proxy=7 status=200 for Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath
+[2025-11-06 20:44:33] [FETCH SINGLE RESP] proxy=0 status=200 for +#% to Critical Strike Multiplier while affected by Precision
+[2025-11-06 20:44:33] [AVG SINGLE] +#% to Critical Strike Multiplier while affected by Precision: 3.00 div (435.0 chaos)
+[2025-11-06 20:44:33] Proxy 0 completed fetch for +#% to Critical Strike Multiplier while affected by Precision with result: 3.00 div.
+[2025-11-06 20:44:33] Saved watcher_prices_single.json
+[2025-11-06 20:44:33] [FETCH SINGLE RESP] proxy=7 status=200 for Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath
+[2025-11-06 20:44:33] [AVG SINGLE] Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath: 0.73 div (106.0 chaos)
+[2025-11-06 20:44:33] Proxy 7 completed fetch for Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath with result: 0.73 div.
+[2025-11-06 20:44:33] Saved watcher_prices_single.json
+[2025-11-06 20:44:34] [SEARCH SINGLE RESP] proxy=8 status=200 for +#% to Critical Strike Chance while affected by Hatred
+[2025-11-06 20:44:34] [FETCH SINGLE RESP] proxy=8 status=200 for +#% to Critical Strike Chance while affected by Hatred
+[2025-11-06 20:44:34] [AVG SINGLE] +#% to Critical Strike Chance while affected by Hatred: 2.00 div (290.0 chaos)
+[2025-11-06 20:44:34] Proxy 8 completed fetch for +#% to Critical Strike Chance while affected by Hatred with result: 2.00 div.
+[2025-11-06 20:44:34] Saved watcher_prices_single.json
+[2025-11-06 20:44:42] [SEARCH SINGLE] proxy=0 #% increased Cold Damage while affected by Hatred
+[2025-11-06 20:44:42] [SEARCH SINGLE] proxy=1 Damage Penetrates #% Cold Resistance while affected by Hatred
+[2025-11-06 20:44:42] [SEARCH SINGLE] proxy=2 #% of Physical Damage Converted to Cold Damage while affected by Hatred
+[2025-11-06 20:44:42] [SEARCH SINGLE] proxy=3 You take #% reduced Extra Damage from Critical Strikes while affected by Determination
+[2025-11-06 20:44:42] [SEARCH SINGLE] proxy=4 +# to Armour while affected by Determination
+[2025-11-06 20:44:42] [SEARCH SINGLE] proxy=5 #% additional Physical Damage Reduction while affected by Determination
+[2025-11-06 20:44:42] [SEARCH SINGLE] proxy=6 +#% Chance to Block Attack Damage while affected by Determination
+[2025-11-06 20:44:42] [SEARCH SINGLE] proxy=7 Impales you inflict last # additional Hits while using Pride
+[2025-11-06 20:44:42] [SEARCH SINGLE] proxy=8 #% chance to deal Double Damage while using Pride
+[2025-11-06 20:44:42] [SEARCH SINGLE] proxy=9 #% chance to Impale Enemies on Hit with Attacks while using Pride
+[2025-11-06 20:44:42] [SEARCH SINGLE RESP] proxy=1 status=200 for Damage Penetrates #% Cold Resistance while affected by Hatred
+[2025-11-06 20:44:42] [SEARCH SINGLE RESP] proxy=9 status=200 for #% chance to Impale Enemies on Hit with Attacks while using Pride
+[2025-11-06 20:44:42] [SEARCH SINGLE RESP] proxy=4 status=200 for +# to Armour while affected by Determination
+[2025-11-06 20:44:42] [SEARCH SINGLE RESP] proxy=3 status=200 for You take #% reduced Extra Damage from Critical Strikes while affected by Determination
+[2025-11-06 20:44:42] [SEARCH SINGLE RESP] proxy=2 status=200 for #% of Physical Damage Converted to Cold Damage while affected by Hatred
+[2025-11-06 20:44:42] [SEARCH SINGLE RESP] proxy=0 status=200 for #% increased Cold Damage while affected by Hatred
+[2025-11-06 20:44:42] [SEARCH SINGLE RESP] proxy=7 status=200 for Impales you inflict last # additional Hits while using Pride
+[2025-11-06 20:44:42] [SEARCH SINGLE RESP] proxy=6 status=200 for +#% Chance to Block Attack Damage while affected by Determination
+[2025-11-06 20:44:42] [SEARCH SINGLE RESP] proxy=5 status=200 for #% additional Physical Damage Reduction while affected by Determination
+[2025-11-06 20:44:42] [FETCH SINGLE RESP] proxy=4 status=200 for +# to Armour while affected by Determination
+[2025-11-06 20:44:42] [FETCH SINGLE RESP] proxy=9 status=200 for #% chance to Impale Enemies on Hit with Attacks while using Pride
+[2025-11-06 20:44:42] [AVG SINGLE] +# to Armour while affected by Determination: 0.85 div (123.0 chaos)
+[2025-11-06 20:44:42] Proxy 4 completed fetch for +# to Armour while affected by Determination with result: 0.85 div.
+[2025-11-06 20:44:42] Saved watcher_prices_single.json
+[2025-11-06 20:44:42] [FETCH SINGLE RESP] proxy=1 status=200 for Damage Penetrates #% Cold Resistance while affected by Hatred
+[2025-11-06 20:44:42] [AVG SINGLE] Damage Penetrates #% Cold Resistance while affected by Hatred: 0.91 div (132.0 chaos)
+[2025-11-06 20:44:42] Proxy 1 completed fetch for Damage Penetrates #% Cold Resistance while affected by Hatred with result: 0.91 div.
+[2025-11-06 20:44:42] Saved watcher_prices_single.json
+[2025-11-06 20:44:42] [AVG SINGLE] #% chance to Impale Enemies on Hit with Attacks while using Pride: 0.86 div (124.0 chaos)
+[2025-11-06 20:44:42] Proxy 9 completed fetch for #% chance to Impale Enemies on Hit with Attacks while using Pride with result: 0.86 div.
+[2025-11-06 20:44:42] Saved watcher_prices_single.json
+[2025-11-06 20:44:42] [FETCH SINGLE RESP] proxy=3 status=200 for You take #% reduced Extra Damage from Critical Strikes while affected by Determination
+[2025-11-06 20:44:42] [AVG SINGLE] You take #% reduced Extra Damage from Critical Strikes while affected by Determination: 0.94 div (136.0 chaos)
+[2025-11-06 20:44:42] Proxy 3 completed fetch for You take #% reduced Extra Damage from Critical Strikes while affected by Determination with result: 0.94 div.
+[2025-11-06 20:44:42] Saved watcher_prices_single.json
+[2025-11-06 20:44:42] [FETCH SINGLE RESP] proxy=2 status=200 for #% of Physical Damage Converted to Cold Damage while affected by Hatred
+[2025-11-06 20:44:42] [AVG SINGLE] #% of Physical Damage Converted to Cold Damage while affected by Hatred: 0.84 div (122.0 chaos)
+[2025-11-06 20:44:42] Proxy 2 completed fetch for #% of Physical Damage Converted to Cold Damage while affected by Hatred with result: 0.84 div.
+[2025-11-06 20:44:42] Saved watcher_prices_single.json
+[2025-11-06 20:44:42] [SEARCH SINGLE RESP] proxy=8 status=200 for #% chance to deal Double Damage while using Pride
+[2025-11-06 20:44:42] [FETCH SINGLE RESP] proxy=0 status=200 for #% increased Cold Damage while affected by Hatred
+[2025-11-06 20:44:42] [FETCH SINGLE RESP] proxy=5 status=200 for #% additional Physical Damage Reduction while affected by Determination
+[2025-11-06 20:44:42] [AVG SINGLE] #% additional Physical Damage Reduction while affected by Determination: 1.00 div (145.0 chaos)
+[2025-11-06 20:44:42] Proxy 5 completed fetch for #% additional Physical Damage Reduction while affected by Determination with result: 1.00 div.
+[2025-11-06 20:44:42] Saved watcher_prices_single.json
+[2025-11-06 20:44:42] [AVG SINGLE] #% increased Cold Damage while affected by Hatred: 0.93 div (135.0 chaos)
+[2025-11-06 20:44:42] Proxy 0 completed fetch for #% increased Cold Damage while affected by Hatred with result: 0.93 div.
+[2025-11-06 20:44:42] Saved watcher_prices_single.json
+[2025-11-06 20:44:42] [FETCH SINGLE RESP] proxy=7 status=200 for Impales you inflict last # additional Hits while using Pride
+[2025-11-06 20:44:42] [AVG SINGLE] Impales you inflict last # additional Hits while using Pride: 0.85 div (123.0 chaos)
+[2025-11-06 20:44:42] Proxy 7 completed fetch for Impales you inflict last # additional Hits while using Pride with result: 0.85 div.
+[2025-11-06 20:44:42] Saved watcher_prices_single.json
+[2025-11-06 20:44:42] [FETCH SINGLE RESP] proxy=6 status=200 for +#% Chance to Block Attack Damage while affected by Determination
+[2025-11-06 20:44:42] [AVG SINGLE] +#% Chance to Block Attack Damage while affected by Determination: 0.76 div (109.8 chaos)
+[2025-11-06 20:44:42] Proxy 6 completed fetch for +#% Chance to Block Attack Damage while affected by Determination with result: 0.76 div.
+[2025-11-06 20:44:42] Saved watcher_prices_single.json
+[2025-11-06 20:44:43] [FETCH SINGLE RESP] proxy=8 status=200 for #% chance to deal Double Damage while using Pride
+[2025-11-06 20:44:43] [AVG SINGLE] #% chance to deal Double Damage while using Pride: 0.86 div (125.0 chaos)
+[2025-11-06 20:44:43] Proxy 8 completed fetch for #% chance to deal Double Damage while using Pride with result: 0.86 div.
+[2025-11-06 20:44:43] Saved watcher_prices_single.json
+[2025-11-06 20:44:52] [SEARCH SINGLE] proxy=0 #% increased Physical Damage while using Pride
+[2025-11-06 20:44:52] [SEARCH SINGLE] proxy=1 Your Hits Intimidate Enemies for 4 seconds while you are using Pride
+[2025-11-06 20:44:52] [SEARCH SINGLE] proxy=2 +#% chance to Evade Attack Hits while affected by Grace
+[2025-11-06 20:44:52] [SEARCH SINGLE] proxy=3 +#% chance to Suppress Spell Damage while affected by Grace
+[2025-11-06 20:44:52] [SEARCH SINGLE] proxy=4 #% increased Movement Speed while affected by Grace
+[2025-11-06 20:44:52] [SEARCH SINGLE] proxy=5 Gain # Life per Enemy Hit while affected by Vitality
+[2025-11-06 20:44:52] [SEARCH SINGLE] proxy=6 Gain # Energy Shield per Enemy Hit while affected by Discipline
+[2025-11-06 20:44:52] [SEARCH SINGLE] proxy=7 +#% Chance to Block Spell Damage while affected by Discipline
+[2025-11-06 20:44:52] [SEARCH SINGLE] proxy=8 Regenerate #% of Energy Shield per Second while affected by Discipline
+[2025-11-06 20:44:52] [SEARCH SINGLE] proxy=9 You gain Onslaught for # seconds on Kill while affected by Haste
+[2025-11-06 20:44:52] [SEARCH SINGLE RESP] proxy=3 status=200 for +#% chance to Suppress Spell Damage while affected by Grace
+[2025-11-06 20:44:52] [SEARCH SINGLE RESP] proxy=5 status=200 for Gain # Life per Enemy Hit while affected by Vitality
+[2025-11-06 20:44:52] [SEARCH SINGLE RESP] proxy=4 status=200 for #% increased Movement Speed while affected by Grace
+[2025-11-06 20:44:52] [SEARCH SINGLE RESP] proxy=1 status=200 for Your Hits Intimidate Enemies for 4 seconds while you are using Pride
+[2025-11-06 20:44:52] [SEARCH SINGLE RESP] proxy=0 status=200 for #% increased Physical Damage while using Pride
+[2025-11-06 20:44:52] [SEARCH SINGLE RESP] proxy=7 status=200 for +#% Chance to Block Spell Damage while affected by Discipline
+[2025-11-06 20:44:52] [SEARCH SINGLE RESP] proxy=6 status=200 for Gain # Energy Shield per Enemy Hit while affected by Discipline
+[2025-11-06 20:44:52] [SEARCH SINGLE RESP] proxy=2 status=200 for +#% chance to Evade Attack Hits while affected by Grace
+[2025-11-06 20:44:52] [SEARCH SINGLE RESP] proxy=9 status=200 for You gain Onslaught for # seconds on Kill while affected by Haste
+[2025-11-06 20:44:52] [FETCH SINGLE RESP] proxy=3 status=200 for +#% chance to Suppress Spell Damage while affected by Grace
+[2025-11-06 20:44:52] [FETCH SINGLE RESP] proxy=5 status=200 for Gain # Life per Enemy Hit while affected by Vitality
+[2025-11-06 20:44:52] [AVG SINGLE] +#% chance to Suppress Spell Damage while affected by Grace: 1.00 div (145.0 chaos)
+[2025-11-06 20:44:52] Proxy 3 completed fetch for +#% chance to Suppress Spell Damage while affected by Grace with result: 1.00 div.
+[2025-11-06 20:44:52] Saved watcher_prices_single.json
+[2025-11-06 20:44:52] [AVG SINGLE] Gain # Life per Enemy Hit while affected by Vitality: 4.00 div (580.0 chaos)
+[2025-11-06 20:44:52] Proxy 5 completed fetch for Gain # Life per Enemy Hit while affected by Vitality with result: 4.00 div.
+[2025-11-06 20:44:52] Saved watcher_prices_single.json
+[2025-11-06 20:44:52] [FETCH SINGLE RESP] proxy=1 status=200 for Your Hits Intimidate Enemies for 4 seconds while you are using Pride
+[2025-11-06 20:44:52] [AVG SINGLE] Your Hits Intimidate Enemies for 4 seconds while you are using Pride: 0.52 div (76.0 chaos)
+[2025-11-06 20:44:52] Proxy 1 completed fetch for Your Hits Intimidate Enemies for 4 seconds while you are using Pride with result: 0.52 div.
+[2025-11-06 20:44:52] Saved watcher_prices_single.json
+[2025-11-06 20:44:52] [SEARCH SINGLE RESP] proxy=8 status=200 for Regenerate #% of Energy Shield per Second while affected by Discipline
+[2025-11-06 20:44:52] [FETCH SINGLE RESP] proxy=0 status=200 for #% increased Physical Damage while using Pride
+[2025-11-06 20:44:52] [AVG SINGLE] #% increased Physical Damage while using Pride: 1.00 div (145.0 chaos)
+[2025-11-06 20:44:52] Proxy 0 completed fetch for #% increased Physical Damage while using Pride with result: 1.00 div.
+[2025-11-06 20:44:52] Saved watcher_prices_single.json
+[2025-11-06 20:44:52] [FETCH SINGLE RESP] proxy=4 status=200 for #% increased Movement Speed while affected by Grace
+[2025-11-06 20:44:52] [AVG SINGLE] #% increased Movement Speed while affected by Grace: 0.92 div (134.0 chaos)
+[2025-11-06 20:44:52] Proxy 4 completed fetch for #% increased Movement Speed while affected by Grace with result: 0.92 div.
+[2025-11-06 20:44:52] Saved watcher_prices_single.json
+[2025-11-06 20:44:52] [FETCH SINGLE RESP] proxy=9 status=200 for You gain Onslaught for # seconds on Kill while affected by Haste
+[2025-11-06 20:44:52] [AVG SINGLE] You gain Onslaught for # seconds on Kill while affected by Haste: 0.74 div (108.0 chaos)
+[2025-11-06 20:44:52] Proxy 9 completed fetch for You gain Onslaught for # seconds on Kill while affected by Haste with result: 0.74 div.
+[2025-11-06 20:44:52] Saved watcher_prices_single.json
+[2025-11-06 20:44:52] [FETCH SINGLE RESP] proxy=7 status=200 for +#% Chance to Block Spell Damage while affected by Discipline
+[2025-11-06 20:44:52] [AVG SINGLE] +#% Chance to Block Spell Damage while affected by Discipline: 0.75 div (109.0 chaos)
+[2025-11-06 20:44:52] Proxy 7 completed fetch for +#% Chance to Block Spell Damage while affected by Discipline with result: 0.75 div.
+[2025-11-06 20:44:52] Saved watcher_prices_single.json
+[2025-11-06 20:44:52] [FETCH SINGLE RESP] proxy=2 status=200 for +#% chance to Evade Attack Hits while affected by Grace
+[2025-11-06 20:44:52] [AVG SINGLE] +#% chance to Evade Attack Hits while affected by Grace: 1.00 div (145.0 chaos)
+[2025-11-06 20:44:52] Proxy 2 completed fetch for +#% chance to Evade Attack Hits while affected by Grace with result: 1.00 div.
+[2025-11-06 20:44:52] Saved watcher_prices_single.json
+[2025-11-06 20:44:52] [FETCH SINGLE RESP] proxy=6 status=200 for Gain # Energy Shield per Enemy Hit while affected by Discipline
+[2025-11-06 20:44:52] [AVG SINGLE] Gain # Energy Shield per Enemy Hit while affected by Discipline: 2.00 div (290.0 chaos)
+[2025-11-06 20:44:52] Proxy 6 completed fetch for Gain # Energy Shield per Enemy Hit while affected by Discipline with result: 2.00 div.
+[2025-11-06 20:44:52] Saved watcher_prices_single.json
+[2025-11-06 20:44:53] [FETCH SINGLE RESP] proxy=8 status=200 for Regenerate #% of Energy Shield per Second while affected by Discipline
+[2025-11-06 20:44:53] [AVG SINGLE] Regenerate #% of Energy Shield per Second while affected by Discipline: 0.84 div (122.0 chaos)
+[2025-11-06 20:44:53] Proxy 8 completed fetch for Regenerate #% of Energy Shield per Second while affected by Discipline with result: 0.84 div.
+[2025-11-06 20:44:53] Saved watcher_prices_single.json
+[2025-11-06 20:45:02] [SEARCH SINGLE] proxy=0 You have Phasing while affected by Haste
+[2025-11-06 20:45:02] [SEARCH SINGLE] proxy=1 Debuffs on you expire #% faster while affected by Haste
+[2025-11-06 20:45:02] [SEARCH SINGLE] proxy=2 Non-Channelling Skills have +# to Total Mana Cost while affected by Clarity
+[2025-11-06 20:45:02] [SEARCH SINGLE] proxy=3 Gain #% of Maximum Mana as Extra Maximum Energy Shield while affected by Clarity
+[2025-11-06 20:45:02] [SEARCH SINGLE] proxy=4 +#% to Chaos Resistance while affected by Purity of Elements
+[2025-11-06 20:45:02] [SEARCH SINGLE] proxy=5 +#% to Damage over Time Multiplier while affected by Malevolence
+[2025-11-06 20:45:02] [SEARCH SINGLE] proxy=6 Unaffected by Burning Ground while affected by Purity of Fire
+[2025-11-06 20:45:02] [SEARCH SINGLE] proxy=7 Unaffected by Bleeding while affected by Malevolence
+[2025-11-06 20:45:02] [SEARCH SINGLE] proxy=8 Unaffected by Poison while affected by Malevolence
+[2025-11-06 20:45:02] [SEARCH SINGLE] proxy=9 #% increased Recovery rate of Life and Energy Shield while affected by Malevolence
+[2025-11-06 20:45:02] [SEARCH SINGLE RESP] proxy=9 status=200 for #% increased Recovery rate of Life and Energy Shield while affected by Malevolence
+[2025-11-06 20:45:02] [SEARCH SINGLE RESP] proxy=1 status=200 for Debuffs on you expire #% faster while affected by Haste
+[2025-11-06 20:45:02] [SEARCH SINGLE RESP] proxy=5 status=200 for +#% to Damage over Time Multiplier while affected by Malevolence
+[2025-11-06 20:45:02] [SEARCH SINGLE RESP] proxy=2 status=200 for Non-Channelling Skills have +# to Total Mana Cost while affected by Clarity
+[2025-11-06 20:45:02] [SEARCH SINGLE RESP] proxy=4 status=200 for +#% to Chaos Resistance while affected by Purity of Elements
+[2025-11-06 20:45:02] [SEARCH SINGLE RESP] proxy=0 status=200 for You have Phasing while affected by Haste
+[2025-11-06 20:45:02] [SEARCH SINGLE RESP] proxy=3 status=200 for Gain #% of Maximum Mana as Extra Maximum Energy Shield while affected by Clarity
+[2025-11-06 20:45:02] [SEARCH SINGLE RESP] proxy=6 status=200 for Unaffected by Burning Ground while affected by Purity of Fire
+[2025-11-06 20:45:02] [SEARCH SINGLE RESP] proxy=7 status=200 for Unaffected by Bleeding while affected by Malevolence
+[2025-11-06 20:45:02] [FETCH SINGLE RESP] proxy=1 status=200 for Debuffs on you expire #% faster while affected by Haste
+[2025-11-06 20:45:02] [AVG SINGLE] Debuffs on you expire #% faster while affected by Haste: 0.76 div (110.0 chaos)
+[2025-11-06 20:45:02] Proxy 1 completed fetch for Debuffs on you expire #% faster while affected by Haste with result: 0.76 div.
+[2025-11-06 20:45:02] Saved watcher_prices_single.json
+[2025-11-06 20:45:02] [SEARCH SINGLE RESP] proxy=8 status=200 for Unaffected by Poison while affected by Malevolence
+[2025-11-06 20:45:02] [FETCH SINGLE RESP] proxy=5 status=200 for +#% to Damage over Time Multiplier while affected by Malevolence
+[2025-11-06 20:45:02] [AVG SINGLE] +#% to Damage over Time Multiplier while affected by Malevolence: 5.00 div (725.0 chaos)
+[2025-11-06 20:45:02] Proxy 5 completed fetch for +#% to Damage over Time Multiplier while affected by Malevolence with result: 5.00 div.
+[2025-11-06 20:45:02] Saved watcher_prices_single.json
+[2025-11-06 20:45:02] [FETCH SINGLE RESP] proxy=9 status=200 for #% increased Recovery rate of Life and Energy Shield while affected by Malevolence
+[2025-11-06 20:45:02] [AVG SINGLE] #% increased Recovery rate of Life and Energy Shield while affected by Malevolence: 0.84 div (122.0 chaos)
+[2025-11-06 20:45:02] Proxy 9 completed fetch for #% increased Recovery rate of Life and Energy Shield while affected by Malevolence with result: 0.84 div.
+[2025-11-06 20:45:02] Saved watcher_prices_single.json
+[2025-11-06 20:45:02] [FETCH SINGLE RESP] proxy=4 status=200 for +#% to Chaos Resistance while affected by Purity of Elements
+[2025-11-06 20:45:02] [AVG SINGLE] +#% to Chaos Resistance while affected by Purity of Elements: 1.96 div (284.2 chaos)
+[2025-11-06 20:45:02] Proxy 4 completed fetch for +#% to Chaos Resistance while affected by Purity of Elements with result: 1.96 div.
+[2025-11-06 20:45:02] Saved watcher_prices_single.json
+[2025-11-06 20:45:02] [FETCH SINGLE RESP] proxy=2 status=200 for Non-Channelling Skills have +# to Total Mana Cost while affected by Clarity
+[2025-11-06 20:45:02] [AVG SINGLE] Non-Channelling Skills have +# to Total Mana Cost while affected by Clarity: 1.00 div (145.0 chaos)
+[2025-11-06 20:45:02] Proxy 2 completed fetch for Non-Channelling Skills have +# to Total Mana Cost while affected by Clarity with result: 1.00 div.
+[2025-11-06 20:45:02] Saved watcher_prices_single.json
+[2025-11-06 20:45:02] [FETCH SINGLE RESP] proxy=3 status=200 for Gain #% of Maximum Mana as Extra Maximum Energy Shield while affected by Clarity
+[2025-11-06 20:45:02] [AVG SINGLE] Gain #% of Maximum Mana as Extra Maximum Energy Shield while affected by Clarity: 7.00 div (1015.0 chaos)
+[2025-11-06 20:45:02] Proxy 3 completed fetch for Gain #% of Maximum Mana as Extra Maximum Energy Shield while affected by Clarity with result: 7.00 div.
+[2025-11-06 20:45:02] Saved watcher_prices_single.json
+[2025-11-06 20:45:02] [FETCH SINGLE RESP] proxy=0 status=200 for You have Phasing while affected by Haste
+[2025-11-06 20:45:02] [AVG SINGLE] You have Phasing while affected by Haste: 1.00 div (145.0 chaos)
+[2025-11-06 20:45:02] Proxy 0 completed fetch for You have Phasing while affected by Haste with result: 1.00 div.
+[2025-11-06 20:45:02] Saved watcher_prices_single.json
+[2025-11-06 20:45:02] [FETCH SINGLE RESP] proxy=6 status=200 for Unaffected by Burning Ground while affected by Purity of Fire
+[2025-11-06 20:45:02] [AVG SINGLE] Unaffected by Burning Ground while affected by Purity of Fire: 0.61 div (88.0 chaos)
+[2025-11-06 20:45:02] Proxy 6 completed fetch for Unaffected by Burning Ground while affected by Purity of Fire with result: 0.61 div.
+[2025-11-06 20:45:02] Saved watcher_prices_single.json
+[2025-11-06 20:45:02] [FETCH SINGLE RESP] proxy=7 status=200 for Unaffected by Bleeding while affected by Malevolence
+[2025-11-06 20:45:02] [AVG SINGLE] Unaffected by Bleeding while affected by Malevolence: 0.79 div (114.0 chaos)
+[2025-11-06 20:45:02] Proxy 7 completed fetch for Unaffected by Bleeding while affected by Malevolence with result: 0.79 div.
+[2025-11-06 20:45:02] Saved watcher_prices_single.json
+[2025-11-06 20:45:03] [FETCH SINGLE RESP] proxy=8 status=200 for Unaffected by Poison while affected by Malevolence
+[2025-11-06 20:45:03] [AVG SINGLE] Unaffected by Poison while affected by Malevolence: 0.79 div (114.0 chaos)
+[2025-11-06 20:45:03] Proxy 8 completed fetch for Unaffected by Poison while affected by Malevolence with result: 0.79 div.
+[2025-11-06 20:45:03] Saved watcher_prices_single.json
+[2025-11-06 20:45:12] [SEARCH SINGLE] proxy=0 Damaging Ailments you inflict deal Damage #% faster while affected by Malevolence
+[2025-11-06 20:45:12] [SEARCH SINGLE] proxy=1 Unaffected by Vulnerability while affected by Determination
+[2025-11-06 20:45:12] [SEARCH SINGLE] proxy=2 Unaffected by Temporal Chains while affected by Haste
+[2025-11-06 20:45:12] [SEARCH SINGLE] proxy=3 Unaffected by Shocked Ground while affected by Purity of Lightning
+[2025-11-06 20:45:12] [SEARCH SINGLE] proxy=4 Unaffected by Frostbite while affected by Purity of Ice
+[2025-11-06 20:45:12] [SEARCH SINGLE] proxy=5 Unaffected by Flammability while affected by Purity of Fire
+[2025-11-06 20:45:12] [SEARCH SINGLE] proxy=6 Unaffected by Enfeeble while affected by Grace
+[2025-11-06 20:45:12] [SEARCH SINGLE] proxy=7 Unaffected by Elemental Weakness while affected by Purity of Elements
+[2025-11-06 20:45:12] [SEARCH SINGLE] proxy=8 Unaffected by Conductivity while affected by Purity of Lightning
+[2025-11-06 20:45:12] [SEARCH SINGLE] proxy=9 Unaffected by Chilled Ground while affected by Purity of Ice
+[2025-11-06 20:45:12] [SEARCH SINGLE RESP] proxy=1 status=200 for Unaffected by Vulnerability while affected by Determination
+[2025-11-06 20:45:12] [SEARCH SINGLE RESP] proxy=7 status=200 for Unaffected by Elemental Weakness while affected by Purity of Elements
+[2025-11-06 20:45:12] [SEARCH SINGLE RESP] proxy=5 status=200 for Unaffected by Flammability while affected by Purity of Fire
+[2025-11-06 20:45:12] [SEARCH SINGLE RESP] proxy=3 status=200 for Unaffected by Shocked Ground while affected by Purity of Lightning
+[2025-11-06 20:45:12] [SEARCH SINGLE RESP] proxy=2 status=200 for Unaffected by Temporal Chains while affected by Haste
+[2025-11-06 20:45:12] [SEARCH SINGLE RESP] proxy=9 status=200 for Unaffected by Chilled Ground while affected by Purity of Ice
+[2025-11-06 20:45:12] [SEARCH SINGLE RESP] proxy=4 status=200 for Unaffected by Frostbite while affected by Purity of Ice
+[2025-11-06 20:45:12] [SEARCH SINGLE RESP] proxy=6 status=200 for Unaffected by Enfeeble while affected by Grace
+[2025-11-06 20:45:12] [SEARCH SINGLE RESP] proxy=0 status=200 for Damaging Ailments you inflict deal Damage #% faster while affected by Malevolence
+[2025-11-06 20:45:12] [SEARCH SINGLE RESP] proxy=8 status=200 for Unaffected by Conductivity while affected by Purity of Lightning
+[2025-11-06 20:45:12] [FETCH SINGLE RESP] proxy=1 status=200 for Unaffected by Vulnerability while affected by Determination
+[2025-11-06 20:45:12] [AVG SINGLE] Unaffected by Vulnerability while affected by Determination: 0.92 div (133.8 chaos)
+[2025-11-06 20:45:12] Proxy 1 completed fetch for Unaffected by Vulnerability while affected by Determination with result: 0.92 div.
+[2025-11-06 20:45:12] Saved watcher_prices_single.json
+[2025-11-06 20:45:12] [FETCH SINGLE RESP] proxy=5 status=200 for Unaffected by Flammability while affected by Purity of Fire
+[2025-11-06 20:45:12] [AVG SINGLE] Unaffected by Flammability while affected by Purity of Fire: 0.56 div (81.6 chaos)
+[2025-11-06 20:45:12] Proxy 5 completed fetch for Unaffected by Flammability while affected by Purity of Fire with result: 0.56 div.
+[2025-11-06 20:45:12] Saved watcher_prices_single.json
+[2025-11-06 20:45:12] [FETCH SINGLE RESP] proxy=4 status=200 for Unaffected by Frostbite while affected by Purity of Ice
+[2025-11-06 20:45:12] [AVG SINGLE] Unaffected by Frostbite while affected by Purity of Ice: 0.55 div (80.0 chaos)
+[2025-11-06 20:45:12] Proxy 4 completed fetch for Unaffected by Frostbite while affected by Purity of Ice with result: 0.55 div.
+[2025-11-06 20:45:12] Saved watcher_prices_single.json
+[2025-11-06 20:45:12] [FETCH SINGLE RESP] proxy=9 status=200 for Unaffected by Chilled Ground while affected by Purity of Ice
+[2025-11-06 20:45:12] [AVG SINGLE] Unaffected by Chilled Ground while affected by Purity of Ice: 0.63 div (91.0 chaos)
+[2025-11-06 20:45:12] Proxy 9 completed fetch for Unaffected by Chilled Ground while affected by Purity of Ice with result: 0.63 div.
+[2025-11-06 20:45:12] Saved watcher_prices_single.json
+[2025-11-06 20:45:12] [FETCH SINGLE RESP] proxy=3 status=200 for Unaffected by Shocked Ground while affected by Purity of Lightning
+[2025-11-06 20:45:12] [AVG SINGLE] Unaffected by Shocked Ground while affected by Purity of Lightning: 0.60 div (87.0 chaos)
+[2025-11-06 20:45:12] Proxy 3 completed fetch for Unaffected by Shocked Ground while affected by Purity of Lightning with result: 0.60 div.
+[2025-11-06 20:45:12] Saved watcher_prices_single.json
+[2025-11-06 20:45:12] [FETCH SINGLE RESP] proxy=7 status=200 for Unaffected by Elemental Weakness while affected by Purity of Elements
+[2025-11-06 20:45:12] [AVG SINGLE] Unaffected by Elemental Weakness while affected by Purity of Elements: 0.48 div (69.0 chaos)
+[2025-11-06 20:45:12] Proxy 7 completed fetch for Unaffected by Elemental Weakness while affected by Purity of Elements with result: 0.48 div.
+[2025-11-06 20:45:12] Saved watcher_prices_single.json
+[2025-11-06 20:45:12] [FETCH SINGLE RESP] proxy=2 status=200 for Unaffected by Temporal Chains while affected by Haste
+[2025-11-06 20:45:12] [AVG SINGLE] Unaffected by Temporal Chains while affected by Haste: 0.60 div (87.6 chaos)
+[2025-11-06 20:45:12] Proxy 2 completed fetch for Unaffected by Temporal Chains while affected by Haste with result: 0.60 div.
+[2025-11-06 20:45:12] Saved watcher_prices_single.json
+[2025-11-06 20:45:12] [FETCH SINGLE RESP] proxy=0 status=200 for Damaging Ailments you inflict deal Damage #% faster while affected by Malevolence
+[2025-11-06 20:45:12] [AVG SINGLE] Damaging Ailments you inflict deal Damage #% faster while affected by Malevolence: 1.38 div (200.0 chaos)
+[2025-11-06 20:45:12] Proxy 0 completed fetch for Damaging Ailments you inflict deal Damage #% faster while affected by Malevolence with result: 1.38 div.
+[2025-11-06 20:45:12] Saved watcher_prices_single.json
+[2025-11-06 20:45:13] [FETCH SINGLE RESP] proxy=6 status=200 for Unaffected by Enfeeble while affected by Grace
+[2025-11-06 20:45:13] [AVG SINGLE] Unaffected by Enfeeble while affected by Grace: 0.73 div (106.0 chaos)
+[2025-11-06 20:45:13] Proxy 6 completed fetch for Unaffected by Enfeeble while affected by Grace with result: 0.73 div.
+[2025-11-06 20:45:13] Saved watcher_prices_single.json
+[2025-11-06 20:45:13] [FETCH SINGLE RESP] proxy=8 status=200 for Unaffected by Conductivity while affected by Purity of Lightning
+[2025-11-06 20:45:13] [AVG SINGLE] Unaffected by Conductivity while affected by Purity of Lightning: 0.60 div (87.0 chaos)
+[2025-11-06 20:45:13] Proxy 8 completed fetch for Unaffected by Conductivity while affected by Purity of Lightning with result: 0.60 div.
+[2025-11-06 20:45:13] Saved watcher_prices_single.json
+[2025-11-06 20:45:22] [SEARCH SINGLE] proxy=0 Regenerate #% of Life per second while affected by Vitality
+[2025-11-06 20:45:22] [SEARCH SINGLE] proxy=1 Immune to Ignite while affected by Purity of Fire
+[2025-11-06 20:45:22] [SEARCH SINGLE] proxy=2 Immune to Freeze while affected by Purity of Ice
+[2025-11-06 20:45:22] [SEARCH SINGLE] proxy=3 Gain Arcane Surge for 4 seconds when you create Consecrated Ground while affected by Zealotry
+[2025-11-06 20:45:22] [SEARCH SINGLE] proxy=4 Gain a Flask Charge when you deal a Critical Strike while affected by Precision
+[2025-11-06 20:45:22] [SEARCH SINGLE] proxy=5 Gain #% of Physical Damage as Extra Fire Damage while affected by Anger
+[2025-11-06 20:45:22] [SEARCH SINGLE] proxy=6 Effects of Consecrated Ground you create while affected by Zealotry Linger for # seconds
+[2025-11-06 20:45:22] [SEARCH SINGLE] proxy=7 Damage Penetrates #% Fire Resistance while affected by Anger
+[2025-11-06 20:45:22] [SEARCH SINGLE] proxy=8 Consecrated Ground you create while affected by Zealotry causes enemies to take #% increased Damage
+[2025-11-06 20:45:22] [SEARCH SINGLE] proxy=9 Cannot be Blinded while affected by Precision
+[2025-11-06 20:45:22] [SEARCH SINGLE RESP] proxy=9 status=200 for Cannot be Blinded while affected by Precision
+[2025-11-06 20:45:22] [SEARCH SINGLE RESP] proxy=5 status=200 for Gain #% of Physical Damage as Extra Fire Damage while affected by Anger
+[2025-11-06 20:45:22] [SEARCH SINGLE RESP] proxy=3 status=200 for Gain Arcane Surge for 4 seconds when you create Consecrated Ground while affected by Zealotry
+[2025-11-06 20:45:22] [SEARCH SINGLE RESP] proxy=1 status=200 for Immune to Ignite while affected by Purity of Fire
+[2025-11-06 20:45:22] [SEARCH SINGLE RESP] proxy=4 status=200 for Gain a Flask Charge when you deal a Critical Strike while affected by Precision
+[2025-11-06 20:45:22] [SEARCH SINGLE RESP] proxy=2 status=200 for Immune to Freeze while affected by Purity of Ice
+[2025-11-06 20:45:22] [SEARCH SINGLE RESP] proxy=7 status=200 for Damage Penetrates #% Fire Resistance while affected by Anger
+[2025-11-06 20:45:22] [SEARCH SINGLE RESP] proxy=0 status=200 for Regenerate #% of Life per second while affected by Vitality
+[2025-11-06 20:45:22] [SEARCH SINGLE RESP] proxy=6 status=200 for Effects of Consecrated Ground you create while affected by Zealotry Linger for # seconds
+[2025-11-06 20:45:22] [SEARCH SINGLE RESP] proxy=8 status=200 for Consecrated Ground you create while affected by Zealotry causes enemies to take #% increased Damage
+[2025-11-06 20:45:22] [FETCH SINGLE RESP] proxy=5 status=200 for Gain #% of Physical Damage as Extra Fire Damage while affected by Anger
+[2025-11-06 20:45:22] [AVG SINGLE] Gain #% of Physical Damage as Extra Fire Damage while affected by Anger: 0.60 div (87.6 chaos)
+[2025-11-06 20:45:22] Proxy 5 completed fetch for Gain #% of Physical Damage as Extra Fire Damage while affected by Anger with result: 0.60 div.
+[2025-11-06 20:45:22] Saved watcher_prices_single.json
+[2025-11-06 20:45:22] [FETCH SINGLE RESP] proxy=9 status=200 for Cannot be Blinded while affected by Precision
+[2025-11-06 20:45:22] [AVG SINGLE] Cannot be Blinded while affected by Precision: 0.77 div (112.0 chaos)
+[2025-11-06 20:45:22] Proxy 9 completed fetch for Cannot be Blinded while affected by Precision with result: 0.77 div.
+[2025-11-06 20:45:22] Saved watcher_prices_single.json
+[2025-11-06 20:45:22] [FETCH SINGLE RESP] proxy=3 status=200 for Gain Arcane Surge for 4 seconds when you create Consecrated Ground while affected by Zealotry
+[2025-11-06 20:45:22] [AVG SINGLE] Gain Arcane Surge for 4 seconds when you create Consecrated Ground while affected by Zealotry: 0.70 div (101.0 chaos)
+[2025-11-06 20:45:22] Proxy 3 completed fetch for Gain Arcane Surge for 4 seconds when you create Consecrated Ground while affected by Zealotry with result: 0.70 div.
+[2025-11-06 20:45:22] Saved watcher_prices_single.json
+[2025-11-06 20:45:22] [FETCH SINGLE RESP] proxy=1 status=200 for Immune to Ignite while affected by Purity of Fire
+[2025-11-06 20:45:22] [AVG SINGLE] Immune to Ignite while affected by Purity of Fire: 0.68 div (98.0 chaos)
+[2025-11-06 20:45:22] Proxy 1 completed fetch for Immune to Ignite while affected by Purity of Fire with result: 0.68 div.
+[2025-11-06 20:45:22] Saved watcher_prices_single.json
+[2025-11-06 20:45:22] [FETCH SINGLE RESP] proxy=4 status=200 for Gain a Flask Charge when you deal a Critical Strike while affected by Precision
+[2025-11-06 20:45:22] [AVG SINGLE] Gain a Flask Charge when you deal a Critical Strike while affected by Precision: 0.77 div (111.0 chaos)
+[2025-11-06 20:45:22] Proxy 4 completed fetch for Gain a Flask Charge when you deal a Critical Strike while affected by Precision with result: 0.77 div.
+[2025-11-06 20:45:22] Saved watcher_prices_single.json
+[2025-11-06 20:45:22] [FETCH SINGLE RESP] proxy=2 status=200 for Immune to Freeze while affected by Purity of Ice
+[2025-11-06 20:45:22] [AVG SINGLE] Immune to Freeze while affected by Purity of Ice: 0.86 div (125.0 chaos)
+[2025-11-06 20:45:22] Proxy 2 completed fetch for Immune to Freeze while affected by Purity of Ice with result: 0.86 div.
+[2025-11-06 20:45:22] Saved watcher_prices_single.json
+[2025-11-06 20:45:22] [FETCH SINGLE RESP] proxy=7 status=200 for Damage Penetrates #% Fire Resistance while affected by Anger
+[2025-11-06 20:45:22] [AVG SINGLE] Damage Penetrates #% Fire Resistance while affected by Anger: 0.70 div (102.0 chaos)
+[2025-11-06 20:45:22] Proxy 7 completed fetch for Damage Penetrates #% Fire Resistance while affected by Anger with result: 0.70 div.
+[2025-11-06 20:45:22] Saved watcher_prices_single.json
+[2025-11-06 20:45:22] [FETCH SINGLE RESP] proxy=0 status=200 for Regenerate #% of Life per second while affected by Vitality
+[2025-11-06 20:45:22] [AVG SINGLE] Regenerate #% of Life per second while affected by Vitality: 1.00 div (145.0 chaos)
+[2025-11-06 20:45:22] Proxy 0 completed fetch for Regenerate #% of Life per second while affected by Vitality with result: 1.00 div.
+[2025-11-06 20:45:22] Saved watcher_prices_single.json
+[2025-11-06 20:45:22] [FETCH SINGLE RESP] proxy=6 status=200 for Effects of Consecrated Ground you create while affected by Zealotry Linger for # seconds
+[2025-11-06 20:45:22] [AVG SINGLE] Effects of Consecrated Ground you create while affected by Zealotry Linger for # seconds: 0.61 div (89.0 chaos)
+[2025-11-06 20:45:22] Proxy 6 completed fetch for Effects of Consecrated Ground you create while affected by Zealotry Linger for # seconds with result: 0.61 div.
+[2025-11-06 20:45:23] Saved watcher_prices_single.json
+[2025-11-06 20:45:23] [FETCH SINGLE RESP] proxy=8 status=200 for Consecrated Ground you create while affected by Zealotry causes enemies to take #% increased Damage
+[2025-11-06 20:45:23] [AVG SINGLE] Consecrated Ground you create while affected by Zealotry causes enemies to take #% increased Damage: 0.76 div (110.6 chaos)
+[2025-11-06 20:45:23] Proxy 8 completed fetch for Consecrated Ground you create while affected by Zealotry causes enemies to take #% increased Damage with result: 0.76 div.
+[2025-11-06 20:45:23] Saved watcher_prices_single.json
+[2025-11-06 20:45:32] [SEARCH SINGLE] proxy=0 #% increased Maximum total Energy Shield Recovery per second from Leech while affected by Zealotry
+[2025-11-06 20:45:32] [SEARCH SINGLE] proxy=1 +#% to all maximum Elemental Resistances while affected by Purity of Elements
+[2025-11-06 20:45:32] [SEARCH SINGLE] proxy=2 +#% to Critical Strike Multiplier while affected by Anger
+[2025-11-06 20:45:32] [SEARCH SINGLE] proxy=3 Critical Strikes Penetrate #% of Enemy Elemental Resistances while affected by Zealotry
+[2025-11-06 20:45:32] [SEARCH SINGLE] proxy=4 #% increased Critical Strike Chance against Enemies on Consecrated Ground while affected by Zealotry
+[2025-11-06 20:45:32] [SEARCH SINGLE] proxy=5 #% increased Life Recovery from Flasks while affected by Vitality
+[2025-11-06 20:45:32] [SEARCH SINGLE] proxy=6 #% reduced Reflected Physical Damage taken while affected by Determination
+[2025-11-06 20:45:32] [SEARCH SINGLE] proxy=7 #% reduced Reflected Elemental Damage taken while affected by Purity of Elements
+[2025-11-06 20:45:32] [SEARCH SINGLE] proxy=8 #% increased Fire Damage while affected by Anger
+[2025-11-06 20:45:32] [SEARCH SINGLE] proxy=9 #% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste
+[2025-11-06 20:45:32] [SEARCH SINGLE RESP] proxy=4 status=200 for #% increased Critical Strike Chance against Enemies on Consecrated Ground while affected by Zealotry
+[2025-11-06 20:45:32] [SEARCH SINGLE RESP] proxy=1 status=200 for +#% to all maximum Elemental Resistances while affected by Purity of Elements
+[2025-11-06 20:45:32] [SEARCH SINGLE RESP] proxy=3 status=200 for Critical Strikes Penetrate #% of Enemy Elemental Resistances while affected by Zealotry
+[2025-11-06 20:45:32] [SEARCH SINGLE RESP] proxy=9 status=200 for #% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste
+[2025-11-06 20:45:32] [SEARCH SINGLE RESP] proxy=5 status=200 for #% increased Life Recovery from Flasks while affected by Vitality
+[2025-11-06 20:45:32] [SEARCH SINGLE RESP] proxy=2 status=200 for +#% to Critical Strike Multiplier while affected by Anger
+[2025-11-06 20:45:32] [SEARCH SINGLE RESP] proxy=0 status=200 for #% increased Maximum total Energy Shield Recovery per second from Leech while affected by Zealotry
+[2025-11-06 20:45:32] [SEARCH SINGLE RESP] proxy=7 status=200 for #% reduced Reflected Elemental Damage taken while affected by Purity of Elements
+[2025-11-06 20:45:32] [SEARCH SINGLE RESP] proxy=6 status=200 for #% reduced Reflected Physical Damage taken while affected by Determination
+[2025-11-06 20:45:32] [FETCH SINGLE RESP] proxy=4 status=200 for #% increased Critical Strike Chance against Enemies on Consecrated Ground while affected by Zealotry
+[2025-11-06 20:45:32] [AVG SINGLE] #% increased Critical Strike Chance against Enemies on Consecrated Ground while affected by Zealotry: 0.93 div (135.0 chaos)
+[2025-11-06 20:45:32] Proxy 4 completed fetch for #% increased Critical Strike Chance against Enemies on Consecrated Ground while affected by Zealotry with result: 0.93 div.
+[2025-11-06 20:45:32] Saved watcher_prices_single.json
+[2025-11-06 20:45:32] [FETCH SINGLE RESP] proxy=1 status=200 for +#% to all maximum Elemental Resistances while affected by Purity of Elements
+[2025-11-06 20:45:32] [AVG SINGLE] +#% to all maximum Elemental Resistances while affected by Purity of Elements: 1.00 div (145.0 chaos)
+[2025-11-06 20:45:32] Proxy 1 completed fetch for +#% to all maximum Elemental Resistances while affected by Purity of Elements with result: 1.00 div.
+[2025-11-06 20:45:32] Saved watcher_prices_single.json
+[2025-11-06 20:45:32] [FETCH SINGLE RESP] proxy=3 status=200 for Critical Strikes Penetrate #% of Enemy Elemental Resistances while affected by Zealotry
+[2025-11-06 20:45:32] [AVG SINGLE] Critical Strikes Penetrate #% of Enemy Elemental Resistances while affected by Zealotry: 0.84 div (122.0 chaos)
+[2025-11-06 20:45:32] Proxy 3 completed fetch for Critical Strikes Penetrate #% of Enemy Elemental Resistances while affected by Zealotry with result: 0.84 div.
+[2025-11-06 20:45:32] Saved watcher_prices_single.json
+[2025-11-06 20:45:32] [FETCH SINGLE RESP] proxy=9 status=200 for #% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste
+[2025-11-06 20:45:32] [AVG SINGLE] #% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste: 0.62 div (90.0 chaos)
+[2025-11-06 20:45:32] Proxy 9 completed fetch for #% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste with result: 0.62 div.
+[2025-11-06 20:45:32] Saved watcher_prices_single.json
+[2025-11-06 20:45:32] [FETCH SINGLE RESP] proxy=5 status=200 for #% increased Life Recovery from Flasks while affected by Vitality
+[2025-11-06 20:45:32] [AVG SINGLE] #% increased Life Recovery from Flasks while affected by Vitality: 0.91 div (132.0 chaos)
+[2025-11-06 20:45:32] Proxy 5 completed fetch for #% increased Life Recovery from Flasks while affected by Vitality with result: 0.91 div.
+[2025-11-06 20:45:32] Saved watcher_prices_single.json
+[2025-11-06 20:45:32] [SEARCH SINGLE RESP] proxy=8 status=200 for #% increased Fire Damage while affected by Anger
+[2025-11-06 20:45:32] [FETCH SINGLE RESP] proxy=2 status=200 for +#% to Critical Strike Multiplier while affected by Anger
+[2025-11-06 20:45:32] [AVG SINGLE] +#% to Critical Strike Multiplier while affected by Anger: 0.53 div (76.6 chaos)
+[2025-11-06 20:45:32] Proxy 2 completed fetch for +#% to Critical Strike Multiplier while affected by Anger with result: 0.53 div.
+[2025-11-06 20:45:32] Saved watcher_prices_single.json
+[2025-11-06 20:45:32] [FETCH SINGLE RESP] proxy=0 status=200 for #% increased Maximum total Energy Shield Recovery per second from Leech while affected by Zealotry
+[2025-11-06 20:45:32] [AVG SINGLE] #% increased Maximum total Energy Shield Recovery per second from Leech while affected by Zealotry: 0.58 div (83.6 chaos)
+[2025-11-06 20:45:32] Proxy 0 completed fetch for #% increased Maximum total Energy Shield Recovery per second from Leech while affected by Zealotry with result: 0.58 div.
+[2025-11-06 20:45:32] Saved watcher_prices_single.json
+[2025-11-06 20:45:32] [FETCH SINGLE RESP] proxy=7 status=200 for #% reduced Reflected Elemental Damage taken while affected by Purity of Elements
+[2025-11-06 20:45:32] [AVG SINGLE] #% reduced Reflected Elemental Damage taken while affected by Purity of Elements: 0.91 div (132.0 chaos)
+[2025-11-06 20:45:32] Proxy 7 completed fetch for #% reduced Reflected Elemental Damage taken while affected by Purity of Elements with result: 0.91 div.
+[2025-11-06 20:45:32] Saved watcher_prices_single.json
+[2025-11-06 20:45:32] [FETCH SINGLE RESP] proxy=6 status=200 for #% reduced Reflected Physical Damage taken while affected by Determination
+[2025-11-06 20:45:32] [AVG SINGLE] #% reduced Reflected Physical Damage taken while affected by Determination: 0.69 div (100.0 chaos)
+[2025-11-06 20:45:32] Proxy 6 completed fetch for #% reduced Reflected Physical Damage taken while affected by Determination with result: 0.69 div.
+[2025-11-06 20:45:33] Saved watcher_prices_single.json
+[2025-11-06 20:45:33] [FETCH SINGLE RESP] proxy=8 status=200 for #% increased Fire Damage while affected by Anger
+[2025-11-06 20:45:33] [AVG SINGLE] #% increased Fire Damage while affected by Anger: 0.78 div (113.0 chaos)
+[2025-11-06 20:45:33] Proxy 8 completed fetch for #% increased Fire Damage while affected by Anger with result: 0.78 div.
+[2025-11-06 20:45:33] Saved watcher_prices_single.json
+[2025-11-06 20:45:42] [SEARCH SINGLE] proxy=0 #% chance to Blind Enemies which Hit you while affected by Grace
+[2025-11-06 20:45:42] [SEARCH SINGLE] proxy=1 #% faster start of Energy Shield Recharge while affected by Discipline
+[2025-11-06 20:45:42] [SEARCH SINGLE] proxy=2 #% of Physical Damage Converted to Fire Damage while affected by Anger
+[2025-11-06 20:45:42] [SEARCH SINGLE] proxy=3 #% of Damage taken while affected by Clarity Recouped as Mana
+[2025-11-06 20:45:42] [SEARCH SINGLE] proxy=4 #% of Fire and Lightning Damage taken as Cold Damage while affected by Purity of Ice
+[2025-11-06 20:45:42] [SEARCH SINGLE] proxy=5 #% of Fire and Cold Damage taken as Lightning Damage while affected by Purity of Lightning
+[2025-11-06 20:45:42] [SEARCH SINGLE] proxy=6 #% of Cold and Lightning Damage taken as Fire Damage while affected by Purity of Fire
+[2025-11-06 20:45:42] [SEARCH SINGLE] proxy=7 #% increased Mana Recovery Rate while affected by Clarity
+[2025-11-06 20:45:42] [SEARCH SINGLE] proxy=8 #% increased Life Recovery Rate while affected by Vitality
+[2025-11-06 20:45:42] [SEARCH SINGLE] proxy=9 #% increased Energy Shield Recovery Rate while affected by Discipline
+[2025-11-06 20:45:42] [SEARCH SINGLE RESP] proxy=4 status=200 for #% of Fire and Lightning Damage taken as Cold Damage while affected by Purity of Ice
+[2025-11-06 20:45:42] [SEARCH SINGLE RESP] proxy=5 status=200 for #% of Fire and Cold Damage taken as Lightning Damage while affected by Purity of Lightning
+[2025-11-06 20:45:42] [SEARCH SINGLE RESP] proxy=1 status=200 for #% faster start of Energy Shield Recharge while affected by Discipline
+[2025-11-06 20:45:42] [SEARCH SINGLE RESP] proxy=3 status=200 for #% of Damage taken while affected by Clarity Recouped as Mana
+[2025-11-06 20:45:42] [SEARCH SINGLE RESP] proxy=9 status=200 for #% increased Energy Shield Recovery Rate while affected by Discipline
+[2025-11-06 20:45:42] [SEARCH SINGLE RESP] proxy=7 status=200 for #% increased Mana Recovery Rate while affected by Clarity
+[2025-11-06 20:45:42] [SEARCH SINGLE RESP] proxy=6 status=200 for #% of Cold and Lightning Damage taken as Fire Damage while affected by Purity of Fire
+[2025-11-06 20:45:42] [SEARCH SINGLE RESP] proxy=0 status=200 for #% chance to Blind Enemies which Hit you while affected by Grace
+[2025-11-06 20:45:42] [FETCH SINGLE RESP] proxy=4 status=200 for #% of Fire and Lightning Damage taken as Cold Damage while affected by Purity of Ice
+[2025-11-06 20:45:42] [AVG SINGLE] #% of Fire and Lightning Damage taken as Cold Damage while affected by Purity of Ice: 0.76 div (110.0 chaos)
+[2025-11-06 20:45:42] Proxy 4 completed fetch for #% of Fire and Lightning Damage taken as Cold Damage while affected by Purity of Ice with result: 0.76 div.
+[2025-11-06 20:45:42] Saved watcher_prices_single.json
+[2025-11-06 20:45:42] [SEARCH SINGLE RESP] proxy=2 status=200 for #% of Physical Damage Converted to Fire Damage while affected by Anger
+[2025-11-06 20:45:42] [FETCH SINGLE RESP] proxy=1 status=200 for #% faster start of Energy Shield Recharge while affected by Discipline
+[2025-11-06 20:45:42] [AVG SINGLE] #% faster start of Energy Shield Recharge while affected by Discipline: 0.64 div (93.0 chaos)
+[2025-11-06 20:45:42] Proxy 1 completed fetch for #% faster start of Energy Shield Recharge while affected by Discipline with result: 0.64 div.
+[2025-11-06 20:45:42] Saved watcher_prices_single.json
+[2025-11-06 20:45:42] [FETCH SINGLE RESP] proxy=5 status=200 for #% of Fire and Cold Damage taken as Lightning Damage while affected by Purity of Lightning
+[2025-11-06 20:45:42] [AVG SINGLE] #% of Fire and Cold Damage taken as Lightning Damage while affected by Purity of Lightning: 0.91 div (132.0 chaos)
+[2025-11-06 20:45:42] Proxy 5 completed fetch for #% of Fire and Cold Damage taken as Lightning Damage while affected by Purity of Lightning with result: 0.91 div.
+[2025-11-06 20:45:42] Saved watcher_prices_single.json
+[2025-11-06 20:45:42] [FETCH SINGLE RESP] proxy=3 status=200 for #% of Damage taken while affected by Clarity Recouped as Mana
+[2025-11-06 20:45:42] [AVG SINGLE] #% of Damage taken while affected by Clarity Recouped as Mana: 0.77 div (111.8 chaos)
+[2025-11-06 20:45:42] Proxy 3 completed fetch for #% of Damage taken while affected by Clarity Recouped as Mana with result: 0.77 div.
+[2025-11-06 20:45:42] Saved watcher_prices_single.json
+[2025-11-06 20:45:42] [FETCH SINGLE RESP] proxy=9 status=200 for #% increased Energy Shield Recovery Rate while affected by Discipline
+[2025-11-06 20:45:42] [AVG SINGLE] #% increased Energy Shield Recovery Rate while affected by Discipline: 0.76 div (110.0 chaos)
+[2025-11-06 20:45:42] Proxy 9 completed fetch for #% increased Energy Shield Recovery Rate while affected by Discipline with result: 0.76 div.
+[2025-11-06 20:45:42] Saved watcher_prices_single.json
+[2025-11-06 20:45:42] [SEARCH SINGLE RESP] proxy=8 status=200 for #% increased Life Recovery Rate while affected by Vitality
+[2025-11-06 20:45:42] [FETCH SINGLE RESP] proxy=7 status=200 for #% increased Mana Recovery Rate while affected by Clarity
+[2025-11-06 20:45:42] [AVG SINGLE] #% increased Mana Recovery Rate while affected by Clarity: 0.74 div (108.0 chaos)
+[2025-11-06 20:45:42] Proxy 7 completed fetch for #% increased Mana Recovery Rate while affected by Clarity with result: 0.74 div.
+[2025-11-06 20:45:43] Saved watcher_prices_single.json
+[2025-11-06 20:45:43] [FETCH SINGLE RESP] proxy=0 status=200 for #% chance to Blind Enemies which Hit you while affected by Grace
+[2025-11-06 20:45:43] [AVG SINGLE] #% chance to Blind Enemies which Hit you while affected by Grace: 0.93 div (135.0 chaos)
+[2025-11-06 20:45:43] Proxy 0 completed fetch for #% chance to Blind Enemies which Hit you while affected by Grace with result: 0.93 div.
+[2025-11-06 20:45:43] Saved watcher_prices_single.json
+[2025-11-06 20:45:43] [FETCH SINGLE RESP] proxy=6 status=200 for #% of Cold and Lightning Damage taken as Fire Damage while affected by Purity of Fire
+[2025-11-06 20:45:43] [AVG SINGLE] #% of Cold and Lightning Damage taken as Fire Damage while affected by Purity of Fire: 1.00 div (145.0 chaos)
+[2025-11-06 20:45:43] Proxy 6 completed fetch for #% of Cold and Lightning Damage taken as Fire Damage while affected by Purity of Fire with result: 1.00 div.
+[2025-11-06 20:45:43] Saved watcher_prices_single.json
+[2025-11-06 20:45:43] [FETCH SINGLE RESP] proxy=2 status=200 for #% of Physical Damage Converted to Fire Damage while affected by Anger
+[2025-11-06 20:45:43] [AVG SINGLE] #% of Physical Damage Converted to Fire Damage while affected by Anger: 0.70 div (101.0 chaos)
+[2025-11-06 20:45:43] Proxy 2 completed fetch for #% of Physical Damage Converted to Fire Damage while affected by Anger with result: 0.70 div.
+[2025-11-06 20:45:43] Saved watcher_prices_single.json
+[2025-11-06 20:45:43] [FETCH SINGLE RESP] proxy=8 status=200 for #% increased Life Recovery Rate while affected by Vitality
+[2025-11-06 20:45:43] [AVG SINGLE] #% increased Life Recovery Rate while affected by Vitality: 0.67 div (97.6 chaos)
+[2025-11-06 20:45:43] Proxy 8 completed fetch for #% increased Life Recovery Rate while affected by Vitality with result: 0.67 div.
+[2025-11-06 20:45:43] Saved watcher_prices_single.json
+[2025-11-06 20:45:52] [SEARCH SINGLE] proxy=0 #% increased Cast Speed while affected by Zealotry
+[2025-11-06 20:45:52] [SEARCH SINGLE] proxy=1 #% chance to Recover 10% of Mana when you use a Skill while affected by Clarity
+[2025-11-06 20:45:52] [SEARCH SINGLE] proxy=2 #% of Damage taken from Mana before Life while affected by Clarity
+[2025-11-06 20:45:52] [SEARCH SINGLE] proxy=3 #% of Lightning Damage is Leeched as Energy Shield while affected by Wrath
+[2025-11-06 20:45:52] [SEARCH SINGLE] proxy=4 #% of Fire Damage Leeched as Life while affected by Anger
+[2025-11-06 20:45:52] [SEARCH SINGLE] proxy=5 #% of Damage leeched as Life while affected by Vitality
+[2025-11-06 20:45:52] [SEARCH SINGLE] proxy=6 Immune to Shock while affected by Purity of Lightning
+[2025-11-06 20:45:52] [SEARCH SINGLE RESP] proxy=1 status=200 for #% chance to Recover 10% of Mana when you use a Skill while affected by Clarity
+[2025-11-06 20:45:52] [SEARCH SINGLE RESP] proxy=5 status=200 for #% of Damage leeched as Life while affected by Vitality
+[2025-11-06 20:45:52] [SEARCH SINGLE RESP] proxy=4 status=200 for #% of Fire Damage Leeched as Life while affected by Anger
+[2025-11-06 20:45:52] [SEARCH SINGLE RESP] proxy=3 status=200 for #% of Lightning Damage is Leeched as Energy Shield while affected by Wrath
+[2025-11-06 20:45:52] [SEARCH SINGLE RESP] proxy=6 status=200 for Immune to Shock while affected by Purity of Lightning
+[2025-11-06 20:45:52] [SEARCH SINGLE RESP] proxy=0 status=200 for #% increased Cast Speed while affected by Zealotry
+[2025-11-06 20:45:52] [SEARCH SINGLE RESP] proxy=2 status=200 for #% of Damage taken from Mana before Life while affected by Clarity
+[2025-11-06 20:45:52] [FETCH SINGLE RESP] proxy=1 status=200 for #% chance to Recover 10% of Mana when you use a Skill while affected by Clarity
+[2025-11-06 20:45:52] [AVG SINGLE] #% chance to Recover 10% of Mana when you use a Skill while affected by Clarity: 3.80 div (551.0 chaos)
+[2025-11-06 20:45:52] Proxy 1 completed fetch for #% chance to Recover 10% of Mana when you use a Skill while affected by Clarity with result: 3.80 div.
+[2025-11-06 20:45:52] Saved watcher_prices_single.json
+[2025-11-06 20:45:52] [FETCH SINGLE RESP] proxy=5 status=200 for #% of Damage leeched as Life while affected by Vitality
+[2025-11-06 20:45:52] [AVG SINGLE] #% of Damage leeched as Life while affected by Vitality: 0.78 div (113.0 chaos)
+[2025-11-06 20:45:52] Proxy 5 completed fetch for #% of Damage leeched as Life while affected by Vitality with result: 0.78 div.
+[2025-11-06 20:45:52] Saved watcher_prices_single.json
+[2025-11-06 20:45:52] [FETCH SINGLE RESP] proxy=4 status=200 for #% of Fire Damage Leeched as Life while affected by Anger
+[2025-11-06 20:45:52] [AVG SINGLE] #% of Fire Damage Leeched as Life while affected by Anger: 0.70 div (100.8 chaos)
+[2025-11-06 20:45:52] Proxy 4 completed fetch for #% of Fire Damage Leeched as Life while affected by Anger with result: 0.70 div.
+[2025-11-06 20:45:52] Saved watcher_prices_single.json
+[2025-11-06 20:45:52] [FETCH SINGLE RESP] proxy=3 status=200 for #% of Lightning Damage is Leeched as Energy Shield while affected by Wrath
+[2025-11-06 20:45:52] [AVG SINGLE] #% of Lightning Damage is Leeched as Energy Shield while affected by Wrath: 0.79 div (114.0 chaos)
+[2025-11-06 20:45:52] Proxy 3 completed fetch for #% of Lightning Damage is Leeched as Energy Shield while affected by Wrath with result: 0.79 div.
+[2025-11-06 20:45:52] Saved watcher_prices_single.json
+[2025-11-06 20:45:52] [FETCH SINGLE RESP] proxy=0 status=200 for #% increased Cast Speed while affected by Zealotry
+[2025-11-06 20:45:52] [FETCH SINGLE RESP] proxy=6 status=200 for Immune to Shock while affected by Purity of Lightning
+[2025-11-06 20:45:52] [AVG SINGLE] #% increased Cast Speed while affected by Zealotry: 0.65 div (94.0 chaos)
+[2025-11-06 20:45:52] Proxy 0 completed fetch for #% increased Cast Speed while affected by Zealotry with result: 0.65 div.
+[2025-11-06 20:45:52] Saved watcher_prices_single.json
+[2025-11-06 20:45:52] [AVG SINGLE] Immune to Shock while affected by Purity of Lightning: 0.50 div (73.0 chaos)
+[2025-11-06 20:45:52] Proxy 6 completed fetch for Immune to Shock while affected by Purity of Lightning with result: 0.50 div.
+[2025-11-06 20:45:52] Saved watcher_prices_single.json
+[2025-11-06 20:45:52] [FETCH SINGLE RESP] proxy=2 status=200 for #% of Damage taken from Mana before Life while affected by Clarity
+[2025-11-06 20:45:52] [AVG SINGLE] #% of Damage taken from Mana before Life while affected by Clarity: 1.00 div (145.0 chaos)
+[2025-11-06 20:45:52] Proxy 2 completed fetch for #% of Damage taken from Mana before Life while affected by Clarity with result: 1.00 div.
+[2025-11-06 20:45:52] Saved watcher_prices_single.json
+[2025-11-06 20:45:53] All queued modifiers processed.
+[2025-11-06 20:45:53] Proxy 0 session closed and marked dead.
+[2025-11-06 20:45:53] Proxy 1 session closed and marked dead.
+[2025-11-06 20:45:53] Proxy 2 session closed and marked dead.
+[2025-11-06 20:45:53] Proxy 3 session closed and marked dead.
+[2025-11-06 20:45:53] Proxy 4 session closed and marked dead.
+[2025-11-06 20:45:53] Proxy 5 session closed and marked dead.
+[2025-11-06 20:45:53] Proxy 6 session closed and marked dead.
+[2025-11-06 20:45:53] Proxy 7 session closed and marked dead.
+[2025-11-06 20:45:53] Proxy 8 session closed and marked dead.
+[2025-11-06 20:45:53] Proxy 9 session closed and marked dead.
+[2025-11-06 20:45:53] Worker stopped and sessions closed
+[2025-11-06 20:45:53] Batch 20251106-184431-single-70b7 finalized at 2025-11-06T18:45:53.127505.
+[2025-11-06 20:45:53] Database connection closed.
+[2025-11-06 20:45:53] Exported batch 20251106-184431-single-70b7 to exports\20251106-184431-single-70b7_single.csv.
+[2025-11-06 20:47:04] Prepared run with 0 previously completed modifiers (single_mode=False, rate=145.0).
+[2025-11-06 20:47:04] Starting new batch 20251106-184704-double-e155 for league=Keepers.
+[2025-11-06 20:47:04] Queue populated with 3741 items
+[2025-11-06 20:47:04] Opened database connection at data\watchers_eye.db.
+[2025-11-06 20:47:04] Batch 20251106-184704-double-e155 recorded in database.
+[2025-11-06 20:47:04] Loaded 10 proxies
+[2025-11-06 20:47:04] Started 10 proxy workers
+[2025-11-06 20:47:04] Run started for 3741 modifiers (single_mode=False, proxies=on, rate=145.0).
+[2025-11-06 20:47:04] Proxy worker 0 starting. Loop period=10s
+[2025-11-06 20:47:04] Created persistent session for proxy 0 (142.111.48.253:7030)
+[2025-11-06 20:47:04] Proxy 0 state -> ok
+[2025-11-06 20:47:04] [SEARCH] proxy=0 +#% to Critical Strike Multiplier while affected by Precision + #% increased Attack Speed while affected by Precision
+[2025-11-06 20:47:04] Proxy worker 1 starting. Loop period=10s
+[2025-11-06 20:47:04] Created persistent session for proxy 1 (31.59.20.176:6754)
+[2025-11-06 20:47:04] Proxy 1 state -> ok
+[2025-11-06 20:47:04] [SEARCH] proxy=1 +#% to Critical Strike Multiplier while affected by Precision + #% increased Attack Damage while affected by Precision
+[2025-11-06 20:47:04] Proxy worker 2 starting. Loop period=10s
+[2025-11-06 20:47:04] Created persistent session for proxy 2 (23.95.150.145:6114)
+[2025-11-06 20:47:04] Proxy 2 state -> ok
+[2025-11-06 20:47:04] [SEARCH] proxy=2 +#% to Critical Strike Multiplier while affected by Precision + #% increased Lightning Damage while affected by Wrath
+[2025-11-06 20:47:04] Proxy worker 3 starting. Loop period=10s
+[2025-11-06 20:47:04] Created persistent session for proxy 3 (198.23.239.134:6540)
+[2025-11-06 20:47:04] Proxy 3 state -> ok
+[2025-11-06 20:47:04] [SEARCH] proxy=3 +#% to Critical Strike Multiplier while affected by Precision + #% of Physical Damage Converted to Lightning Damage while affected by Wrath
+[2025-11-06 20:47:04] Proxy worker 4 starting. Loop period=10s
+[2025-11-06 20:47:04] Created persistent session for proxy 4 (45.38.107.97:6014)
+[2025-11-06 20:47:04] Proxy 4 state -> ok
+[2025-11-06 20:47:04] [SEARCH] proxy=4 +#% to Critical Strike Multiplier while affected by Precision + #% increased Critical Strike Chance while affected by Wrath
+[2025-11-06 20:47:04] Proxy worker 5 starting. Loop period=10s
+[2025-11-06 20:47:04] Created persistent session for proxy 5 (107.172.163.27:6543)
+[2025-11-06 20:47:04] Proxy 5 state -> ok
+[2025-11-06 20:47:04] [SEARCH] proxy=5 +#% to Critical Strike Multiplier while affected by Precision + Damage Penetrates #% Lightning Resistance while affected by Wrath
+[2025-11-06 20:47:04] Proxy worker 6 starting. Loop period=10s
+[2025-11-06 20:47:04] Created persistent session for proxy 6 (64.137.96.74:6641)
+[2025-11-06 20:47:04] Proxy 6 state -> ok
+[2025-11-06 20:47:04] [SEARCH] proxy=6 +#% to Critical Strike Multiplier while affected by Precision + Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath
+[2025-11-06 20:47:04] Proxy worker 7 starting. Loop period=10s
+[2025-11-06 20:47:04] Created persistent session for proxy 7 (216.10.27.159:6837)
+[2025-11-06 20:47:04] Proxy 7 state -> ok
+[2025-11-06 20:47:04] [SEARCH] proxy=7 +#% to Critical Strike Multiplier while affected by Precision + +#% to Critical Strike Chance while affected by Hatred
+[2025-11-06 20:47:04] Proxy worker 8 starting. Loop period=10s
+[2025-11-06 20:47:04] Created persistent session for proxy 8 (142.111.67.146:5611)
+[2025-11-06 20:47:04] Proxy 8 state -> ok
+[2025-11-06 20:47:04] [SEARCH] proxy=8 +#% to Critical Strike Multiplier while affected by Precision + Adds # to # Cold Damage while affected by Hatred
+[2025-11-06 20:47:04] Proxy worker 9 starting. Loop period=10s
+[2025-11-06 20:47:04] Created persistent session for proxy 9 (142.147.128.93:6593)
+[2025-11-06 20:47:04] Proxy 9 state -> ok
+[2025-11-06 20:47:04] [SEARCH] proxy=9 +#% to Critical Strike Multiplier while affected by Precision + #% increased Cold Damage while affected by Hatred
+[2025-11-06 20:47:04] [SEARCH RESP] proxy=1 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% increased Attack Damage while affected by Precision
+[2025-11-06 20:47:04] [FETCH] proxy=1 https://www.pathofexile.com/api/trade/fetch/66496ce3803bf2545d465c49a47f24703d305614b0a9d2f96efa4b3d75813287,6e50b79ec9d0d9f1b9d59da292ee59f4cf992fa92b3b89e370b89b9ff557fd19,16ea2559c3265cc6cbd3bd7b0569cd5ba18491e1bcc48dd5fa5449e3bfeffec7,a0e4a63a360363a586b1d598082a1cdd27a0f78ef6c701a5f862fc8c7fb55bd6,13e13ee99a0dac627ce6e0b51af149a0774056a877a0792a278df2dd26dbfcb4?query=6zoa7g69UG
+[2025-11-06 20:47:04] [SEARCH RESP] proxy=4 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% increased Critical Strike Chance while affected by Wrath
+[2025-11-06 20:47:04] [FETCH] proxy=4 https://www.pathofexile.com/api/trade/fetch/0ddd3bfa79e5392303e65a9bdd819dddd3fbd7f1ddcd7d5cb158b900ae5a3108,31486ac4f631105cfa06e1f0f910ed990ac6bbeb16bbc6c2f262485c5d4c810a,5cbda4775c0824bd3f1ac10bf79f2c2cad7a5bcd29cbbf899140bee1f36a6e90,f71f35bf6c2737ffd155153cdb52e899eb5238abb38c1034adf87d54f14040f5,db6bd6c2a6260c56f376650e9f3b086f187d439207c22856654c5b46be7ca07c?query=aLkMOanaSe
+[2025-11-06 20:47:04] [SEARCH RESP] proxy=6 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath
+[2025-11-06 20:47:04] [FETCH] proxy=6 https://www.pathofexile.com/api/trade/fetch/aedbe397b0a8b2e605aa01e72616e4edeeea65f44dc5f739c624809c91c51b65,9f40feca93ea7085cc0f746c33bfed367e3538628bfedabdb2e5bbbb72c41f2e,ed7e8060bfe9c4a9ff79c1e9297319fb86777eab7224936154f7270a42d11b49,aa8cd8c307c0417e07806bdcf30b4133777936cb8f0eea8f87bbf70e8f8e04b1,04d384795910898518aad6ca7afb823d0c304ffecdaf67cbfdcb5db79829f89c?query=8rl97JvZcV
+[2025-11-06 20:47:05] [FETCH RESP] proxy=1 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% increased Attack Damage while affected by Precision
+[2025-11-06 20:47:05] [AVG] +#% to Critical Strike Multiplier while affected by Precision + #% increased Attack Damage while affected by Precision: 18.00 div (2610.0 chaos)
+[2025-11-06 20:47:05] Proxy 1 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + #% increased Attack Damage while affected by Precision with result: 18.00 div.
+[2025-11-06 20:47:05] Saved watcher_prices_double.json
+[2025-11-06 20:47:05] [SEARCH RESP] proxy=9 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% increased Cold Damage while affected by Hatred
+[2025-11-06 20:47:05] [FETCH] proxy=9 https://www.pathofexile.com/api/trade/fetch/4d67da80b3f5331f7abda67515a02ed310507d98391667d261ca192098984bba,ac5c9ae9389cf5715c6d2ebbba3c22aa124deb81b47a2513bc00305a2ea14e76,9bc386d63711edfa8bbc77b0e61ef3e8c0d58922fe7d07f88dd4610c8578d3af,40a6ce306ca10e16ad194644f940def43763cde4091824e0a4a04c92aea986f6,13932b6872c24428cc130a608a5ad0cc68f44e4e951ff2fbd4e7441bacf48efe?query=3qjogDlPT5
+[2025-11-06 20:47:05] [SEARCH RESP] proxy=5 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Damage Penetrates #% Lightning Resistance while affected by Wrath
+[2025-11-06 20:47:05] [FETCH] proxy=5 https://www.pathofexile.com/api/trade/fetch/9fe1c0d8701a4ccde9ce7211ba43ca8436b93d35ed6a69c4670ccc8850d7404e,0e8cc9a8236e23e5ed2e0e5481c38cf3165e51ecf69e8a4b06da8641f00cdae2,381530bad7faba33d1feefbf198fe4a01294b1bfc07dec1b37b9d81e5ec2a200,ebef811666c699737298f1f874782be16ff54bd81e0d272644c7c540fac2beaa,fbef5b2cae5aac804df40fe5d3d806a38497922abbcd3acb83c0ff267ab232c8?query=V5l20mzlsp
+[2025-11-06 20:47:05] [SEARCH RESP] proxy=3 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% of Physical Damage Converted to Lightning Damage while affected by Wrath
+[2025-11-06 20:47:05] [FETCH] proxy=3 https://www.pathofexile.com/api/trade/fetch/e997192ebf5796e305b354eaeee082184bdf020f2132729f421656f0a8f0cb25,cb9039e9764ee88562d16dbd1116b54c258611d5da80f1d934b11028b8af2969,ce004866d4c09b2d520ea98e8d5950a868238d475167907cde57692354c46133,004c422682c2d2bd5fb047240be6a2b27460bae24996c99eb2db3435b2a9029b,f053074f2189b6c99a222fb6d06f09459cd3e9f61f3bbffdf301cc31f7f68282?query=LgBl0LG5cn
+[2025-11-06 20:47:05] [FETCH RESP] proxy=4 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% increased Critical Strike Chance while affected by Wrath
+[2025-11-06 20:47:05] [AVG] +#% to Critical Strike Multiplier while affected by Precision + #% increased Critical Strike Chance while affected by Wrath: 11.60 div (1682.0 chaos)
+[2025-11-06 20:47:05] Proxy 4 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + #% increased Critical Strike Chance while affected by Wrath with result: 11.60 div.
+[2025-11-06 20:47:05] Saved watcher_prices_double.json
+[2025-11-06 20:47:05] [SEARCH RESP] proxy=2 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% increased Lightning Damage while affected by Wrath
+[2025-11-06 20:47:05] [FETCH] proxy=2 https://www.pathofexile.com/api/trade/fetch/2beb0f11c8bedbf9a292774468db85bd2e569aceb56121ff64284600d1fa9117,5fa5bae23a9a6df989a51dde88253338dff18ff3f992931f7dbb428b3cca84cd,40477bd68a9c908e0a67608a37949ebed43b72edc1426a2dad68f0cee75eeeb0,8c1b8e6ca9bdde0163969c06d866330a376eb2aecdf07853d29e9ade3cda25d4,578bc58cedbf8eb471376da2848060f7ad513feaa39655da1bf10b2535671184?query=D6V50jrvS5
+[2025-11-06 20:47:05] [FETCH RESP] proxy=6 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath
+[2025-11-06 20:47:05] [AVG] +#% to Critical Strike Multiplier while affected by Precision + Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath: 3.37 div (488.0 chaos)
+[2025-11-06 20:47:05] Proxy 6 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath with result: 3.37 div.
+[2025-11-06 20:47:05] Saved watcher_prices_double.json
+[2025-11-06 20:47:05] [SEARCH RESP] proxy=7 status=200 for +#% to Critical Strike Multiplier while affected by Precision + +#% to Critical Strike Chance while affected by Hatred
+[2025-11-06 20:47:05] [FETCH] proxy=7 https://www.pathofexile.com/api/trade/fetch/692aa2229bb296437822988379fb572464ecdc16b33efbfe44f3cad725b73214,198a85043c6859ec3bf379016a4bf23f2b187bf770d9e9d0899bb6a8a1497d49,e4a84832d80eda815b4f56e3e2f3e56203be3a97f4be5794926b0931eb1e1542,dc8851876f0d66e55467141f29d84c3755e6f9d837b59ba8bad74e140df114c9,0f1927257d2627d978e4fa3ac732ce2f6479ded051557897fa33fc03652695e5?query=pJYMOkn3C0
+[2025-11-06 20:47:05] [SEARCH RESP] proxy=0 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% increased Attack Speed while affected by Precision
+[2025-11-06 20:47:05] [FETCH] proxy=0 https://www.pathofexile.com/api/trade/fetch/55c9fb815431cecfb4a43e440a1706ab953bdfb27922d8584712e0430cee81ac,0f4043e786ef2ce26d1b8e2d70a033f59a7810e31b00787525a3fefc119c12d6,5a95381ba529a0e6803d97981bc3c48c24e719328b43fd344252a760dbc920ec,30bb6dea84e77770a5d3e5906a2cf58e14b3ed66ed29ba204f8f86c952839727,892ad2eb9951168263842905ab50536d2150ff67e424953c9bbab6dab243b3ca?query=Z6Ky4Xn8TQ
+[2025-11-06 20:47:05] [FETCH RESP] proxy=5 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Damage Penetrates #% Lightning Resistance while affected by Wrath
+[2025-11-06 20:47:05] [AVG] +#% to Critical Strike Multiplier while affected by Precision + Damage Penetrates #% Lightning Resistance while affected by Wrath: 16.80 div (2436.0 chaos)
+[2025-11-06 20:47:05] Proxy 5 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + Damage Penetrates #% Lightning Resistance while affected by Wrath with result: 16.80 div.
+[2025-11-06 20:47:05] Saved watcher_prices_double.json
+[2025-11-06 20:47:05] [FETCH RESP] proxy=9 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% increased Cold Damage while affected by Hatred
+[2025-11-06 20:47:05] [AVG] +#% to Critical Strike Multiplier while affected by Precision + #% increased Cold Damage while affected by Hatred: 3.40 div (493.0 chaos)
+[2025-11-06 20:47:05] Proxy 9 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + #% increased Cold Damage while affected by Hatred with result: 3.40 div.
+[2025-11-06 20:47:05] Saved watcher_prices_double.json
+[2025-11-06 20:47:05] [FETCH RESP] proxy=3 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% of Physical Damage Converted to Lightning Damage while affected by Wrath
+[2025-11-06 20:47:05] [AVG] +#% to Critical Strike Multiplier while affected by Precision + #% of Physical Damage Converted to Lightning Damage while affected by Wrath: 3.20 div (464.0 chaos)
+[2025-11-06 20:47:05] Proxy 3 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + #% of Physical Damage Converted to Lightning Damage while affected by Wrath with result: 3.20 div.
+[2025-11-06 20:47:05] Saved watcher_prices_double.json
+[2025-11-06 20:47:05] [FETCH RESP] proxy=2 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% increased Lightning Damage while affected by Wrath
+[2025-11-06 20:47:05] [AVG] +#% to Critical Strike Multiplier while affected by Precision + #% increased Lightning Damage while affected by Wrath: 5.60 div (812.0 chaos)
+[2025-11-06 20:47:05] Proxy 2 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + #% increased Lightning Damage while affected by Wrath with result: 5.60 div.
+[2025-11-06 20:47:05] Saved watcher_prices_double.json
+[2025-11-06 20:47:05] [FETCH RESP] proxy=7 status=200 for +#% to Critical Strike Multiplier while affected by Precision + +#% to Critical Strike Chance while affected by Hatred
+[2025-11-06 20:47:05] [AVG] +#% to Critical Strike Multiplier while affected by Precision + +#% to Critical Strike Chance while affected by Hatred: 12.00 div (1740.0 chaos)
+[2025-11-06 20:47:05] Proxy 7 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + +#% to Critical Strike Chance while affected by Hatred with result: 12.00 div.
+[2025-11-06 20:47:05] Saved watcher_prices_double.json
+[2025-11-06 20:47:05] [FETCH RESP] proxy=0 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% increased Attack Speed while affected by Precision
+[2025-11-06 20:47:05] [AVG] +#% to Critical Strike Multiplier while affected by Precision + #% increased Attack Speed while affected by Precision: 60.20 div (8729.0 chaos)
+[2025-11-06 20:47:05] Proxy 0 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + #% increased Attack Speed while affected by Precision with result: 60.20 div.
+[2025-11-06 20:47:05] Saved watcher_prices_double.json
+[2025-11-06 20:47:05] [SEARCH RESP] proxy=8 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Adds # to # Cold Damage while affected by Hatred
+[2025-11-06 20:47:05] [FETCH] proxy=8 https://www.pathofexile.com/api/trade/fetch/68e57eab5c71639f5073fa4291372e24632e378de0b68d6ecd87bcaa9e2556e6,047cb19d8ecbd82a6453bda74dc18a60c7d0f6a3bd72b6794ab4c83927e46616,bc799de379e2932cc3c9c8a1787b10672a8b63ed67574ab0e821941d2c952865,87a1c3c17ba90632d17fd76c386887ed0ea2b8f60894ee120028e802b00470be,e584e728d845732fa5de5aae334b1f99111b46c57c21bb826ec6f95be1108b68?query=V5l20mDdCp
+[2025-11-06 20:47:06] [FETCH RESP] proxy=8 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Adds # to # Cold Damage while affected by Hatred
+[2025-11-06 20:47:06] [AVG] +#% to Critical Strike Multiplier while affected by Precision + Adds # to # Cold Damage while affected by Hatred: 3.60 div (522.0 chaos)
+[2025-11-06 20:47:06] Proxy 8 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + Adds # to # Cold Damage while affected by Hatred with result: 3.60 div.
+[2025-11-06 20:47:06] Saved watcher_prices_double.json
+[2025-11-06 20:47:14] [SEARCH] proxy=0 +#% to Critical Strike Multiplier while affected by Precision + Damage Penetrates #% Cold Resistance while affected by Hatred
+[2025-11-06 20:47:14] [SEARCH] proxy=1 +#% to Critical Strike Multiplier while affected by Precision + #% of Physical Damage Converted to Cold Damage while affected by Hatred
+[2025-11-06 20:47:14] [SEARCH] proxy=2 +#% to Critical Strike Multiplier while affected by Precision + You take #% reduced Extra Damage from Critical Strikes while affected by Determination
+[2025-11-06 20:47:14] [SEARCH] proxy=3 +#% to Critical Strike Multiplier while affected by Precision + +# to Armour while affected by Determination
+[2025-11-06 20:47:14] [SEARCH] proxy=4 +#% to Critical Strike Multiplier while affected by Precision + #% additional Physical Damage Reduction while affected by Determination
+[2025-11-06 20:47:14] [SEARCH] proxy=5 +#% to Critical Strike Multiplier while affected by Precision + +#% Chance to Block Attack Damage while affected by Determination
+[2025-11-06 20:47:14] [SEARCH] proxy=6 +#% to Critical Strike Multiplier while affected by Precision + Impales you inflict last # additional Hits while using Pride
+[2025-11-06 20:47:14] [SEARCH] proxy=7 +#% to Critical Strike Multiplier while affected by Precision + #% chance to deal Double Damage while using Pride
+[2025-11-06 20:47:14] [SEARCH] proxy=8 +#% to Critical Strike Multiplier while affected by Precision + #% chance to Impale Enemies on Hit with Attacks while using Pride
+[2025-11-06 20:47:14] [SEARCH] proxy=9 +#% to Critical Strike Multiplier while affected by Precision + #% increased Physical Damage while using Pride
+[2025-11-06 20:47:14] [SEARCH RESP] proxy=4 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% additional Physical Damage Reduction while affected by Determination
+[2025-11-06 20:47:14] [FETCH] proxy=4 https://www.pathofexile.com/api/trade/fetch/b2038c9ee5fd0494024ee9fd2f19178468ea0b12bbf41c91bf0a65353eef06a2,02471342496d8a3517d5586c85a2b18454eb6cfac93f96373f487bc2edfee770,100b36cef2ee191923c42ec7f3ace520c0dead11bd7aa553db8acc123bf9fdde,6767a55805cea186a9a7b441545ba20d3928a260b22c39ecd50cc7b18e391a01,53b4a690f5597185f98b32b4c45b9db2de9170aa27325537a1a32a2cb5ae74b8?query=veZMV42jcE
+[2025-11-06 20:47:14] [SEARCH RESP] proxy=9 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% increased Physical Damage while using Pride
+[2025-11-06 20:47:14] [FETCH] proxy=9 https://www.pathofexile.com/api/trade/fetch/2ea9c0238c3588826172a2a388c0399caebe368c4b4a67763b63d91919d23ce6,d20529e2bcf17572ef919686550f29b4baf3ead16f34a9c99dd34eaa789762e9,9dee163504188e58c368fd50a5c9a2c9298ced7e7b50d541be4e930432e0ecb9,f5851c925fb5a05fab18df49ceab9a3c2a6ac10ff796a571d4acf3dfc025ad57,a0bd296f2069508adfc526740faf2ae95b6a906f3c624cbd104370f797e4fa59?query=Bg3L07a3i8
+[2025-11-06 20:47:14] [SEARCH RESP] proxy=1 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% of Physical Damage Converted to Cold Damage while affected by Hatred
+[2025-11-06 20:47:14] [FETCH] proxy=1 https://www.pathofexile.com/api/trade/fetch/47c5cc326b6c73316a6dc414c0f0b01b697ac75f2524459c4f9baaff1fe47892,4699cba468516927d32fdaf47efe0c55278db28e488a1e81791ff59b2151c246,c4c7194c21443241dec8fdd598d3c92fa932e879df9c544fc44134caf6d08b8f,7d4a79ecb12cf7aef3058e89ece46bdb65d24496225b2294b6a20f709f3398a2,853c73fd869dca9c8fcd35b9f4505adeb8aa3c8ff5b65f06840af9c16646eb10?query=5n4lJmYmHa
+[2025-11-06 20:47:14] [SEARCH RESP] proxy=5 status=200 for +#% to Critical Strike Multiplier while affected by Precision + +#% Chance to Block Attack Damage while affected by Determination
+[2025-11-06 20:47:14] [FETCH] proxy=5 https://www.pathofexile.com/api/trade/fetch/2bea753f16d349cfbd3a486e46fa85713f3832455e69e717bc9b49d442afb0b5,6bf8ceee7848b96bddd67a7ca6ffbb38dd40385ad1aa49acf183804f6982a83b,e16f5e5a1891b4b920c62dec35dfa01972a29271594bb48e2442e2da33febc5a,9e181e666a266bb0ae875c45b8626f3caed82986d9c964ba8105e4f5c7161116,f748af9952a8bdaa449e120cb61464325ed79fa38f7eed9c75e6283daf0e0d59?query=5n4lJmjoCa
+[2025-11-06 20:47:14] [SEARCH RESP] proxy=2 status=200 for +#% to Critical Strike Multiplier while affected by Precision + You take #% reduced Extra Damage from Critical Strikes while affected by Determination
+[2025-11-06 20:47:14] [FETCH] proxy=2 https://www.pathofexile.com/api/trade/fetch/ba1a1fdce3e3438afd16013a5487a4d4fdb5552b0ed76fcd854e0edd8ebc0141,3e888de455f902c1dc15d676b006e373ce419bfea108de6ddfd97d96ce7411c6,9b5baac86e7a7a3ec59abd6b7edc7c53a4125e20cc84d3f364da5cbc75e32047,775601a07e9a0aa826311f08728312de32ca1b14074664dabf0228feb759ffb0,0656915eb466afde26de86612012bda82d45e99d2a6d630fb9380ee24a2549e6?query=JBEo0Lmvil
+[2025-11-06 20:47:14] [SEARCH RESP] proxy=0 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Damage Penetrates #% Cold Resistance while affected by Hatred
+[2025-11-06 20:47:14] [FETCH] proxy=0 https://www.pathofexile.com/api/trade/fetch/ba4812cfc29189fe7ed4ba30f784e31290e6322e71e02115c10277caad0d5077,71afbccfc78e45466c0bb1fc38c2c00aaab1e02f6c88cab4a422800dc0c10622,6ac8da9c9e85d71a55b909b79db233aea2c734e65a126e115810bcc6fddd6c94,3362e2dd8050068af15ab29b936c56c59ef86c884f763f68b86a823608f04aa8,1a347f6ea7d4e7d44f19c1d21e54261837bd3098d7c1b1684b9c4059caf7a413?query=rPGMDL37HQ
+[2025-11-06 20:47:14] [SEARCH RESP] proxy=3 status=200 for +#% to Critical Strike Multiplier while affected by Precision + +# to Armour while affected by Determination
+[2025-11-06 20:47:14] [FETCH] proxy=3 https://www.pathofexile.com/api/trade/fetch/0023db6f12aeb351ee005a585ef691890fb35ae091ca2cd8e773e90652b967b7,c7d5878ce31e577b598fec149b3a14364e0ab88db038f9650ad425b4484015c4,52c81fe54412f5d3a623562b6e53cb2edeff346ba04cb8672213ea6f6c594d76,63abb6e6c201f5c2fdf51f869e6f02319b038c1127b8cee8e10b69d2afe8bd0b,40d69a31e70e3df5278389ee406340a9cee201a5590628fb58d85457ff460275?query=eRGMe2PwIL
+[2025-11-06 20:47:14] [SEARCH RESP] proxy=7 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% chance to deal Double Damage while using Pride
+[2025-11-06 20:47:14] [FETCH] proxy=7 https://www.pathofexile.com/api/trade/fetch/1db459ac3ab310d16791cb518b5ba860b7d10a352d54c4d057b936c030ba3672,85791eead83fdad86e46b26e0edd2026a08bdbde14af17e1103e68b8bf15ec18,a8b3b7ecc53bebaee19fe80723867818be8198e2ec4376b6306da93136a81be0,c142ab4e03d116b2654479ddbc14e7227b41f2a88d3083c652cade01a1cafd58,12b3af746140396c5b4e695c6270cd3057aa63a60778ed279cde7767adc43988?query=rPGMDjP4tQ
+[2025-11-06 20:47:14] [SEARCH RESP] proxy=8 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% chance to Impale Enemies on Hit with Attacks while using Pride
+[2025-11-06 20:47:14] [FETCH] proxy=8 https://www.pathofexile.com/api/trade/fetch/13ad2db4dade3f15ab6258695427d4764372769945260bd674523236dc9fcda5,2064ecd1426639443c8506b1246689e5f3fa1245bd0eab1d5d3ef883c8fd460f,de31a17185cd7e985fa506496bbed5e4e0f015054d407e52387af63912b4b167,7509a9ce02cdb72f6695aba56e8c83d0a84670c4db8b62d597e814dc740aeecc,05d853c546bd7cc7a5317dac50d2e974f6bb27cfaba50d4a8050c6a5b575b28f?query=WvQE0WqKTm
+[2025-11-06 20:47:14] [FETCH RESP] proxy=4 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% additional Physical Damage Reduction while affected by Determination
+[2025-11-06 20:47:14] [AVG] +#% to Critical Strike Multiplier while affected by Precision + #% additional Physical Damage Reduction while affected by Determination: 2.40 div (347.5 chaos)
+[2025-11-06 20:47:14] Proxy 4 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + #% additional Physical Damage Reduction while affected by Determination with result: 2.40 div.
+[2025-11-06 20:47:14] Saved watcher_prices_double.json
+[2025-11-06 20:47:14] [FETCH RESP] proxy=9 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% increased Physical Damage while using Pride
+[2025-11-06 20:47:14] [AVG] +#% to Critical Strike Multiplier while affected by Precision + #% increased Physical Damage while using Pride: 3.37 div (488.0 chaos)
+[2025-11-06 20:47:14] Proxy 9 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + #% increased Physical Damage while using Pride with result: 3.37 div.
+[2025-11-06 20:47:14] Saved watcher_prices_double.json
+[2025-11-06 20:47:14] [FETCH RESP] proxy=5 status=200 for +#% to Critical Strike Multiplier while affected by Precision + +#% Chance to Block Attack Damage while affected by Determination
+[2025-11-06 20:47:14] [AVG] +#% to Critical Strike Multiplier while affected by Precision + +#% Chance to Block Attack Damage while affected by Determination: 2.40 div (348.0 chaos)
+[2025-11-06 20:47:14] Proxy 5 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + +#% Chance to Block Attack Damage while affected by Determination with result: 2.40 div.
+[2025-11-06 20:47:14] Saved watcher_prices_double.json
+[2025-11-06 20:47:14] [FETCH RESP] proxy=1 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% of Physical Damage Converted to Cold Damage while affected by Hatred
+[2025-11-06 20:47:14] [AVG] +#% to Critical Strike Multiplier while affected by Precision + #% of Physical Damage Converted to Cold Damage while affected by Hatred: 3.19 div (462.8 chaos)
+[2025-11-06 20:47:14] Proxy 1 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + #% of Physical Damage Converted to Cold Damage while affected by Hatred with result: 3.19 div.
+[2025-11-06 20:47:15] Saved watcher_prices_double.json
+[2025-11-06 20:47:15] [SEARCH RESP] proxy=6 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Impales you inflict last # additional Hits while using Pride
+[2025-11-06 20:47:15] [FETCH] proxy=6 https://www.pathofexile.com/api/trade/fetch/d835bf0e25c6c7f2ebf281ace8a2287d9b10dc5661e9647f125b1a770cb31f6e,4dbfc77a88b8d08c5edc872c23d837926f8a6c5cadc7cbc701073a484b5231c5,6efb86a5a84be7487624addaffc0f5cb2b938c02a45ff7b11f55c05b6ef5573e,e1e5c61016a8064f7350f99ed24d01e1a59bdcce94c02a0c3e00f545a4a73131,39a552163836f49a53e89dff1e3701ea6a613ed7f0ad5fa1336fd8d9d5774e6c?query=Bg3L07ZjC8
+[2025-11-06 20:47:15] [FETCH RESP] proxy=2 status=200 for +#% to Critical Strike Multiplier while affected by Precision + You take #% reduced Extra Damage from Critical Strikes while affected by Determination
+[2025-11-06 20:47:15] [AVG] +#% to Critical Strike Multiplier while affected by Precision + You take #% reduced Extra Damage from Critical Strikes while affected by Determination: 8.60 div (1247.0 chaos)
+[2025-11-06 20:47:15] Proxy 2 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + You take #% reduced Extra Damage from Critical Strikes while affected by Determination with result: 8.60 div.
+[2025-11-06 20:47:15] Saved watcher_prices_double.json
+[2025-11-06 20:47:15] [FETCH RESP] proxy=3 status=200 for +#% to Critical Strike Multiplier while affected by Precision + +# to Armour while affected by Determination
+[2025-11-06 20:47:15] [AVG] +#% to Critical Strike Multiplier while affected by Precision + +# to Armour while affected by Determination: 3.40 div (493.0 chaos)
+[2025-11-06 20:47:15] Proxy 3 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + +# to Armour while affected by Determination with result: 3.40 div.
+[2025-11-06 20:47:15] Saved watcher_prices_double.json
+[2025-11-06 20:47:15] [FETCH RESP] proxy=0 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Damage Penetrates #% Cold Resistance while affected by Hatred
+[2025-11-06 20:47:15] [AVG] +#% to Critical Strike Multiplier while affected by Precision + Damage Penetrates #% Cold Resistance while affected by Hatred: 2.80 div (406.0 chaos)
+[2025-11-06 20:47:15] Proxy 0 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + Damage Penetrates #% Cold Resistance while affected by Hatred with result: 2.80 div.
+[2025-11-06 20:47:15] Saved watcher_prices_double.json
+[2025-11-06 20:47:15] [FETCH RESP] proxy=7 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% chance to deal Double Damage while using Pride
+[2025-11-06 20:47:15] [AVG] +#% to Critical Strike Multiplier while affected by Precision + #% chance to deal Double Damage while using Pride: 3.80 div (551.0 chaos)
+[2025-11-06 20:47:15] Proxy 7 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + #% chance to deal Double Damage while using Pride with result: 3.80 div.
+[2025-11-06 20:47:15] Saved watcher_prices_double.json
+[2025-11-06 20:47:15] [FETCH RESP] proxy=6 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Impales you inflict last # additional Hits while using Pride
+[2025-11-06 20:47:15] [AVG] +#% to Critical Strike Multiplier while affected by Precision + Impales you inflict last # additional Hits while using Pride: 7.60 div (1102.0 chaos)
+[2025-11-06 20:47:15] Proxy 6 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + Impales you inflict last # additional Hits while using Pride with result: 7.60 div.
+[2025-11-06 20:47:15] Saved watcher_prices_double.json
+[2025-11-06 20:47:15] [FETCH RESP] proxy=8 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% chance to Impale Enemies on Hit with Attacks while using Pride
+[2025-11-06 20:47:15] [AVG] +#% to Critical Strike Multiplier while affected by Precision + #% chance to Impale Enemies on Hit with Attacks while using Pride: 4.60 div (667.0 chaos)
+[2025-11-06 20:47:15] Proxy 8 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + #% chance to Impale Enemies on Hit with Attacks while using Pride with result: 4.60 div.
+[2025-11-06 20:47:15] Saved watcher_prices_double.json
+[2025-11-06 20:47:24] [SEARCH] proxy=0 +#% to Critical Strike Multiplier while affected by Precision + Your Hits Intimidate Enemies for 4 seconds while you are using Pride
+[2025-11-06 20:47:24] [SEARCH] proxy=1 +#% to Critical Strike Multiplier while affected by Precision + +#% chance to Evade Attack Hits while affected by Grace
+[2025-11-06 20:47:24] [SEARCH] proxy=2 +#% to Critical Strike Multiplier while affected by Precision + +#% chance to Suppress Spell Damage while affected by Grace
+[2025-11-06 20:47:24] [SEARCH] proxy=3 +#% to Critical Strike Multiplier while affected by Precision + #% increased Movement Speed while affected by Grace
+[2025-11-06 20:47:24] [SEARCH] proxy=4 +#% to Critical Strike Multiplier while affected by Precision + Gain # Life per Enemy Hit while affected by Vitality
+[2025-11-06 20:47:24] [SEARCH] proxy=5 +#% to Critical Strike Multiplier while affected by Precision + Gain # Energy Shield per Enemy Hit while affected by Discipline
+[2025-11-06 20:47:24] [SEARCH] proxy=6 +#% to Critical Strike Multiplier while affected by Precision + +#% Chance to Block Spell Damage while affected by Discipline
+[2025-11-06 20:47:24] [SEARCH] proxy=7 +#% to Critical Strike Multiplier while affected by Precision + Regenerate #% of Energy Shield per Second while affected by Discipline
+[2025-11-06 20:47:24] [SEARCH] proxy=8 +#% to Critical Strike Multiplier while affected by Precision + You gain Onslaught for # seconds on Kill while affected by Haste
+[2025-11-06 20:47:24] [SEARCH] proxy=9 +#% to Critical Strike Multiplier while affected by Precision + You have Phasing while affected by Haste
+[2025-11-06 20:47:24] [SEARCH RESP] proxy=9 status=200 for +#% to Critical Strike Multiplier while affected by Precision + You have Phasing while affected by Haste
+[2025-11-06 20:47:24] [FETCH] proxy=9 https://www.pathofexile.com/api/trade/fetch/1c8de05a2dd541fdba3527d0bcb7f7d7994a5601bd4e86f57bf2b13125f7e34d,4d40feeee523ee2a4eb43b8c22a5db66acb80b48274d9dc987bbde24d5ad05a5,b0b7e15d72ba01db5290a4c3320dfb1f8b751f82f863a6eef4da1830bf3586a6,091f7005540ebd240a39238965fafc7b147b4a4f5f98e021f29425c47397ed40,a22536817d160d9092082fd6d6f5b09509d6f2ad24b9b52e46b94df8f71ea4b7?query=3qjoRr29c5
+[2025-11-06 20:47:24] [SEARCH RESP] proxy=5 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Gain # Energy Shield per Enemy Hit while affected by Discipline
+[2025-11-06 20:47:24] [FETCH] proxy=5 https://www.pathofexile.com/api/trade/fetch/b1f9efb51324e9f2bec29dfc9ae35f958bbae4f5b2e2741a49f62df5c18e4705,c39299aef2d6941b1ff98125e23c1fe773a5cd75f34067676126410496917929,4112a619eee98e9d90b5335c90d0e14fc00ef8c1c3d526352dd835113e9cd1f3,4a2538be6e75c19a850dee3bda9dd2dcd7fc8b012c980cbf293ce9ed97f5904e,b699ac82c2b6f2cdef1b0dd4a07b4285ad194a7ca28c67c679f9ad98e01a5624?query=veZMVPyzcE
+[2025-11-06 20:47:24] [SEARCH RESP] proxy=3 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% increased Movement Speed while affected by Grace
+[2025-11-06 20:47:24] [FETCH] proxy=3 https://www.pathofexile.com/api/trade/fetch/942f37a4396e651271aa1307e94789c9531e46cfa99e1c9897d846a965088389,8d594868fde37cc4ad6c426da986cfbeecbd92956c3dd50ccad0b65e7eb1449f,6f38b5804e2e4df7bebf014fd8e6cf2ea0a44f5f90d317719ee3d79b40d33dd4,d0309ab2c23f9fa195a9d53aa3c0b0ef04513b37f4f09ac860812d18a15fc9df,5353921f35a1078c6ea9f69cc4ab37e634c9899b5c6d43e8820f27b601e343c3?query=jW9MrjvLsX
+[2025-11-06 20:47:24] [SEARCH RESP] proxy=4 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Gain # Life per Enemy Hit while affected by Vitality
+[2025-11-06 20:47:24] [FETCH] proxy=4 https://www.pathofexile.com/api/trade/fetch/551dd0341b55ab7f97cd2c000504b5364b0ce42d9b5d2ae1b475e3545f3bcf40,63319aa8687262c8b83d17e9d568f34d7671144097a682f7b4be647c948d6d69,7f7ddacd55cd3688c6bb6d7c48366db6de54375493fe30c98f27106bd7abb2f5,bf345274c89b0c6f09724477fd1f1a245aa699190e02ac7ca82dab13552db97b,e509486fcbc0973434bef4fd7c74a09df4bfc91501972f62216165ad0206bcf1?query=opVMyjaqFl
+[2025-11-06 20:47:24] [SEARCH RESP] proxy=2 status=200 for +#% to Critical Strike Multiplier while affected by Precision + +#% chance to Suppress Spell Damage while affected by Grace
+[2025-11-06 20:47:24] [FETCH] proxy=2 https://www.pathofexile.com/api/trade/fetch/484c5d24030aeeec0620a33658c1c18f9e6a9bafb0489fc3260165cd7228c050,13a1bdd09511284e370ed1779502a1e3e2acf3af5ea24f1a96907549fdc6cd1a,bfdebc9dbda15fa3912b0359f82fee14125ed17a15bc59c05c5881b2c1db4ba8,4fe0ad3e553f824da57d572347346e3442f1c57dc02e00acd5fdb078699dc0a5,20d409dbe43225a273dd134cc515abc6d7bde87a89008623d1914298d2f9b1f0?query=bGkMaWVXsL
+[2025-11-06 20:47:24] [SEARCH RESP] proxy=1 status=200 for +#% to Critical Strike Multiplier while affected by Precision + +#% chance to Evade Attack Hits while affected by Grace
+[2025-11-06 20:47:24] [FETCH] proxy=1 https://www.pathofexile.com/api/trade/fetch/a5c79cdde3f58c1d6553b2d0ee3e27af7fd2f98ae7bd96f6f1b9f13b578f44f5,63fd539da2516c5979c737cb8384e0667dd8bce20bd4e302588396431d9e58af,d44b080027c819796119d94fbb4c37b50334c18974e5256816fc417187b70e4b,1bf245db23f29a5e7fbc6613ce3a6e4d9168cda3b0ffd76583376b86312f4979,089adbfb2eca18b05d891c9acc8fed2b2bdae38bed206237f3dd72310f163182?query=MdYa0DdMFJ
+[2025-11-06 20:47:24] [SEARCH RESP] proxy=0 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Your Hits Intimidate Enemies for 4 seconds while you are using Pride
+[2025-11-06 20:47:24] [FETCH] proxy=0 https://www.pathofexile.com/api/trade/fetch/4c983a49a2ba5aab31c4110996edf2a7fc4ceda41b7342f8111134c23582c4ff,e08558590f3e62eb6e585c5c3a7f81808c41ab873f103e5e99f7456fd7d2c235,4f8bba8260770b90f9c9a74daa76c000ddf14d9bc163238c7690705397380bf3,9c9d8e5ef7c07804cccdf8371330b48f98e26d1f894a96252a20320afa6c3747,60c7adcfe3f0618dcbe7fe60475ab7d5599da274150062ab05675864f276c0b3?query=pJYM5jV3f0
+[2025-11-06 20:47:24] [SEARCH RESP] proxy=7 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Regenerate #% of Energy Shield per Second while affected by Discipline
+[2025-11-06 20:47:24] [FETCH] proxy=7 https://www.pathofexile.com/api/trade/fetch/fbbd31e73e8097cc9a830ec0f8931e30bf719d2a6175967cc5bed0f38e40a63c,d68f3d8640478309e3b478b446431772559aed66f1917d0ccd8d217762ecded9,42fa73c2aaa7a6d49775603f14a79b4e2618812c2983a5576042767043c5072a,0bc0f478524a8d9a6ef50e76a3428947ac6e3799b299fa7b9e24dcb639915c21,8c5d9c78752d58233b6b5ba099a128bee8c0c1a8750e213ef339b4a296f8d41d?query=6zoa7ko0FG
+[2025-11-06 20:47:24] [SEARCH RESP] proxy=6 status=200 for +#% to Critical Strike Multiplier while affected by Precision + +#% Chance to Block Spell Damage while affected by Discipline
+[2025-11-06 20:47:24] [FETCH] proxy=6 https://www.pathofexile.com/api/trade/fetch/b8d14d22810363c44e812dcc53309d7803963590c1ba4db4754a67a2004be745,5019c6e24fde29c78af8f547c500dd07790d6cdc5554605dc8d66802bec3985c,4fc442d67210762ace3af5928b749e238f1fe782e1ecac49c5747bfc9a2c3cb5,0b1f9bf3e4c24556651bbebbb375e88c1ce61d2d61721b71e7c432f2cbc3b24c,b7f092932ad4c9e04517f418cb0deadea091a919151943069cee6f22847f2579?query=2KnJWrnpuk
+[2025-11-06 20:47:24] [FETCH RESP] proxy=9 status=200 for +#% to Critical Strike Multiplier while affected by Precision + You have Phasing while affected by Haste
+[2025-11-06 20:47:24] [AVG] +#% to Critical Strike Multiplier while affected by Precision + You have Phasing while affected by Haste: 8.20 div (1189.0 chaos)
+[2025-11-06 20:47:24] Proxy 9 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + You have Phasing while affected by Haste with result: 8.20 div.
+[2025-11-06 20:47:25] Saved watcher_prices_double.json
+[2025-11-06 20:47:25] [FETCH RESP] proxy=5 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Gain # Energy Shield per Enemy Hit while affected by Discipline
+[2025-11-06 20:47:25] [AVG] +#% to Critical Strike Multiplier while affected by Precision + Gain # Energy Shield per Enemy Hit while affected by Discipline: 20.40 div (2958.0 chaos)
+[2025-11-06 20:47:25] Proxy 5 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + Gain # Energy Shield per Enemy Hit while affected by Discipline with result: 20.40 div.
+[2025-11-06 20:47:25] Saved watcher_prices_double.json
+[2025-11-06 20:47:25] [FETCH RESP] proxy=3 status=200 for +#% to Critical Strike Multiplier while affected by Precision + #% increased Movement Speed while affected by Grace
+[2025-11-06 20:47:25] [AVG] +#% to Critical Strike Multiplier while affected by Precision + #% increased Movement Speed while affected by Grace: 4.60 div (667.0 chaos)
+[2025-11-06 20:47:25] Proxy 3 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + #% increased Movement Speed while affected by Grace with result: 4.60 div.
+[2025-11-06 20:47:25] Saved watcher_prices_double.json
+[2025-11-06 20:47:25] [FETCH RESP] proxy=4 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Gain # Life per Enemy Hit while affected by Vitality
+[2025-11-06 20:47:25] [AVG] +#% to Critical Strike Multiplier while affected by Precision + Gain # Life per Enemy Hit while affected by Vitality: 7.00 div (1015.0 chaos)
+[2025-11-06 20:47:25] Proxy 4 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + Gain # Life per Enemy Hit while affected by Vitality with result: 7.00 div.
+[2025-11-06 20:47:25] Saved watcher_prices_double.json
+[2025-11-06 20:47:25] [FETCH RESP] proxy=2 status=200 for +#% to Critical Strike Multiplier while affected by Precision + +#% chance to Suppress Spell Damage while affected by Grace
+[2025-11-06 20:47:25] [AVG] +#% to Critical Strike Multiplier while affected by Precision + +#% chance to Suppress Spell Damage while affected by Grace: 7.20 div (1044.0 chaos)
+[2025-11-06 20:47:25] Proxy 2 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + +#% chance to Suppress Spell Damage while affected by Grace with result: 7.20 div.
+[2025-11-06 20:47:25] Saved watcher_prices_double.json
+[2025-11-06 20:47:25] [SEARCH RESP] proxy=8 status=200 for +#% to Critical Strike Multiplier while affected by Precision + You gain Onslaught for # seconds on Kill while affected by Haste
+[2025-11-06 20:47:25] [FETCH] proxy=8 https://www.pathofexile.com/api/trade/fetch/79c1493a4bd100757a3644edc88843ecbc19198a2b38111bf56c56be6deb5a14,d9ced710ba6e84413ffab95ec70204c3db8a4c83a2519811c51d4e6fcce9c690,b94c82056f625f11552c44c6b6c4d0fd4cfa5fc154568be6ecacb003a354988a,429e6251ddddbf30dd3bf6a1b78f9757cd93eba557309829660f371d49e71826?query=7nZY65r6H5
+[2025-11-06 20:47:25] [FETCH RESP] proxy=1 status=200 for +#% to Critical Strike Multiplier while affected by Precision + +#% chance to Evade Attack Hits while affected by Grace
+[2025-11-06 20:47:25] [AVG] +#% to Critical Strike Multiplier while affected by Precision + +#% chance to Evade Attack Hits while affected by Grace: 21.20 div (3074.0 chaos)
+[2025-11-06 20:47:25] Proxy 1 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + +#% chance to Evade Attack Hits while affected by Grace with result: 21.20 div.
+[2025-11-06 20:47:25] Saved watcher_prices_double.json
+[2025-11-06 20:47:25] [FETCH RESP] proxy=7 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Regenerate #% of Energy Shield per Second while affected by Discipline
+[2025-11-06 20:47:25] [AVG] +#% to Critical Strike Multiplier while affected by Precision + Regenerate #% of Energy Shield per Second while affected by Discipline: 37.60 div (5452.0 chaos)
+[2025-11-06 20:47:25] Proxy 7 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + Regenerate #% of Energy Shield per Second while affected by Discipline with result: 37.60 div.
+[2025-11-06 20:47:25] Saved watcher_prices_double.json
+[2025-11-06 20:47:25] [FETCH RESP] proxy=0 status=200 for +#% to Critical Strike Multiplier while affected by Precision + Your Hits Intimidate Enemies for 4 seconds while you are using Pride
+[2025-11-06 20:47:25] [AVG] +#% to Critical Strike Multiplier while affected by Precision + Your Hits Intimidate Enemies for 4 seconds while you are using Pride: 2.00 div (290.0 chaos)
+[2025-11-06 20:47:25] Proxy 0 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + Your Hits Intimidate Enemies for 4 seconds while you are using Pride with result: 2.00 div.
+[2025-11-06 20:47:25] Saved watcher_prices_double.json
+[2025-11-06 20:47:25] [FETCH RESP] proxy=6 status=200 for +#% to Critical Strike Multiplier while affected by Precision + +#% Chance to Block Spell Damage while affected by Discipline
+[2025-11-06 20:47:25] [AVG] +#% to Critical Strike Multiplier while affected by Precision + +#% Chance to Block Spell Damage while affected by Discipline: 4.40 div (638.0 chaos)
+[2025-11-06 20:47:25] Proxy 6 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + +#% Chance to Block Spell Damage while affected by Discipline with result: 4.40 div.
+[2025-11-06 20:47:25] Saved watcher_prices_double.json
+[2025-11-06 20:47:25] [FETCH RESP] proxy=8 status=200 for +#% to Critical Strike Multiplier while affected by Precision + You gain Onslaught for # seconds on Kill while affected by Haste
+[2025-11-06 20:47:25] [AVG] +#% to Critical Strike Multiplier while affected by Precision + You gain Onslaught for # seconds on Kill while affected by Haste: 5.75 div (833.8 chaos)
+[2025-11-06 20:47:25] Proxy 8 completed fetch for +#% to Critical Strike Multiplier while affected by Precision + You gain Onslaught for # seconds on Kill while affected by Haste with result: 5.75 div.
+[2025-11-06 20:47:25] Saved watcher_prices_double.json
+[2025-11-06 20:47:28] Stop requested; signaling workers to exit.
+[2025-11-06 20:47:28] Proxy 0 session closed and marked dead.
+[2025-11-06 20:47:28] Proxy 1 session closed and marked dead.
+[2025-11-06 20:47:28] Proxy 2 session closed and marked dead.
+[2025-11-06 20:47:28] Proxy 3 session closed and marked dead.
+[2025-11-06 20:47:28] Proxy 4 session closed and marked dead.
+[2025-11-06 20:47:28] Proxy 5 session closed and marked dead.
+[2025-11-06 20:47:28] Proxy 6 session closed and marked dead.
+[2025-11-06 20:47:28] Proxy 7 session closed and marked dead.
+[2025-11-06 20:47:28] Proxy 8 session closed and marked dead.
+[2025-11-06 20:47:28] Proxy 9 session closed and marked dead.
+[2025-11-06 20:47:28] Worker stopped and sessions closed
+[2025-11-06 20:47:29] Batch 20251106-184704-double-e155 finalized at 2025-11-06T18:47:28.942804.
+[2025-11-06 20:47:29] Database connection closed.
+[2025-11-06 20:47:29] Exported batch 20251106-184704-double-e155 to exports\20251106-184704-double-e155_double.csv.
