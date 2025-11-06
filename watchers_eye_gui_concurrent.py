@@ -11,9 +11,13 @@
 import sys
 import os
 import asyncio
+import sqlite3
 import aiohttp
 import json
 import time
+import uuid
+from datetime import datetime
+from pathlib import Path
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QPushButton,
     QTableWidget, QTableWidgetItem, QLabel, QMessageBox, QTextEdit, QHBoxLayout,
@@ -22,12 +26,15 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import QThread, pyqtSignal, QObject, Qt
 from PyQt5.QtGui import QColor
 from mod_data import MOD_COMBOS, MOD_NAMES
+from watchers_eye_db import ensure_database, export_batch_to_csv
 
 DIVINE_TO_CHAOS_RATE = 100.0
 SINGLE_MODS = list(MOD_NAMES.keys())
 DOUBLE_RESULTS_FILE = "watcher_prices_double.json"
 SINGLE_RESULTS_FILE = "watcher_prices_single.json"
 NAME_TO_MOD_ID = {name: mod_id for mod_id, name in MOD_NAMES.items()}
+DATABASE_PATH = Path("data/watchers_eye.db")
+EXPORT_DIR = Path("exports")
 
 class PriceWorker(QObject):
     result_ready = pyqtSignal(float, float, str, str, int)
@@ -71,12 +78,24 @@ class PriceWorker(QObject):
         self.debug_log_path = "watcher_debug.log"
         self.proxy_states = {}
 
+        # database
+        self.db_path = DATABASE_PATH
+        self.batch_id = None
+        self.batch_started_at = None
+        self._db_conn = None
+        self._batch_finalized = False
+        self.export_dir = EXPORT_DIR
+
     def prepare_for_run(self):
         """Load previously saved results and cache completed modifier keys."""
         self.completed_keys = set()
         self._stop_tokens_sent = False
         self._worker_count = 0
         self.proxy_states = {}
+        ensure_database(self.db_path)
+        self.batch_id = self._generate_batch_id()
+        self.batch_started_at = datetime.utcnow().isoformat()
+        self._batch_finalized = False
         results_file = self._current_results_file()
         loaded_results = []
         if os.path.exists(results_file):
@@ -98,6 +117,7 @@ class PriceWorker(QObject):
             f"Prepared run with {len(self.completed_keys)} previously completed modifiers "
             f"(single_mode={self.single_mode}, rate={self.divine_to_chaos_rate})."
         )
+        self._emit_debug(f"Starting new batch {self.batch_id} for league={self.league}.")
         return list(self.results)
 
     def _current_results_file(self):
@@ -163,12 +183,87 @@ class PriceWorker(QObject):
             return (mod1,)
         return (mod1, mod2)
 
+    def _generate_batch_id(self):
+        timestamp = datetime.utcnow().strftime("%Y%m%d-%H%M%S")
+        mode = "single" if self.single_mode else "double"
+        suffix = uuid.uuid4().hex[:4]
+        return f"{timestamp}-{mode}-{suffix}"
+
     async def _inject_stop_tokens(self):
         if not self.queue:
             return
         tokens = max(1, self._worker_count or 0)
         for _ in range(tokens):
             await self.queue.put(None)
+
+    def _open_db_connection(self):
+        if self._db_conn:
+            return
+        try:
+            self._db_conn = sqlite3.connect(self.db_path)
+            self._db_conn.execute("PRAGMA foreign_keys = ON")
+            self._emit_debug(f"Opened database connection at {self.db_path}.")
+        except Exception as exc:
+            self._emit_debug(f"Database connection error: {exc}")
+            self._db_conn = None
+
+    def _close_db_connection(self):
+        if not self._db_conn:
+            return
+        try:
+            self._db_conn.close()
+            self._emit_debug("Database connection closed.")
+        except Exception as exc:
+            self._emit_debug(f"Error closing database connection: {exc}")
+        finally:
+            self._db_conn = None
+
+    def _create_batch_record(self):
+        if not self._db_conn or not self.batch_id:
+            return
+        run_mode = "single" if self.single_mode else "double"
+        started_at = self.batch_started_at or datetime.utcnow().isoformat()
+        try:
+            self._db_conn.execute(
+                """
+                INSERT OR REPLACE INTO batches (batch_id, run_mode, league, divine_rate, started_at)
+                VALUES (?, ?, ?, ?, ?)
+                """,
+                (self.batch_id, run_mode, self.league, self.divine_to_chaos_rate, started_at),
+            )
+            self._db_conn.commit()
+            self._emit_debug(f"Batch {self.batch_id} recorded in database.")
+        except Exception as exc:
+            self._emit_debug(f"Failed to record batch {self.batch_id}: {exc}")
+
+    def _finalize_batch_record(self):
+        if self._batch_finalized or not self._db_conn or not self.batch_id:
+            return
+        finished_at = datetime.utcnow().isoformat()
+        try:
+            self._db_conn.execute(
+                "UPDATE batches SET finished_at = ? WHERE batch_id = ?",
+                (finished_at, self.batch_id),
+            )
+            self._db_conn.commit()
+            self._batch_finalized = True
+            self._emit_debug(f"Batch {self.batch_id} finalized at {finished_at}.")
+        except Exception as exc:
+            self._emit_debug(f"Failed to finalize batch {self.batch_id}: {exc}")
+
+    def _export_batch_results(self):
+        if not self.batch_id:
+            return None
+        mode = "single" if self.single_mode else "double"
+        self.export_dir.mkdir(parents=True, exist_ok=True)
+        export_path = self.export_dir / f"{self.batch_id}_{mode}.csv"
+        try:
+            export_batch_to_csv(self.db_path, self.batch_id, export_path, mode)
+            self._emit_debug(f"Exported batch {self.batch_id} to {export_path}.")
+            return export_path
+        except Exception as exc:
+            self._emit_debug(f"Failed to export batch {self.batch_id}: {exc}")
+            return None
 
     def load_proxies(self):
         try:
@@ -421,16 +516,19 @@ class PriceWorker(QObject):
         self.queue = asyncio.Queue()
         enqueued = await self._fill_queue()
 
+        if enqueued == 0:
+            self.status_update.emit("All modifiers already fetched. Nothing to queue.")
+            self.running = False
+            return
+
+        self._open_db_connection()
+        self._create_batch_record()
+
         # if proxies requested, ensure they are loaded and create workers per proxy
         if self.use_proxies:
             if not self.load_proxies():
                 self._emit_debug("No proxies loaded, falling back to direct mode.")
                 self.use_proxies = False
-
-        if enqueued == 0:
-            self.status_update.emit("All modifiers already fetched. Nothing to queue.")
-            self.running = False
-            return
 
         tasks = []
         self._proxy_tasks = []
@@ -481,6 +579,11 @@ class PriceWorker(QObject):
                 except Exception:
                     pass
             self._emit_debug("Worker stopped and sessions closed")
+            self._finalize_batch_record()
+            self._close_db_connection()
+            export_path = self._export_batch_results()
+            if export_path:
+                self.status_update.emit(f"Exported batch data to {export_path}")
 
     def start(self):
         # create and set event loop for thread
@@ -692,6 +795,7 @@ class PriceWorker(QObject):
 
     # ---- Result bookkeeping ----
     def add_result(self, mod1, mod2, avg_price_div, avg_price_chaos, proxy_idx=None):
+        recorded_at = datetime.utcnow().isoformat()
         key = self._make_key(mod1, mod2)
         result = {
             "mod1_id": mod1,
@@ -700,7 +804,9 @@ class PriceWorker(QObject):
             "mod2_name": MOD_NAMES.get(mod2, str(mod2)) if mod2 else None,
             "avg_price_divine": round(avg_price_div, 2),
             "avg_price_chaos": round(avg_price_chaos, 1),
-            "divine_to_chaos_rate": round(self.divine_to_chaos_rate, 2)
+            "divine_to_chaos_rate": round(self.divine_to_chaos_rate, 2),
+            "batch_id": self.batch_id,
+            "recorded_at": recorded_at
         }
         if proxy_idx is not None and proxy_idx >= 0:
             result["proxy_index"] = proxy_idx
@@ -719,6 +825,14 @@ class PriceWorker(QObject):
         if not updated:
             self.results.append(result)
         self.completed_keys.add(key)
+        if self._db_conn:
+            try:
+                if self.single_mode:
+                    self._persist_single_price(mod1, avg_price_div, avg_price_chaos, recorded_at)
+                else:
+                    self._persist_double_price(mod1, mod2, avg_price_div, avg_price_chaos, recorded_at)
+            except Exception as exc:
+                self._emit_debug(f"Database persistence failed for {key}: {exc}")
 
     def update_results_file(self):
         try:
@@ -744,6 +858,63 @@ class PriceWorker(QObject):
 
     def resume(self):
         self.paused = False
+
+    def _persist_single_price(self, mod_id, avg_div, avg_chaos, recorded_at):
+        if not self._db_conn or not self.batch_id:
+            return
+        try:
+            self._db_conn.execute(
+                """
+                INSERT INTO prices_single (
+                    batch_id, mod_id, mod_name, avg_divine, avg_chaos,
+                    divine_to_chaos_rate, listing_count, recorded_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    self.batch_id,
+                    mod_id,
+                    MOD_NAMES.get(mod_id, str(mod_id)),
+                    float(avg_div),
+                    float(avg_chaos),
+                    float(self.divine_to_chaos_rate),
+                    int(self.listing_count),
+                    recorded_at,
+                ),
+            )
+            self._db_conn.commit()
+        except Exception as exc:
+            self._emit_debug(f"Failed to persist single modifier {mod_id}: {exc}")
+
+    def _persist_double_price(self, mod1, mod2, avg_div, avg_chaos, recorded_at):
+        if not self._db_conn or not self.batch_id or mod2 is None:
+            return
+        if mod1 > mod2:
+            mod1, mod2 = mod2, mod1
+        try:
+            self._db_conn.execute(
+                """
+                INSERT INTO prices_double (
+                    batch_id, mod1_id, mod2_id, mod1_name, mod2_name,
+                    avg_divine, avg_chaos, divine_to_chaos_rate,
+                    listing_count, recorded_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    self.batch_id,
+                    mod1,
+                    mod2,
+                    MOD_NAMES.get(mod1, str(mod1)),
+                    MOD_NAMES.get(mod2, str(mod2)),
+                    float(avg_div),
+                    float(avg_chaos),
+                    float(self.divine_to_chaos_rate),
+                    int(self.listing_count),
+                    recorded_at,
+                ),
+            )
+            self._db_conn.commit()
+        except Exception as exc:
+            self._emit_debug(f"Failed to persist double modifiers {mod1}/{mod2}: {exc}")
 
 # UI class remains similar to original; we keep it unchanged externally except filename
 class PriceFetcher(QWidget):
