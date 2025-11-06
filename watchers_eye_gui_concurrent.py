@@ -9,6 +9,7 @@
 # UI structure left unchanged
 
 import sys
+import os
 import asyncio
 import aiohttp
 import json
@@ -16,19 +17,23 @@ import time
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QPushButton,
     QTableWidget, QTableWidgetItem, QLabel, QMessageBox, QTextEdit, QHBoxLayout,
-    QComboBox, QSpinBox, QFormLayout, QCheckBox
+    QComboBox, QSpinBox, QFormLayout, QCheckBox, QInputDialog
 )
-from PyQt5.QtCore import QThread, pyqtSignal, QObject
+from PyQt5.QtCore import QThread, pyqtSignal, QObject, Qt
+from PyQt5.QtGui import QColor
 from mod_data import MOD_COMBOS, MOD_NAMES
 
 DIVINE_TO_CHAOS_RATE = 100.0
 SINGLE_MODS = list(MOD_NAMES.keys())
+DOUBLE_RESULTS_FILE = "watcher_prices_double.json"
+SINGLE_RESULTS_FILE = "watcher_prices_single.json"
+NAME_TO_MOD_ID = {name: mod_id for mod_id, name in MOD_NAMES.items()}
 
 class PriceWorker(QObject):
     result_ready = pyqtSignal(float, float, str, str, int)
     status_update = pyqtSignal(str)
     debug_message = pyqtSignal(str)
-    countdown_update = pyqtSignal(int)
+    proxy_status_update = pyqtSignal(int, str)
 
     def __init__(self):
         super().__init__()
@@ -50,13 +55,120 @@ class PriceWorker(QObject):
         self.proxy_sessions = {}  # idx -> aiohttp session or None
         self.proxy_status = {}    # idx -> dict(status='ok'|'dead', dead_since=ts)
         self.queue = None
-        self._reaper_task = None
         self._proxy_tasks = []
-        self._main_task = None
         self.loop = None
 
         # concurrency controls
         self.max_direct_workers = 4
+        self._worker_count = 0
+        self._stop_tokens_sent = False
+
+        # persistence helpers
+        self.completed_keys = set()
+        self.divine_to_chaos_rate = DIVINE_TO_CHAOS_RATE
+
+        # logging
+        self.debug_log_path = "watcher_debug.log"
+        self.proxy_states = {}
+
+    def prepare_for_run(self):
+        """Load previously saved results and cache completed modifier keys."""
+        self.completed_keys = set()
+        self._stop_tokens_sent = False
+        self._worker_count = 0
+        self.proxy_states = {}
+        results_file = self._current_results_file()
+        loaded_results = []
+        if os.path.exists(results_file):
+            try:
+                with open(results_file, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                if isinstance(data, list):
+                    loaded_results = data
+                    for entry in data:
+                        key = self._extract_key_from_entry(entry)
+                        if key:
+                            self.completed_keys.add(key)
+                else:
+                    self._emit_debug(f"Ignoring malformed results file: {results_file}")
+            except Exception as exc:
+                self._emit_debug(f"Failed to load cached results: {exc}")
+        self.results = list(loaded_results)
+        self._emit_debug(
+            f"Prepared run with {len(self.completed_keys)} previously completed modifiers "
+            f"(single_mode={self.single_mode}, rate={self.divine_to_chaos_rate})."
+        )
+        return list(self.results)
+
+    def _current_results_file(self):
+        return SINGLE_RESULTS_FILE if self.single_mode else DOUBLE_RESULTS_FILE
+
+    def _emit_debug(self, message):
+        timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        formatted = f"[{timestamp}] {message}"
+        self.debug_message.emit(formatted)
+        try:
+            with open(self.debug_log_path, "a", encoding="utf-8") as log:
+                log.write(formatted + "\n")
+        except Exception:
+            # avoid recursion if logging fails
+            pass
+
+    def _set_proxy_state(self, idx, state, detail=None):
+        if idx is None or idx < 0:
+            return
+        previous = self.proxy_states.get(idx)
+        state_changed = previous != state
+        if state_changed:
+            self.proxy_states[idx] = state
+            self.proxy_status_update.emit(idx, state)
+        if detail:
+            self._emit_debug(detail)
+        elif state_changed:
+            self._emit_debug(f"Proxy {idx} state -> {state}")
+
+    def _handle_rate_limit(self, proxy_idx, job_desc, wait_time):
+        message = f"Rate limit hit while fetching {job_desc}. Cooling down for {wait_time}s."
+        if proxy_idx is not None and proxy_idx >= 0:
+            self._set_proxy_state(
+                proxy_idx,
+                "rate_limited",
+                detail=f"Proxy {proxy_idx} hit rate limit while fetching {job_desc}. Cooling down for {wait_time}s."
+            )
+        else:
+            self._emit_debug(f"[DIRECT] {message}")
+
+    def _resolve_mod_id(self, value):
+        if not value:
+            return None
+        if value in MOD_NAMES:
+            return value
+        return NAME_TO_MOD_ID.get(value)
+
+    def _extract_key_from_entry(self, entry):
+        if not isinstance(entry, dict):
+            return None
+        mod1 = entry.get("mod1_id") or self._resolve_mod_id(entry.get("mod1"))
+        if self.single_mode:
+            if not mod1:
+                return None
+            return (mod1,)
+        mod2 = entry.get("mod2_id") or self._resolve_mod_id(entry.get("mod2"))
+        if mod1 and mod2:
+            return (mod1, mod2)
+        return None
+
+    def _make_key(self, mod1, mod2=None):
+        if self.single_mode:
+            return (mod1,)
+        return (mod1, mod2)
+
+    async def _inject_stop_tokens(self):
+        if not self.queue:
+            return
+        tokens = max(1, self._worker_count or 0)
+        for _ in range(tokens):
+            await self.queue.put(None)
 
     def load_proxies(self):
         try:
@@ -72,10 +184,10 @@ class PriceWorker(QObject):
                     ip, port, username, password = parts
                     proxy_url = f"http://{username}:{password}@{ip}:{port}"
                     self.proxies.append(proxy_url)
-            self.debug_message.emit(f"Loaded {len(self.proxies)} proxies")
+            self._emit_debug(f"Loaded {len(self.proxies)} proxies")
             return len(self.proxies) > 0
         except Exception as e:
-            self.debug_message.emit(f"Failed to load proxies: {e}")
+            self._emit_debug(f"Failed to load proxies: {e}")
             return False
 
     async def _ensure_proxy_session(self, idx):
@@ -91,7 +203,14 @@ class PriceWorker(QObject):
         session = aiohttp.ClientSession(headers=headers, connector=conn, timeout=timeout)
         self.proxy_sessions[idx] = session
         self.proxy_status[idx] = {"status": "ok", "dead_since": None}
-        self.debug_message.emit(f"Created persistent session for proxy {idx}")
+        if idx < len(self.proxies):
+            masked_proxy = self.proxies[idx]
+            if "@" in masked_proxy:
+                masked_proxy = masked_proxy.split("@", 1)[1]
+        else:
+            masked_proxy = "?"
+        self._emit_debug(f"Created persistent session for proxy {idx} ({masked_proxy})")
+        self._set_proxy_state(idx, "ok")
         return session
 
     async def _close_proxy_session(self, idx):
@@ -100,24 +219,38 @@ class PriceWorker(QObject):
             try:
                 await sess.close()
             except Exception as e:
-                self.debug_message.emit(f"Error closing session {idx}: {e}")
+                self._emit_debug(f"Error closing session {idx}: {e}")
         self.proxy_sessions.pop(idx, None)
         self.proxy_status[idx] = {"status": "dead", "dead_since": time.time()}
+        self._set_proxy_state(idx, "dead", detail=f"Proxy {idx} session closed and marked dead.")
 
     async def _fill_queue(self):
         """Populate the queue with mod combos. We'll cycle them by re-adding after processing."""
         await asyncio.sleep(0)  # allow event loop scheduling
         mod_list = SINGLE_MODS if self.single_mode else MOD_COMBOS
         # put all items initially
+        enqueued = 0
         for m in mod_list:
+            if self.single_mode:
+                key = self._make_key(m)
+            else:
+                mod1, mod2 = m
+                key = self._make_key(mod1, mod2)
+            if key in self.completed_keys:
+                continue
             await self.queue.put(m)
-        self.debug_message.emit(f"Queue populated with {len(mod_list)} items")
+            enqueued += 1
+        if enqueued:
+            self._emit_debug(f"Queue populated with {enqueued} items")
+        else:
+            self._emit_debug("Queue is empty; nothing pending to fetch")
+        return enqueued
 
     async def _proxy_worker(self, idx):
         """Worker that runs perpetually for a single proxy.
         Takes next mod combo from queue, performs request, then sleeps so the interval between requests is >= period."""
         proxy_url = self.proxies[idx] if idx < len(self.proxies) else None
-        backoff = 1
+        self._emit_debug(f"Proxy worker {idx} starting. Loop period={self.proxy_loop_period}s")
         while self.running:
             if self.paused:
                 await asyncio.sleep(0.5)
@@ -129,8 +262,9 @@ class PriceWorker(QObject):
                     await self._ensure_proxy_session(idx)
                 session = self.proxy_sessions[idx]
             except Exception as e:
-                self.debug_message.emit(f"Proxy {idx} session create failed: {e}")
+                self._emit_debug(f"Proxy {idx} session create failed: {e}")
                 self.proxy_status[idx] = {"status": "dead", "dead_since": time.time()}
+                self._set_proxy_state(idx, "error", detail=f"Proxy {idx} failed to establish session: {e}")
                 await asyncio.sleep(self.proxy_retry_delay)
                 continue
 
@@ -139,11 +273,12 @@ class PriceWorker(QObject):
             if status["status"] == "dead":
                 dead_since = status.get("dead_since") or 0
                 if time.time() - dead_since < self.proxy_cooldown:
+                    self._set_proxy_state(idx, "cooldown")
                     await asyncio.sleep(1)
                     continue
                 else:
                     # retry
-                    self.debug_message.emit(f"Retrying proxy {idx} after cooldown")
+                    self._emit_debug(f"Retrying proxy {idx} after cooldown")
                     try:
                         await self._close_proxy_session(idx)
                     except Exception:
@@ -152,13 +287,16 @@ class PriceWorker(QObject):
                         await self._ensure_proxy_session(idx)
                         status = {"status":"ok","dead_since":None}
                         self.proxy_status[idx] = status
+                        self._set_proxy_state(idx, "ok", detail=f"Proxy {idx} re-established after cooldown.")
                     except Exception as e:
-                        self.debug_message.emit(f"Proxy {idx} still failing on recreate: {e}")
+                        self._emit_debug(f"Proxy {idx} still failing on recreate: {e}")
                         self.proxy_status[idx] = {"status": "dead", "dead_since": time.time()}
+                        self._set_proxy_state(idx, "error", detail=f"Proxy {idx} recreate failure: {e}")
                         await asyncio.sleep(self.proxy_retry_delay)
                         continue
 
             # take a job
+            item = None
             try:
                 item = await asyncio.wait_for(self.queue.get(), timeout=5.0)
             except asyncio.TimeoutError:
@@ -166,36 +304,50 @@ class PriceWorker(QObject):
                 await asyncio.sleep(1)
                 continue
 
+            if item is None:
+                self.queue.task_done()
+                self._emit_debug(f"Proxy worker {idx} received stop token.")
+                break
+
             start_ts = time.time()
+            job_desc = ""
+            retry_item = False
             try:
                 if self.single_mode:
                     mod1 = item
                     avg_div, avg_chaos = await self._query_price_single_impl(session, mod1, proxy_url, proxy_idx=idx)
                     m1_name = MOD_NAMES.get(mod1, str(mod1))
                     m2_name = "-"
+                    job_desc = m1_name
                 else:
                     mod1, mod2 = item
                     avg_div, avg_chaos = await self._query_price_impl(session, mod1, mod2, proxy_url, proxy_idx=idx)
                     m1_name = MOD_NAMES.get(mod1, str(mod1))
                     m2_name = MOD_NAMES.get(mod2, str(mod2))
+                    job_desc = f"{m1_name} + {m2_name}"
                 if avg_div is not None:
+                    self._emit_debug(f"Proxy {idx} completed fetch for {job_desc} with result: {avg_div:.2f} div.")
                     self.result_ready.emit(avg_div, avg_chaos, m1_name, m2_name, idx)
                     self.add_result(mod1, mod2 if not self.single_mode else None, avg_div, avg_chaos, idx)
                     self.update_results_file()
+                    self._set_proxy_state(idx, "ok")
                 else:
-                    self.debug_message.emit(f"Proxy {idx} returned no price for {m1_name} {m2_name}")
-                # re-add job to queue end so combos are cycled
-                
-                backoff = 1
+                    self._emit_debug(f"Proxy {idx} returned no price for {job_desc}")
             except Exception as e:
-                self.debug_message.emit(f"Proxy {idx} task error: {e}")
+                self._emit_debug(f"Proxy {idx} task error for {job_desc or item}: {e}")
                 # mark dead and close session
                 self.proxy_status[idx] = {"status": "dead", "dead_since": time.time()}
+                self._set_proxy_state(idx, "error", detail=f"Proxy {idx} encountered error: {e}")
                 try:
                     await self._close_proxy_session(idx)
                 except Exception:
                     pass
+                retry_item = True
             finally:
+                self.queue.task_done()
+                if retry_item and self.running and item is not None:
+                    await self.queue.put(item)
+                    self._emit_debug(f"Requeued job {job_desc or item} after proxy {idx} error.")
                 # ensure at least proxy_loop_period seconds between requests per proxy
                 elapsed = time.time() - start_ts
                 to_sleep = max(0, self.proxy_loop_period - elapsed)
@@ -216,34 +368,45 @@ class PriceWorker(QObject):
                 if self.paused:
                     await asyncio.sleep(0.5)
                     continue
+                item = None
                 try:
                     item = await asyncio.wait_for(self.queue.get(), timeout=5.0)
                 except asyncio.TimeoutError:
                     await asyncio.sleep(0.5)
                     continue
+                if item is None:
+                    self.queue.task_done()
+                    break
                 start_ts = time.time()
+                job_desc = ""
+                retry_item = False
                 try:
                     if self.single_mode:
                         mod1 = item
                         avg_div, avg_chaos = await self._query_price_single_impl(session, mod1, proxy_url=None, proxy_idx=None)
                         m1_name = MOD_NAMES.get(mod1, str(mod1))
                         m2_name = "-"
+                        job_desc = m1_name
                     else:
                         mod1, mod2 = item
                         avg_div, avg_chaos = await self._query_price_impl(session, mod1, mod2, proxy_url=None, proxy_idx=None)
                         m1_name = MOD_NAMES.get(mod1, str(mod1))
                         m2_name = MOD_NAMES.get(mod2, str(mod2))
+                        job_desc = f"{m1_name} + {m2_name}"
                     if avg_div is not None:
                         self.result_ready.emit(avg_div, avg_chaos, m1_name, m2_name, -1)
                         self.add_result(mod1, mod2 if not self.single_mode else None, avg_div, avg_chaos, None)
                         self.update_results_file()
                     else:
-                        self.debug_message.emit(f"Direct worker returned no price for {m1_name} {m2_name}")
-                    # requeue
-                    
+                        self._emit_debug(f"Direct worker returned no price for {job_desc}")
                 except Exception as e:
-                    self.debug_message.emit(f"Direct worker error: {e}")
+                    self._emit_debug(f"Direct worker error for {job_desc or item}: {e}")
+                    retry_item = True
                 finally:
+                    self.queue.task_done()
+                    if retry_item and self.running and item is not None:
+                        await self.queue.put(item)
+                        self._emit_debug(f"Requeued job {job_desc or item} after direct worker error.")
                     elapsed = time.time() - start_ts
                     # keep direct workers modestly paced
                     await asyncio.sleep(max(0.5, 1.0 - elapsed))
@@ -256,15 +419,21 @@ class PriceWorker(QObject):
     async def start_async(self):
         """Main entry inside event loop. Prepares queue and starts proxy workers or direct workers."""
         self.queue = asyncio.Queue()
-        await self._fill_queue()
+        enqueued = await self._fill_queue()
 
         # if proxies requested, ensure they are loaded and create workers per proxy
         if self.use_proxies:
             if not self.load_proxies():
-                self.debug_message.emit("No proxies loaded, falling back to direct mode.")
+                self._emit_debug("No proxies loaded, falling back to direct mode.")
                 self.use_proxies = False
 
+        if enqueued == 0:
+            self.status_update.emit("All modifiers already fetched. Nothing to queue.")
+            self.running = False
+            return
+
         tasks = []
+        self._proxy_tasks = []
         if self.use_proxies:
             # create proxy tasks
             for idx in range(len(self.proxies)):
@@ -274,19 +443,33 @@ class PriceWorker(QObject):
                 t = asyncio.create_task(self._proxy_worker(idx))
                 tasks.append(t)
                 self._proxy_tasks.append(t)
-            self.debug_message.emit(f"Started {len(tasks)} proxy workers")
+            self._emit_debug(f"Started {len(tasks)} proxy workers")
         else:
             # create a pool of direct workers
             for _ in range(self.max_direct_workers):
                 t = asyncio.create_task(self._direct_worker())
                 tasks.append(t)
-            self.debug_message.emit(f"Started {len(tasks)} direct workers")
+            self._emit_debug(f"Started {len(tasks)} direct workers")
 
-        # keep main alive until stopped
+        self._worker_count = len(tasks)
+        self.status_update.emit(f"Queued {enqueued} modifiers; running {self._worker_count} workers.")
+        self._emit_debug(f"Run started for {enqueued} modifiers (single_mode={self.single_mode}, proxies={'on' if self.use_proxies else 'off'}, rate={self.divine_to_chaos_rate}).")
+
+        completion_task = asyncio.create_task(self.queue.join())
+
         try:
             while self.running:
+                if completion_task.done():
+                    self._emit_debug("All queued modifiers processed.")
+                    self.status_update.emit("Completed.")
+                    self.running = False
+                    if not self._stop_tokens_sent:
+                        self._stop_tokens_sent = True
+                        await self._inject_stop_tokens()
+                    break
                 await asyncio.sleep(0.5)
         finally:
+            completion_task.cancel()
             # cancel tasks
             for t in tasks:
                 t.cancel()
@@ -297,7 +480,7 @@ class PriceWorker(QObject):
                     await self._close_proxy_session(idx)
                 except Exception:
                     pass
-            self.debug_message.emit("Worker stopped and sessions closed")
+            self._emit_debug("Worker stopped and sessions closed")
 
     def start(self):
         # create and set event loop for thread
@@ -306,7 +489,7 @@ class PriceWorker(QObject):
         try:
             self.loop.run_until_complete(self.start_async())
         except Exception as e:
-            self.debug_message.emit(f"Event loop error: {e}")
+            self._emit_debug(f"Event loop error: {e}")
         finally:
             # ensure cleanup
             pending = asyncio.all_tasks(self.loop)
@@ -327,6 +510,9 @@ class PriceWorker(QObject):
         if not self.running:
             return None, None
         try:
+            mod1_name = MOD_NAMES.get(mod1, str(mod1))
+            mod2_name = MOD_NAMES.get(mod2, str(mod2))
+            job_desc = f"{mod1_name} + {mod2_name}"
             payload = {
                 "query": {
                     "status": {"option": "available"},
@@ -342,43 +528,46 @@ class PriceWorker(QObject):
                 "sort": {"price": "asc"}
             }
             url = f"https://www.pathofexile.com/api/trade/search/{self.league}"
-            self.debug_message.emit(f"[SEARCH] proxy={proxy_idx} {MOD_NAMES.get(mod1)} + {MOD_NAMES.get(mod2)}")
+            self._emit_debug(f"[SEARCH] proxy={proxy_idx} {job_desc}")
 
             try:
                 async with session.post(url, json=payload, proxy=proxy_url) as r:
+                    self._emit_debug(f"[SEARCH RESP] proxy={proxy_idx} status={r.status} for {job_desc}")
                     if r.status == 429:
                         wait_time = int(r.headers.get("Retry-After", 10))
-                        self.debug_message.emit(f"Rate limit hit. Waiting {wait_time}s...")
+                        self._handle_rate_limit(proxy_idx, job_desc, wait_time)
                         await asyncio.sleep(wait_time)
                         return await self._query_price_impl(session, mod1, mod2, proxy_url, proxy_idx, retry)
                     if r.status != 200:
-                        self.debug_message.emit(f"Search Error: {r.status}")
+                        self._emit_debug(f"Search error {r.status} for {job_desc} (proxy={proxy_idx}).")
                         return None, None
                     search_data = await r.json()
             except (aiohttp.ClientError, asyncio.TimeoutError) as e:
-                self.debug_message.emit(f"Network error (search): {e}")
+                self._emit_debug(f"Network error (search) for {job_desc}: {e}")
                 raise
 
             if not search_data.get("result"):
+                self._emit_debug(f"No search results for {job_desc}.")
                 return None, None
 
             ids = search_data["result"][:self.listing_count]
             fetch_url = f"https://www.pathofexile.com/api/trade/fetch/{','.join(ids)}?query={search_data['id']}"
-            self.debug_message.emit(f"[FETCH] {fetch_url}")
+            self._emit_debug(f"[FETCH] proxy={proxy_idx} {fetch_url}")
 
             try:
                 async with session.get(fetch_url, proxy=proxy_url) as r:
+                    self._emit_debug(f"[FETCH RESP] proxy={proxy_idx} status={r.status} for {job_desc}")
                     if r.status == 429:
                         wait_time = int(r.headers.get("Retry-After", 10))
-                        self.debug_message.emit(f"Rate limit hit (fetch). Waiting {wait_time}s...")
+                        self._handle_rate_limit(proxy_idx, job_desc, wait_time)
                         await asyncio.sleep(wait_time)
                         return await self._query_price_impl(session, mod1, mod2, proxy_url, proxy_idx, retry)
                     if r.status != 200:
-                        self.debug_message.emit(f"Fetch Error: {r.status}")
+                        self._emit_debug(f"Fetch error {r.status} for {job_desc} (proxy={proxy_idx}).")
                         return None, None
                     data = await r.json()
             except (aiohttp.ClientError, asyncio.TimeoutError) as e:
-                self.debug_message.emit(f"Network error (fetch): {e}")
+                self._emit_debug(f"Network error (fetch) for {job_desc}: {e}")
                 raise
 
             prices_divine = []
@@ -389,26 +578,30 @@ class PriceWorker(QObject):
                 currency = listing["currency"]
                 if currency == "divine":
                     prices_divine.append(amount)
-                    prices_chaos.append(amount * DIVINE_TO_CHAOS_RATE)
+                    prices_chaos.append(amount * self.divine_to_chaos_rate)
                 elif currency == "chaos":
                     prices_chaos.append(amount)
-                    prices_divine.append(amount / DIVINE_TO_CHAOS_RATE)
+                    prices_divine.append(amount / self.divine_to_chaos_rate)
 
             if not prices_divine:
+                self._emit_debug(f"No prices parsed for {job_desc}.")
                 return None, None
 
             avg_divine = sum(prices_divine) / len(prices_divine)
             avg_chaos = sum(prices_chaos) / len(prices_chaos)
-            self.debug_message.emit(f"[AVG] {avg_divine:.2f} div")
+            self._emit_debug(f"[AVG] {job_desc}: {avg_divine:.2f} div ({avg_chaos:.1f} chaos)")
+            if proxy_idx is not None:
+                self._set_proxy_state(proxy_idx, "ok")
             return avg_divine, avg_chaos
         except Exception as e:
-            self.debug_message.emit(f"Query exception: {e}")
+            self._emit_debug(f"Query exception for {job_desc}: {e}")
             raise
 
     async def _query_price_single_impl(self, session, mod1, proxy_url=None, proxy_idx=None, retry=True):
         if not self.running:
             return None, None
         try:
+            mod1_name = MOD_NAMES.get(mod1, str(mod1))
             payload = {
                 "query": {
                     "status": {"option": "available"},
@@ -429,23 +622,26 @@ class PriceWorker(QObject):
                 "sort": {"price": "asc"}
             }
             url = f"https://www.pathofexile.com/api/trade/search/{self.league}"
-            self.debug_message.emit(f"[SEARCH SINGLE] proxy={proxy_idx} {MOD_NAMES.get(mod1)}")
+            self._emit_debug(f"[SEARCH SINGLE] proxy={proxy_idx} {mod1_name}")
 
             try:
                 async with session.post(url, json=payload, proxy=proxy_url) as r:
+                    self._emit_debug(f"[SEARCH SINGLE RESP] proxy={proxy_idx} status={r.status} for {mod1_name}")
                     if r.status == 429:
                         wait_time = int(r.headers.get("Retry-After", 10))
+                        self._handle_rate_limit(proxy_idx, mod1_name, wait_time)
                         await asyncio.sleep(wait_time)
                         return await self._query_price_single_impl(session, mod1, proxy_url, proxy_idx, retry)
                     if r.status != 200:
-                        self.debug_message.emit(f"Search Error: {r.status}")
+                        self._emit_debug(f"Search error {r.status} for {mod1_name} (proxy={proxy_idx}).")
                         return None, None
                     search_data = await r.json()
             except (aiohttp.ClientError, asyncio.TimeoutError) as e:
-                self.debug_message.emit(f"Network error (search single): {e}")
+                self._emit_debug(f"Network error (search single) for {mod1_name}: {e}")
                 raise
 
             if not search_data.get("result"):
+                self._emit_debug(f"No search results for {mod1_name}.")
                 return None, None
 
             ids = search_data["result"][:self.listing_count]
@@ -453,16 +649,18 @@ class PriceWorker(QObject):
 
             try:
                 async with session.get(fetch_url, proxy=proxy_url) as r:
+                    self._emit_debug(f"[FETCH SINGLE RESP] proxy={proxy_idx} status={r.status} for {mod1_name}")
                     if r.status == 429:
                         wait_time = int(r.headers.get("Retry-After", 10))
+                        self._handle_rate_limit(proxy_idx, mod1_name, wait_time)
                         await asyncio.sleep(wait_time)
                         return await self._query_price_single_impl(session, mod1, proxy_url, proxy_idx, retry)
                     if r.status != 200:
-                        self.debug_message.emit(f"Fetch Error: {r.status}")
+                        self._emit_debug(f"Fetch error {r.status} for {mod1_name} (proxy={proxy_idx}).")
                         return None, None
                     data = await r.json()
             except (aiohttp.ClientError, asyncio.TimeoutError) as e:
-                self.debug_message.emit(f"Network error (fetch single): {e}")
+                self._emit_debug(f"Network error (fetch single) for {mod1_name}: {e}")
                 raise
 
             prices_divine = []
@@ -473,29 +671,36 @@ class PriceWorker(QObject):
                 currency = listing["currency"]
                 if currency == "divine":
                     prices_divine.append(amount)
-                    prices_chaos.append(amount * DIVINE_TO_CHAOS_RATE)
+                    prices_chaos.append(amount * self.divine_to_chaos_rate)
                 elif currency == "chaos":
                     prices_chaos.append(amount)
-                    prices_divine.append(amount / DIVINE_TO_CHAOS_RATE)
+                    prices_divine.append(amount / self.divine_to_chaos_rate)
 
             if not prices_divine:
+                self._emit_debug(f"No prices parsed for {mod1_name}.")
                 return None, None
 
             avg_divine = sum(prices_divine) / len(prices_divine)
             avg_chaos = sum(prices_chaos) / len(prices_chaos)
-            self.debug_message.emit(f"[AVG SINGLE] {avg_divine:.2f} div")
+            self._emit_debug(f"[AVG SINGLE] {mod1_name}: {avg_divine:.2f} div ({avg_chaos:.1f} chaos)")
+            if proxy_idx is not None:
+                self._set_proxy_state(proxy_idx, "ok")
             return avg_divine, avg_chaos
         except Exception as e:
-            self.debug_message.emit(f"Query single exception: {e}")
+            self._emit_debug(f"Query single exception for {mod1_name}: {e}")
             raise
 
     # ---- Result bookkeeping ----
     def add_result(self, mod1, mod2, avg_price_div, avg_price_chaos, proxy_idx=None):
+        key = self._make_key(mod1, mod2)
         result = {
-            "mod1": MOD_NAMES.get(mod1, str(mod1)),
-            "mod2": MOD_NAMES.get(mod2, str(mod2)) if mod2 else None,
+            "mod1_id": mod1,
+            "mod1_name": MOD_NAMES.get(mod1, str(mod1)),
+            "mod2_id": mod2 if mod2 else None,
+            "mod2_name": MOD_NAMES.get(mod2, str(mod2)) if mod2 else None,
             "avg_price_divine": round(avg_price_div, 2),
-            "avg_price_chaos": round(avg_price_chaos, 1)
+            "avg_price_chaos": round(avg_price_chaos, 1),
+            "divine_to_chaos_rate": round(self.divine_to_chaos_rate, 2)
         }
         if proxy_idx is not None and proxy_idx >= 0:
             result["proxy_index"] = proxy_idx
@@ -504,18 +709,35 @@ class PriceWorker(QObject):
                 if "@" in proxy_url:
                     ip_part = proxy_url.split("@")[1].split(":")[0]
                     result["proxy_ip"] = ip_part
-        self.results.append(result)
+        # update existing entry if already present
+        updated = False
+        for idx, existing in enumerate(self.results):
+            if self._extract_key_from_entry(existing) == key:
+                self.results[idx] = result
+                updated = True
+                break
+        if not updated:
+            self.results.append(result)
+        self.completed_keys.add(key)
 
     def update_results_file(self):
         try:
-            with open("watcher_prices.json", "w", encoding="utf-8") as f:
+            with open(self._current_results_file(), "w", encoding="utf-8") as f:
                 json.dump(self.results, f, ensure_ascii=False, indent=2)
-            self.debug_message.emit("Saved watcher_prices.json")
+            self._emit_debug(f"Saved {self._current_results_file()}")
         except Exception as e:
-            self.debug_message.emit(f"File write error: {e}")
+            self._emit_debug(f"File write error: {e}")
 
     def stop(self):
         self.running = False
+        self.paused = False
+        if self.loop and self.queue and not self._stop_tokens_sent:
+            self._stop_tokens_sent = True
+            self._emit_debug("Stop requested; signaling workers to exit.")
+            try:
+                asyncio.run_coroutine_threadsafe(self._inject_stop_tokens(), self.loop)
+            except Exception as exc:
+                self._emit_debug(f"Failed to inject stop tokens: {exc}")
 
     def pause(self):
         self.paused = True
@@ -567,8 +789,8 @@ class PriceFetcher(QWidget):
         self.status_label = QLabel("Ready.")
         layout.addWidget(self.status_label)
 
-        self.countdown_label = QLabel("Waiting: 0s")
-        layout.addWidget(self.countdown_label)
+        self.divine_rate = DIVINE_TO_CHAOS_RATE
+        self._status_after_finish = None
 
         # === Configuration controls ===
         config_layout = QFormLayout()
@@ -583,6 +805,10 @@ class PriceFetcher(QWidget):
         self.listing_count_spin.setMaximum(50)
         self.listing_count_spin.setValue(5)
         config_layout.addRow("Listing Count:", self.listing_count_spin)
+
+        self.divine_rate_button = QPushButton(self._divine_rate_button_text())
+        self.divine_rate_button.clicked.connect(self.configure_divine_rate)
+        config_layout.addRow("Divine→Chaos:", self.divine_rate_button)
 
         self.proxy_checkbox = QCheckBox("Use Proxies")
         self.proxy_checkbox.setChecked(False)
@@ -599,6 +825,7 @@ class PriceFetcher(QWidget):
         self.thread = None
         self.worker = None
         self.is_running = False
+        self.proxy_states = {}
 
     def start_fetching(self):
         self._start_worker(single=False)
@@ -616,8 +843,9 @@ class PriceFetcher(QWidget):
 
         self.table.setRowCount(0)
         self.debug_info = ""
-        self.status_label.setText("Loading...")
+        self.proxy_states = {}
         self.is_running = True
+        self._status_after_finish = "Completed."
 
         self.refresh_button.setEnabled(False)
         self.single_button.setEnabled(False)
@@ -633,12 +861,19 @@ class PriceFetcher(QWidget):
         self.worker.league = self.league_combo.currentText()
         self.worker.listing_count = self.listing_count_spin.value()
         self.worker.use_proxies = self.proxy_checkbox.isChecked()
+        self.worker.divine_to_chaos_rate = self.divine_rate
+        existing_results = self.worker.prepare_for_run()
+        if existing_results:
+            self._populate_cached_results(existing_results)
+            self.status_label.setText(f"Loaded {len(existing_results)} cached results, starting fetch...")
+        else:
+            self.status_label.setText("Loading...")
         self.worker.moveToThread(self.thread)
 
         self.worker.result_ready.connect(self.update_table)
         self.worker.status_update.connect(self.status_label.setText)
         self.worker.debug_message.connect(self.collect_debug)
-        self.worker.countdown_update.connect(self.update_countdown)
+        self.worker.proxy_status_update.connect(self.on_proxy_status_update)
         self.thread.finished.connect(self._on_thread_finished)
 
         self.thread.started.connect(self.worker.start)
@@ -659,12 +894,15 @@ class PriceFetcher(QWidget):
             self.resume_button.setEnabled(False)
 
     def stop_fetching(self):
-        if self.worker and self.is_running:
+        if not self.is_running:
+            return
+        self._status_after_finish = "Stopped."
+        if self.worker:
             self.worker.stop()
-            self.status_label.setText("Stopping... (will exit after current request completes)")
-
-        if self.thread is None or not self.thread.isRunning():
-            self._reset_ui_state()
+        self.status_label.setText("Stopping...")
+        if self.thread and self.thread.isRunning():
+            self._cleanup_thread()
+        self._reset_ui_state("Stopped.")
 
     def _cleanup_thread(self):
         if self.thread:
@@ -677,8 +915,9 @@ class PriceFetcher(QWidget):
                 self.thread.wait()
             self.thread = None
             self.worker = None
+        self.is_running = False
 
-    def _reset_ui_state(self):
+    def _reset_ui_state(self, status_text=None):
         self.is_running = False
         self.refresh_button.setEnabled(True)
         self.single_button.setEnabled(True)
@@ -688,12 +927,17 @@ class PriceFetcher(QWidget):
         self.pause_button.setEnabled(False)
         self.resume_button.setEnabled(False)
 
-        if self.worker and not self.worker.running:
-            self.status_label.setText("Stopped.")
-        else:
-            self.status_label.setText("Completed.")
+        final_text = status_text or self._status_after_finish
+        if final_text:
+            self.status_label.setText(final_text)
+        self._status_after_finish = None
 
     def _on_thread_finished(self):
+        thread = self.sender()
+        if isinstance(thread, QThread):
+            thread.deleteLater()
+        self.thread = None
+        self.worker = None
         self._reset_ui_state()
 
     def update_table(self, price_div, price_chaos, mod1, mod2, proxy_idx):
@@ -703,11 +947,10 @@ class PriceFetcher(QWidget):
         self.table.setItem(row, 1, QTableWidgetItem(mod2))
         self.table.setItem(row, 2, QTableWidgetItem(f"{price_div:.2f}" if price_div else "N/A"))
         self.table.setItem(row, 3, QTableWidgetItem(f"{price_chaos:.0f}" if price_chaos else "N/A"))
-        proxy_display = f"Proxy {proxy_idx}" if proxy_idx >= 0 else "Direct"
-        self.table.setItem(row, 4, QTableWidgetItem(proxy_display))
-
-    def update_countdown(self, seconds):
-        self.countdown_label.setText(f"Waiting: {seconds}s")
+        proxy_item = QTableWidgetItem()
+        proxy_item.setData(Qt.UserRole, proxy_idx)
+        self.table.setItem(row, 4, proxy_item)
+        self._apply_proxy_cell_style(row, proxy_idx)
 
     def collect_debug(self, message):
         self.debug_info += message + "\n"
@@ -723,6 +966,94 @@ class PriceFetcher(QWidget):
         layout = msg.layout()
         layout.addWidget(text_edit, 0, 0, 1, layout.columnCount())
         msg.exec_()
+
+    def _divine_rate_button_text(self):
+        return f"Current: {self.divine_rate:.2f}"
+
+    def configure_divine_rate(self):
+        value, ok = QInputDialog.getDouble(
+            self,
+            "Set Divine→Chaos Rate",
+            "Enter new Divine→Chaos rate:",
+            self.divine_rate,
+            1.0,
+            1000.0,
+            2
+        )
+        if ok:
+            self.divine_rate = value
+            self.divine_rate_button.setText(self._divine_rate_button_text())
+            if self.worker and self.is_running:
+                self.status_label.setText("New rate will apply on next fetch.")
+
+    def on_proxy_status_update(self, proxy_idx, state):
+        self.proxy_states[proxy_idx] = state
+        if state == "rate_limited":
+            self.status_label.setText(f"Proxy {proxy_idx} hit rate limit. Waiting for retry.")
+        elif state in ("error", "dead"):
+            self.status_label.setText(f"Proxy {proxy_idx} error; see debug log for details.")
+        self._refresh_proxy_styles()
+
+    def _refresh_proxy_styles(self):
+        for row in range(self.table.rowCount()):
+            item = self.table.item(row, 4)
+            if not item:
+                continue
+            proxy_idx = item.data(Qt.UserRole)
+            self._apply_proxy_cell_style(row, proxy_idx)
+
+    def _apply_proxy_cell_style(self, row, proxy_idx):
+        proxy_item = self.table.item(row, 4)
+        if proxy_item is None:
+            return
+        if proxy_idx is None:
+            proxy_idx = -1
+        state = self.proxy_states.get(proxy_idx)
+        label = "Direct" if proxy_idx is None or proxy_idx < 0 else f"Proxy {proxy_idx}"
+        tooltip = ""
+        if state == "rate_limited":
+            proxy_item.setBackground(QColor(255, 140, 140))
+            tooltip = "Rate limited - retrying shortly."
+            label += " (Rate limited)"
+        elif state in ("error", "dead"):
+            proxy_item.setBackground(QColor(255, 200, 120))
+            tooltip = "Proxy error - see debug log."
+            label += " (Error)"
+        elif state == "cooldown":
+            proxy_item.setBackground(QColor(255, 220, 140))
+            tooltip = "Cooling down before retry."
+            label += " (Cooldown)"
+        else:
+            proxy_item.setBackground(QColor(Qt.white))
+        proxy_item.setForeground(QColor(Qt.black))
+        proxy_item.setText(label)
+        if tooltip:
+            proxy_item.setToolTip(tooltip)
+        else:
+            proxy_item.setToolTip("")
+
+    def _populate_cached_results(self, results):
+        for entry in results:
+            if not isinstance(entry, dict):
+                continue
+            mod1 = entry.get("mod1_name") or entry.get("mod1") or "-"
+            mod2_value = entry.get("mod2_name") or entry.get("mod2") or "-"
+            mod2 = mod2_value if mod2_value not in (None, "") else "-"
+            price_div = entry.get("avg_price_divine")
+            price_chaos = entry.get("avg_price_chaos")
+            proxy_idx = entry.get("proxy_index")
+            if isinstance(proxy_idx, str):
+                try:
+                    proxy_idx = int(proxy_idx)
+                except ValueError:
+                    proxy_idx = -1
+            if proxy_idx is None:
+                proxy_idx = -1
+            self.update_table(price_div, price_chaos, mod1, mod2, proxy_idx)
+
+    def closeEvent(self, event):
+        self._cleanup_thread()
+        super().closeEvent(event)
 
 def main():
     app = QApplication(sys.argv)
