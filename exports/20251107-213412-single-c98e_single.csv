@@ -1,0 +1,88 @@
+batch_id,mod_id,mod_name,avg_divine,avg_chaos,divine_to_chaos_rate,listing_count,recorded_at
+20251107-213412-single-c98e,explicit.stat_1011863394,Impales you inflict last # additional Hits while using Pride,1.0575342465753426,154.4,146.0,5,2025-11-07T21:34:25.030989
+20251107-213412-single-c98e,explicit.stat_1016185292,#% faster start of Energy Shield Recharge while affected by Discipline,0.8602739726027397,125.6,146.0,5,2025-11-07T21:35:01.447369
+20251107-213412-single-c98e,explicit.stat_1077131949,Damage Penetrates #% Lightning Resistance while affected by Wrath,1.0,146.0,146.0,5,2025-11-07T21:34:14.725979
+20251107-213412-single-c98e,explicit.stat_1138813382,+#% to Chaos Resistance while affected by Purity of Elements,2.0,292.0,146.0,5,2025-11-07T21:34:37.208054
+20251107-213412-single-c98e,explicit.stat_1165583295,Regenerate #% of Life per second while affected by Vitality,0.9301369863013699,135.8,146.0,5,2025-11-07T21:34:49.361608
+20251107-213412-single-c98e,explicit.stat_1173690938,Unaffected by Flammability while affected by Purity of Fire,0.8493150684931507,124.0,146.0,5,2025-11-07T21:34:49.254850
+20251107-213412-single-c98e,explicit.stat_121436064,#% of Lightning Damage is Leeched as Energy Shield while affected by Wrath,0.9301369863013699,135.8,146.0,5,2025-11-07T21:35:13.321118
+20251107-213412-single-c98e,explicit.stat_1222888897,Damage Penetrates #% Cold Resistance while affected by Hatred,0.9301369863013699,135.8,146.0,5,2025-11-07T21:34:15.619432
+20251107-213412-single-c98e,explicit.stat_1313498929,+#% Chance to Block Spell Damage while affected by Discipline,1.0,146.0,146.0,5,2025-11-07T21:34:25.387112
+20251107-213412-single-c98e,explicit.stat_1346311588,You have Phasing while affected by Haste,1.0,146.0,146.0,5,2025-11-07T21:34:37.325771
+20251107-213412-single-c98e,explicit.stat_1413864591,#% increased Cold Damage while affected by Hatred,0.8465753424657535,123.6,146.0,5,2025-11-07T21:34:15.551526
+20251107-213412-single-c98e,explicit.stat_1424006185,You gain Onslaught for # seconds on Kill while affected by Haste,0.6232876712328768,91.0,146.0,5,2025-11-07T21:34:25.465660
+20251107-213412-single-c98e,explicit.stat_1567542124,Unaffected by Conductivity while affected by Purity of Lightning,0.7767123287671234,113.4,146.0,5,2025-11-07T21:34:49.490358
+20251107-213412-single-c98e,explicit.stat_1653848515,Cannot be Blinded while affected by Precision,1.0,146.0,146.0,5,2025-11-07T21:34:49.412497
+20251107-213412-single-c98e,explicit.stat_1699077932,#% chance to Recover 10% of Mana when you use a Skill while affected by Clarity,3.4,496.4,146.0,5,2025-11-07T21:35:13.086587
+20251107-213412-single-c98e,explicit.stat_1723738042,#% of Cold and Lightning Damage taken as Fire Damage while affected by Purity of Fire,1.0,146.0,146.0,5,2025-11-07T21:35:13.022881
+20251107-213412-single-c98e,explicit.stat_1817023621,+#% to Critical Strike Multiplier while affected by Precision,3.0,438.0,146.0,5,2025-11-07T21:34:16.057120
+20251107-213412-single-c98e,explicit.stat_1853636813,Non-Channelling Skills have +# to Total Mana Cost while affected by Clarity,1.0,146.0,146.0,5,2025-11-07T21:34:37.158284
+20251107-213412-single-c98e,explicit.stat_1873457881,#% additional Physical Damage Reduction while affected by Determination,1.0,146.0,146.0,5,2025-11-07T21:34:25.175178
+20251107-213412-single-c98e,explicit.stat_1919069577,Gain Arcane Surge for 4 seconds when you create Consecrated Ground while affected by Zealotry,0.6095890410958904,89.0,146.0,5,2025-11-07T21:34:49.333803
+20251107-213412-single-c98e,explicit.stat_2048747572,#% increased Attack Damage while affected by Precision,2.0,292.0,146.0,5,2025-11-07T21:34:15.169492
+20251107-213412-single-c98e,explicit.stat_207635700,Debuffs on you expire #% faster while affected by Haste,0.5410958904109588,79.0,146.0,5,2025-11-07T21:34:36.979608
+20251107-213412-single-c98e,explicit.stat_2091518682,Critical Strikes Penetrate #% of Enemy Elemental Resistances while affected by Zealotry,0.6561643835616439,95.8,146.0,5,2025-11-07T21:35:01.379677
+20251107-213412-single-c98e,explicit.stat_2106756686,#% of Physical Damage Converted to Lightning Damage while affected by Wrath,0.763013698630137,111.4,146.0,5,2025-11-07T21:34:14.441262
+20251107-213412-single-c98e,explicit.stat_214835567,#% increased Critical Strike Chance against Enemies on Consecrated Ground while affected by Zealotry,0.6931506849315069,101.2,146.0,5,2025-11-07T21:35:01.124737
+20251107-213412-single-c98e,explicit.stat_2163419452,Effects of Consecrated Ground you create while affected by Zealotry Linger for # seconds,0.5260273972602739,76.8,146.0,5,2025-11-07T21:34:49.568767
+20251107-213412-single-c98e,explicit.stat_2189467271,#% of Fire and Lightning Damage taken as Cold Damage while affected by Purity of Ice,0.9301369863013699,135.8,146.0,5,2025-11-07T21:35:01.475646
+20251107-213412-single-c98e,explicit.stat_2255914633,Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath,1.0,146.0,146.0,5,2025-11-07T21:34:15.041425
+20251107-213412-single-c98e,explicit.stat_2312747856,#% of Fire Damage Leeched as Life while affected by Anger,0.6794520547945206,99.2,146.0,5,2025-11-07T21:35:13.569247
+20251107-213412-single-c98e,explicit.stat_2365917222,Unaffected by Enfeeble while affected by Grace,0.6232876712328768,91.0,146.0,5,2025-11-07T21:34:49.028505
+20251107-213412-single-c98e,explicit.stat_2383304564,#% of Damage taken from Mana before Life while affected by Clarity,0.9164383561643836,133.8,146.0,5,2025-11-07T21:35:13.360347
+20251107-213412-single-c98e,explicit.stat_2434030180,Consecrated Ground you create while affected by Zealotry causes enemies to take #% increased Damage,0.8465753424657535,123.6,146.0,5,2025-11-07T21:34:49.451075
+20251107-213412-single-c98e,explicit.stat_2444534954,#% increased Cast Speed while affected by Zealotry,0.7767123287671234,113.4,146.0,5,2025-11-07T21:35:13.203957
+20251107-213412-single-c98e,explicit.stat_2457540491,#% reduced Reflected Physical Damage taken while affected by Determination,0.9301369863013699,135.8,146.0,5,2025-11-07T21:35:01.184382
+20251107-213412-single-c98e,explicit.stat_2548097895,#% chance to Blind Enemies which Hit you while affected by Grace,0.7657534246575343,111.8,146.0,5,2025-11-07T21:35:01.514117
+20251107-213412-single-c98e,explicit.stat_2567659895,Unaffected by Shocked Ground while affected by Purity of Lightning,0.636986301369863,93.0,146.0,5,2025-11-07T21:34:37.393441
+20251107-213412-single-c98e,explicit.stat_2643562209,Adds # to # Cold Damage while affected by Hatred,1.0,146.0,146.0,5,2025-11-07T21:34:16.625031
+20251107-213412-single-c98e,explicit.stat_2647344903,Unaffected by Chilled Ground while affected by Purity of Ice,0.7904109589041096,115.4,146.0,5,2025-11-07T21:34:49.226447
+20251107-213412-single-c98e,explicit.stat_2690790844,#% increased Life Recovery Rate while affected by Vitality,0.9301369863013699,135.8,146.0,5,2025-11-07T21:35:13.125632
+20251107-213412-single-c98e,explicit.stat_2720072724,Immune to Freeze while affected by Purity of Ice,0.763013698630137,111.4,146.0,5,2025-11-07T21:34:49.596317
+20251107-213412-single-c98e,explicit.stat_2731416566,#% increased Maximum total Energy Shield Recovery per second from Leech while affected by Zealotry,1.0,146.0,146.0,5,2025-11-07T21:35:01.312274
+20251107-213412-single-c98e,explicit.stat_2736708072,+#% to Damage over Time Multiplier while affected by Malevolence,6.1,890.6,146.0,5,2025-11-07T21:34:37.248769
+20251107-213412-single-c98e,explicit.stat_2753985507,+#% to Critical Strike Chance while affected by Hatred,2.0,292.0,146.0,5,2025-11-07T21:34:16.006208
+20251107-213412-single-c98e,explicit.stat_2806391472,Unaffected by Temporal Chains while affected by Haste,0.6232876712328768,91.0,146.0,5,2025-11-07T21:34:37.577244
+20251107-213412-single-c98e,explicit.stat_281949611,Immune to Shock while affected by Purity of Lightning,1.0,146.0,146.0,5,2025-11-07T21:35:13.388301
+20251107-213412-single-c98e,explicit.stat_2831391506,Gain #% of Maximum Mana as Extra Maximum Energy Shield while affected by Clarity,7.2,1051.2,146.0,5,2025-11-07T21:34:37.510210
+20251107-213412-single-c98e,explicit.stat_3111519953,Damage Penetrates #% Fire Resistance while affected by Anger,0.9301369863013699,135.8,146.0,5,2025-11-07T21:34:49.294391
+20251107-213412-single-c98e,explicit.stat_3207781478,Unaffected by Vulnerability while affected by Determination,0.7657534246575343,111.8,146.0,5,2025-11-07T21:34:37.431690
+20251107-213412-single-c98e,explicit.stat_3223142064,Unaffected by Elemental Weakness while affected by Purity of Elements,1.0,146.0,146.0,5,2025-11-07T21:34:49.187742
+20251107-213412-single-c98e,explicit.stat_3234824465,+#% to all maximum Elemental Resistances while affected by Purity of Elements,0.9232876712328768,134.8,146.0,5,2025-11-07T21:35:00.997060
+20251107-213412-single-c98e,explicit.stat_3308185931,Unaffected by Burning Ground while affected by Purity of Fire,0.6164383561643836,90.0,146.0,5,2025-11-07T21:34:37.109447
+20251107-213412-single-c98e,explicit.stat_3329402420,#% increased Movement Speed while affected by Grace,1.0,146.0,146.0,5,2025-11-07T21:34:25.560926
+20251107-213412-single-c98e,explicit.stat_3332055899,#% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste,1.0,146.0,146.0,5,2025-11-07T21:35:01.676489
+20251107-213412-single-c98e,explicit.stat_3337107517,#% increased Fire Damage while affected by Anger,0.8191780821917808,119.6,146.0,5,2025-11-07T21:35:01.341143
+20251107-213412-single-c98e,explicit.stat_3357049845,#% increased Critical Strike Chance while affected by Wrath,1.0,146.0,146.0,5,2025-11-07T21:34:15.307155
+20251107-213412-single-c98e,explicit.stat_3371719014,#% chance to deal Double Damage while using Pride,0.8958904109589041,130.8,146.0,5,2025-11-07T21:34:25.100837
+20251107-213412-single-c98e,explicit.stat_3375743050,#% increased Attack Speed while affected by Precision,2.0,292.0,146.0,5,2025-11-07T21:34:13.289066
+20251107-213412-single-c98e,explicit.stat_34059570,Unaffected by Poison while affected by Malevolence,0.8123287671232877,118.6,146.0,5,2025-11-07T21:34:37.538667
+20251107-213412-single-c98e,explicit.stat_3468843137,Damaging Ailments you inflict deal Damage #% faster while affected by Malevolence,1.8,262.8,146.0,5,2025-11-07T21:34:37.471371
+20251107-213412-single-c98e,explicit.stat_3624529132,#% of Physical Damage Converted to Fire Damage while affected by Anger,0.7821917808219178,114.2,146.0,5,2025-11-07T21:35:01.408928
+20251107-213412-single-c98e,explicit.stat_3627458291,+#% to Critical Strike Multiplier while affected by Anger,1.0,146.0,146.0,5,2025-11-07T21:35:01.223123
+20251107-213412-single-c98e,explicit.stat_362838683,#% increased Life Recovery from Flasks while affected by Vitality,0.8534246575342467,124.6,146.0,5,2025-11-07T21:35:01.269173
+20251107-213412-single-c98e,explicit.stat_3643449791,#% increased Recovery rate of Life and Energy Shield while affected by Malevolence,0.8602739726027397,125.6,146.0,5,2025-11-07T21:34:37.727188
+20251107-213412-single-c98e,explicit.stat_3656959867,#% of Damage leeched as Life while affected by Vitality,0.8602739726027397,125.6,146.0,5,2025-11-07T21:35:13.293109
+20251107-213412-single-c98e,explicit.stat_3692646597,+#% Chance to Block Attack Damage while affected by Determination,0.9301369863013699,135.8,146.0,5,2025-11-07T21:34:24.996071
+20251107-213412-single-c98e,explicit.stat_371612541,Immune to Ignite while affected by Purity of Fire,0.7698630136986301,112.4,146.0,5,2025-11-07T21:34:49.159898
+20251107-213412-single-c98e,explicit.stat_3742808908,+# to Armour while affected by Determination,0.9301369863013699,135.8,146.0,5,2025-11-07T21:34:15.591113
+20251107-213412-single-c98e,explicit.stat_3765507527,Gain # Energy Shield per Enemy Hit while affected by Discipline,3.0,438.0,146.0,5,2025-11-07T21:34:25.280706
+20251107-213412-single-c98e,explicit.stat_3772841281,Gain a Flask Charge when you deal a Critical Strike while affected by Precision,1.0,146.0,146.0,5,2025-11-07T21:34:49.644068
+20251107-213412-single-c98e,explicit.stat_3772848194,Your Hits Intimidate Enemies for 4 seconds while you are using Pride,0.8602739726027397,125.6,146.0,5,2025-11-07T21:34:25.426109
+20251107-213412-single-c98e,explicit.stat_380220671,#% of Damage taken while affected by Clarity Recouped as Mana,0.7753424657534247,113.2,146.0,5,2025-11-07T21:35:01.608499
+20251107-213412-single-c98e,explicit.stat_3953667743,#% of Fire and Cold Damage taken as Lightning Damage while affected by Purity of Lightning,0.8602739726027397,125.6,146.0,5,2025-11-07T21:35:13.253947
+20251107-213412-single-c98e,explicit.stat_4012281889,Unaffected by Frostbite while affected by Purity of Ice,0.7205479452054795,105.2,146.0,5,2025-11-07T21:34:37.353527
+20251107-213412-single-c98e,explicit.stat_4071658793,+#% chance to Suppress Spell Damage while affected by Grace,1.0,146.0,146.0,5,2025-11-07T21:34:25.241780
+20251107-213412-single-c98e,explicit.stat_4104891138,Unaffected by Bleeding while affected by Malevolence,0.8369863013698631,122.2,146.0,5,2025-11-07T21:34:37.286756
+20251107-213412-single-c98e,explicit.stat_4173751044,#% chance to Impale Enemies on Hit with Attacks while using Pride,0.8465753424657535,123.6,146.0,5,2025-11-07T21:34:25.068117
+20251107-213412-single-c98e,explicit.stat_418293304,#% increased Lightning Damage while affected by Wrath,0.8958904109589041,130.8,146.0,5,2025-11-07T21:34:15.450121
+20251107-213412-single-c98e,explicit.stat_4245204226,Gain #% of Physical Damage as Extra Fire Damage while affected by Anger,0.9232876712328768,134.8,146.0,5,2025-11-07T21:34:49.528998
+20251107-213412-single-c98e,explicit.stat_4259701244,Gain # Life per Enemy Hit while affected by Vitality,3.8,554.8,146.0,5,2025-11-07T21:34:25.349297
+20251107-213412-single-c98e,explicit.stat_556659145,#% increased Mana Recovery Rate while affected by Clarity,0.8342465753424657,121.8,146.0,5,2025-11-07T21:35:13.168459
+20251107-213412-single-c98e,explicit.stat_576528026,#% increased Physical Damage while using Pride,0.9095890410958904,132.8,146.0,5,2025-11-07T21:34:25.138166
+20251107-213412-single-c98e,explicit.stat_65331133,#% reduced Reflected Elemental Damage taken while affected by Purity of Elements,0.6,87.6,146.0,5,2025-11-07T21:35:01.640152
+20251107-213412-single-c98e,explicit.stat_664849247,#% of Physical Damage Converted to Cold Damage while affected by Hatred,0.9301369863013699,135.8,146.0,5,2025-11-07T21:34:16.095887
+20251107-213412-single-c98e,explicit.stat_68410701,You take #% reduced Extra Damage from Critical Strikes while affected by Determination,1.0,146.0,146.0,5,2025-11-07T21:34:15.971274
+20251107-213412-single-c98e,explicit.stat_80470845,#% increased Energy Shield Recovery Rate while affected by Discipline,0.8602739726027397,125.6,146.0,5,2025-11-07T21:35:13.058586
+20251107-213412-single-c98e,explicit.stat_969576725,+#% chance to Evade Attack Hits while affected by Grace,1.0,146.0,146.0,5,2025-11-07T21:34:25.309677
+20251107-213412-single-c98e,explicit.stat_991194404,Regenerate #% of Energy Shield per Second while affected by Discipline,0.9232876712328768,134.8,146.0,5,2025-11-07T21:34:25.213482

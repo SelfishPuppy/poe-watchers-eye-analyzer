@@ -14,6 +14,13 @@ import sqlite3
 import aiohttp
 import time
 import uuid
+import json
+import logging
+import random
+from logging.handlers import RotatingFileHandler
+import json
+import logging
+from logging.handlers import RotatingFileHandler
 from datetime import datetime
 from pathlib import Path
 from PyQt5.QtWidgets import (
@@ -26,6 +33,15 @@ from PyQt5.QtGui import QColor
 from mod_data import MOD_COMBOS, MOD_NAMES
 from app_config import load_settings, save_settings
 from watchers_eye_db import ensure_database, export_batch_to_csv
+
+# Configure application logging (rotating file with structured JSON messages)
+LOG_PATH = "watcher_debug.log"
+_logger = logging.getLogger("watchers_eye")
+if not _logger.handlers:
+    _logger.setLevel(logging.INFO)
+    _handler = RotatingFileHandler(LOG_PATH, maxBytes=2_000_000, backupCount=5, encoding="utf-8")
+    _handler.setFormatter(logging.Formatter("%(message)s"))
+    _logger.addHandler(_handler)
 
 DIVINE_TO_CHAOS_RATE = 100.0
 SINGLE_MODS = list(MOD_NAMES.keys())
@@ -88,11 +104,14 @@ class PriceWorker(QObject):
         self._db_conn = None
         self._batch_finalized = False
         self._batch_completed = False
+        self.db_queue = None  # asyncio.Queue for DB jobs
+        self._db_writer_task = None
         self.export_dir = EXPORT_DIR
         self.upload_error_log = UPLOAD_ERROR_LOG
         self.single_price_lookup = {}
         self.latest_single_batch_id = None
         self.resuming_existing_batch = False
+        self.auto_upload = False
 
     def prepare_for_run(self):
         """Load previously saved results and cache completed modifier keys."""
@@ -130,9 +149,8 @@ class PriceWorker(QObject):
             self.batch_id = self._generate_batch_id()
             self.batch_started_at = datetime.utcnow().isoformat()
             self.results = []
-            latest_batch = self._get_latest_batch_info()
-            if latest_batch:
-                display_results = self._load_batch_results(latest_batch["batch_id"], use_mode=self.single_mode)
+            # Do not preload completed batch results into the UI; start fresh
+            display_results = []
             self._emit_debug(f"Starting new batch {self.batch_id} for league={self.league}.")
             self.resuming_existing_batch = False
 
@@ -143,14 +161,22 @@ class PriceWorker(QObject):
         return list(display_results)
 
     def _emit_debug(self, message):
-        timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        formatted = f"[{timestamp}] {message}"
-        self.debug_message.emit(formatted)
+        ts = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        # Emit to GUI panel (human friendly)
+        self.debug_message.emit(f"[{ts}] {message}")
+        # Emit structured JSON to rotating log file
         try:
-            with open(self.debug_log_path, "a", encoding="utf-8") as log:
-                log.write(formatted + "\n")
+            payload = {
+                "ts": ts,
+                "level": "INFO",
+                "batch_id": getattr(self, "batch_id", None),
+                "league": getattr(self, "league", None),
+                "single_mode": bool(getattr(self, "single_mode", False)),
+                "msg": message,
+            }
+            _logger.info(json.dumps(payload, ensure_ascii=False))
         except Exception:
-            # avoid recursion if logging fails
+            # Never raise from logging
             pass
 
     def _set_proxy_state(self, idx, state, detail=None):
@@ -165,6 +191,21 @@ class PriceWorker(QObject):
             self._emit_debug(detail)
         elif state_changed:
             self._emit_debug(f"Proxy {idx} state -> {state}")
+        # Structured event for proxy state changes
+        try:
+            payload = {
+                "ts": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
+                "level": "INFO",
+                "batch_id": getattr(self, "batch_id", None),
+                "league": getattr(self, "league", None),
+                "single_mode": bool(getattr(self, "single_mode", False)),
+                "event": "proxy_state",
+                "proxy_idx": idx,
+                "state": state,
+            }
+            _logger.info(json.dumps(payload, ensure_ascii=False))
+        except Exception:
+            pass
 
     def _handle_rate_limit(self, proxy_idx, job_desc, wait_time):
         message = f"Rate limit hit while fetching {job_desc}. Cooling down for {wait_time}s."
@@ -176,6 +217,22 @@ class PriceWorker(QObject):
             )
         else:
             self._emit_debug(f"[DIRECT] {message}")
+        # Structured event for rate limit
+        try:
+            payload = {
+                "ts": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
+                "level": "INFO",
+                "batch_id": getattr(self, "batch_id", None),
+                "league": getattr(self, "league", None),
+                "single_mode": bool(getattr(self, "single_mode", False)),
+                "event": "rate_limit",
+                "proxy_idx": proxy_idx,
+                "wait_time": wait_time,
+                "job": job_desc,
+            }
+            _logger.info(json.dumps(payload, ensure_ascii=False))
+        except Exception:
+            pass
 
     def _resolve_mod_id(self, value):
         if not value:
@@ -219,7 +276,8 @@ class PriceWorker(QObject):
         if self._db_conn:
             return
         try:
-            self._db_conn = sqlite3.connect(self.db_path)
+            # allow usage from a worker thread via run_in_executor
+            self._db_conn = sqlite3.connect(self.db_path, check_same_thread=False)
             self._db_conn.execute("PRAGMA foreign_keys = ON")
             self._emit_debug(f"Opened database connection at {self.db_path}.")
         except Exception as exc:
@@ -272,6 +330,86 @@ class PriceWorker(QObject):
             self._emit_debug(f"Batch {self.batch_id} finalized at {finished_at}.")
         except Exception as exc:
             self._emit_debug(f"Failed to finalize batch {self.batch_id}: {exc}")
+
+    async def _start_db_writer(self):
+        if self.db_queue is None:
+            self.db_queue = asyncio.Queue()
+        if not self._db_writer_task:
+            self._db_writer_task = asyncio.create_task(self._db_writer())
+
+    async def _stop_db_writer(self):
+        if self.db_queue is not None:
+            await self.db_queue.join()
+        if self._db_writer_task:
+            self._db_writer_task.cancel()
+            try:
+                await self._db_writer_task
+            except Exception:
+                pass
+            self._db_writer_task = None
+
+    async def _db_writer(self):
+        # Single consumer for DB jobs; executes blocking writes in a worker thread
+        while True:
+            job = await self.db_queue.get()
+            try:
+                await asyncio.get_running_loop().run_in_executor(None, self._execute_db_job, job)
+            finally:
+                self.db_queue.task_done()
+
+    def _execute_db_job(self, job):
+        if not self._db_conn:
+            return
+        kind = job.get("kind")
+        if kind == "single":
+            try:
+                self._db_conn.execute(
+                    """
+                    INSERT INTO prices_single (
+                        batch_id, mod_id, mod_name, avg_divine, avg_chaos,
+                        divine_to_chaos_rate, listing_count, recorded_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        job["batch_id"],
+                        job["mod_id"],
+                        job["mod_name"],
+                        float(job["avg_div"]),
+                        float(job["avg_chaos"]),
+                        float(job["rate"]),
+                        int(job["listings"]),
+                        job["recorded_at"],
+                    ),
+                )
+                self._db_conn.commit()
+            except Exception as exc:
+                self._emit_debug(f"DB writer failed (single {job.get('mod_id')}): {exc}")
+        elif kind == "double":
+            try:
+                self._db_conn.execute(
+                    """
+                    INSERT INTO prices_double (
+                        batch_id, mod1_id, mod2_id, mod1_name, mod2_name,
+                        avg_divine, avg_chaos, divine_to_chaos_rate,
+                        listing_count, recorded_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        job["batch_id"],
+                        job["mod1_id"],
+                        job["mod2_id"],
+                        job["mod1_name"],
+                        job["mod2_name"],
+                        float(job["avg_div"]),
+                        float(job["avg_chaos"]),
+                        float(job["rate"]),
+                        int(job["listings"]),
+                        job["recorded_at"],
+                    ),
+                )
+                self._db_conn.commit()
+            except Exception as exc:
+                self._emit_debug(f"DB writer failed (double {job.get('mod1_id')}/{job.get('mod2_id')}): {exc}")
 
     def _export_batch_results(self):
         if not self.batch_id:
@@ -607,6 +745,8 @@ class PriceWorker(QObject):
         Takes next mod combo from queue, performs request, then sleeps so the interval between requests is >= period."""
         proxy_url = self.proxies[idx] if idx < len(self.proxies) else None
         self._emit_debug(f"Proxy worker {idx} starting. Loop period={self.proxy_loop_period}s")
+        # randomize initial offset to avoid synchronized bursts
+        await asyncio.sleep(random.uniform(0, 0.8))
         while self.running:
             if self.paused:
                 await asyncio.sleep(0.5)
@@ -686,6 +826,25 @@ class PriceWorker(QObject):
                     self._emit_debug(f"Proxy {idx} completed fetch for {job_desc} with result: {avg_div:.2f} div.")
                     self.result_ready.emit(avg_div, avg_chaos, m1_name, m2_name, idx)
                     self.add_result(mod1, mod2 if not self.single_mode else None, avg_div, avg_chaos, idx)
+                    # Structured result log
+                    try:
+                        payload = {
+                            "ts": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
+                            "level": "INFO",
+                            "batch_id": getattr(self, "batch_id", None),
+                            "league": getattr(self, "league", None),
+                            "single_mode": bool(getattr(self, "single_mode", False)),
+                            "event": "result",
+                            "proxy_idx": idx,
+                            "mod1": MOD_NAMES.get(mod1, str(mod1)),
+                            "mod2": None if self.single_mode else MOD_NAMES.get(mod2, str(mod2)),
+                            "avg_div": float(avg_div),
+                            "avg_chaos": float(avg_chaos) if avg_chaos is not None else None,
+                            "elapsed": round(time.time() - start_ts, 3),
+                        }
+                        _logger.info(json.dumps(payload, ensure_ascii=False))
+                    except Exception:
+                        pass
                     self._set_proxy_state(idx, "ok")
                 else:
                     self._emit_debug(f"Proxy {idx} returned no price for {job_desc}")
@@ -706,7 +865,8 @@ class PriceWorker(QObject):
                     self._emit_debug(f"Requeued job {job_desc or item} after proxy {idx} error.")
                 # ensure at least proxy_loop_period seconds between requests per proxy
                 elapsed = time.time() - start_ts
-                to_sleep = max(0, self.proxy_loop_period - elapsed)
+                # add slight jitter to avoid alignment
+                to_sleep = max(0, self.proxy_loop_period - elapsed) + random.uniform(0, 0.5)
 
             if not self.running:
                 break
@@ -753,6 +913,25 @@ class PriceWorker(QObject):
                     if avg_div is not None:
                         self.result_ready.emit(avg_div, avg_chaos, m1_name, m2_name, -1)
                         self.add_result(mod1, mod2 if not self.single_mode else None, avg_div, avg_chaos, None)
+                        # Structured result log (direct)
+                        try:
+                            payload = {
+                                "ts": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
+                                "level": "INFO",
+                                "batch_id": getattr(self, "batch_id", None),
+                                "league": getattr(self, "league", None),
+                                "single_mode": bool(getattr(self, "single_mode", False)),
+                                "event": "result",
+                                "proxy_idx": None,
+                                "mod1": MOD_NAMES.get(mod1, str(mod1)),
+                                "mod2": None if self.single_mode else MOD_NAMES.get(mod2, str(mod2)),
+                                "avg_div": float(avg_div),
+                                "avg_chaos": float(avg_chaos) if avg_chaos is not None else None,
+                                "elapsed": round(time.time() - start_ts, 3),
+                            }
+                            _logger.info(json.dumps(payload, ensure_ascii=False))
+                        except Exception:
+                            pass
                     else:
                         self._emit_debug(f"Direct worker returned no price for {job_desc}")
                 except Exception as e:
@@ -787,6 +966,7 @@ class PriceWorker(QObject):
 
         self._open_db_connection()
         self._create_batch_record()
+        await self._start_db_writer()
 
         # if proxies requested, ensure they are loaded and create workers per proxy
         if self.use_proxies:
@@ -837,6 +1017,11 @@ class PriceWorker(QObject):
             for t in tasks:
                 t.cancel()
             await asyncio.gather(*tasks, return_exceptions=True)
+            # Flush DB writes before finalizing
+            try:
+                await self._stop_db_writer()
+            except Exception:
+                pass
             # close any remaining proxy sessions
             for idx in list(self.proxy_sessions.keys()):
                 try:
@@ -853,7 +1038,10 @@ class PriceWorker(QObject):
                 export_path = self._export_batch_results()
                 if export_path:
                     self.status_update.emit(f"Exported batch data to {export_path}")
-                    self._sync_to_google_sheets(export_path)
+                    if self.auto_upload:
+                        self._sync_to_google_sheets(export_path)
+                    else:
+                        self._emit_debug("Auto-upload disabled; skipping Google Sheets sync.")
             else:
                 self._emit_debug("Skipped export/upload because batch did not finish.")
 
@@ -1106,11 +1294,11 @@ class PriceWorker(QObject):
         if self._db_conn:
             try:
                 if self.single_mode:
-                    self._persist_single_price(mod1, avg_price_div, avg_price_chaos, recorded_at)
+                    self._enqueue_single_job(mod1, avg_price_div, avg_price_chaos, recorded_at)
                 else:
-                    self._persist_double_price(mod1, mod2, avg_price_div, avg_price_chaos, recorded_at)
+                    self._enqueue_double_job(mod1, mod2, avg_price_div, avg_price_chaos, recorded_at)
             except Exception as exc:
-                self._emit_debug(f"Database persistence failed for {key}: {exc}")
+                self._emit_debug(f"Database persistence enqueue failed for {key}: {exc}")
 
     def stop(self):
         self.running = False
@@ -1129,62 +1317,41 @@ class PriceWorker(QObject):
     def resume(self):
         self.paused = False
 
-    def _persist_single_price(self, mod_id, avg_div, avg_chaos, recorded_at):
-        if not self._db_conn or not self.batch_id:
+    def _enqueue_single_job(self, mod_id, avg_div, avg_chaos, recorded_at):
+        if not self.db_queue or not self.batch_id:
             return
-        try:
-            self._db_conn.execute(
-                """
-                INSERT INTO prices_single (
-                    batch_id, mod_id, mod_name, avg_divine, avg_chaos,
-                    divine_to_chaos_rate, listing_count, recorded_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                """,
-                (
-                    self.batch_id,
-                    mod_id,
-                    MOD_NAMES.get(mod_id, str(mod_id)),
-                    float(avg_div),
-                    float(avg_chaos),
-                    float(self.divine_to_chaos_rate),
-                    int(self.listing_count),
-                    recorded_at,
-                ),
-            )
-            self._db_conn.commit()
-        except Exception as exc:
-            self._emit_debug(f"Failed to persist single modifier {mod_id}: {exc}")
+        job = {
+            "kind": "single",
+            "batch_id": self.batch_id,
+            "mod_id": mod_id,
+            "mod_name": MOD_NAMES.get(mod_id, str(mod_id)),
+            "avg_div": float(avg_div),
+            "avg_chaos": float(avg_chaos),
+            "rate": float(self.divine_to_chaos_rate),
+            "listings": int(self.listing_count),
+            "recorded_at": recorded_at,
+        }
+        self.db_queue.put_nowait(job)
 
-    def _persist_double_price(self, mod1, mod2, avg_div, avg_chaos, recorded_at):
-        if not self._db_conn or not self.batch_id or mod2 is None:
+    def _enqueue_double_job(self, mod1, mod2, avg_div, avg_chaos, recorded_at):
+        if not self.db_queue or not self.batch_id or mod2 is None:
             return
         if mod1 > mod2:
             mod1, mod2 = mod2, mod1
-        try:
-            self._db_conn.execute(
-                """
-                INSERT INTO prices_double (
-                    batch_id, mod1_id, mod2_id, mod1_name, mod2_name,
-                    avg_divine, avg_chaos, divine_to_chaos_rate,
-                    listing_count, recorded_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """,
-                (
-                    self.batch_id,
-                    mod1,
-                    mod2,
-                    MOD_NAMES.get(mod1, str(mod1)),
-                    MOD_NAMES.get(mod2, str(mod2)),
-                    float(avg_div),
-                    float(avg_chaos),
-                    float(self.divine_to_chaos_rate),
-                    int(self.listing_count),
-                    recorded_at,
-                ),
-            )
-            self._db_conn.commit()
-        except Exception as exc:
-            self._emit_debug(f"Failed to persist double modifiers {mod1}/{mod2}: {exc}")
+        job = {
+            "kind": "double",
+            "batch_id": self.batch_id,
+            "mod1_id": mod1,
+            "mod2_id": mod2,
+            "mod1_name": MOD_NAMES.get(mod1, str(mod1)),
+            "mod2_name": MOD_NAMES.get(mod2, str(mod2)),
+            "avg_div": float(avg_div),
+            "avg_chaos": float(avg_chaos),
+            "rate": float(self.divine_to_chaos_rate),
+            "listings": int(self.listing_count),
+            "recorded_at": recorded_at,
+        }
+        self.db_queue.put_nowait(job)
 
 # UI class remains similar to original; we keep it unchanged externally except filename
 class PriceFetcher(QWidget):
@@ -1259,6 +1426,14 @@ class PriceFetcher(QWidget):
         self.proxy_checkbox.setChecked(False)
         config_layout.addRow("", self.proxy_checkbox)
 
+        self.proxy_files_button = QPushButton("Proxy Files…")
+        self.proxy_files_button.clicked.connect(self.choose_proxy_files)
+        config_layout.addRow("", self.proxy_files_button)
+
+        self.auto_upload_checkbox = QCheckBox("Auto-upload to Google Sheets")
+        self.auto_upload_checkbox.setChecked(False)
+        config_layout.addRow("", self.auto_upload_checkbox)
+
         layout.addLayout(config_layout)
 
         # === updated table ===
@@ -1314,6 +1489,7 @@ class PriceFetcher(QWidget):
         # pass configured proxy files into worker
         proxy_files = self._settings.get("proxy_files") or ["Webshare 10 proxies.txt", "Oxylabs proxies.txt"]
         self.worker.proxy_files = list(proxy_files)
+        self.worker.auto_upload = bool(self._settings.get("auto_upload", False))
         existing_results = self.worker.prepare_for_run()
         if existing_results:
             self._populate_cached_results(existing_results)
@@ -1419,6 +1595,21 @@ class PriceFetcher(QWidget):
         layout.addWidget(text_edit, 0, 0, 1, layout.columnCount())
         msg.exec_()
 
+    def choose_proxy_files(self):
+        start_dir = str(Path('.').resolve())
+        files, _ = QFileDialog.getOpenFileNames(
+            self,
+            "Select proxy list files",
+            start_dir,
+            "Text Files (*.txt);;All Files (*)",
+        )
+        if files:
+            self._settings["proxy_files"] = list(files)
+            try:
+                self._save_current_settings()
+            except Exception:
+                pass
+
     def _divine_rate_button_text(self):
         return f"Current: {self.divine_rate:.2f}"
 
@@ -1512,11 +1703,15 @@ class PriceFetcher(QWidget):
         # Use proxies
         use_proxies = bool(self._settings.get("use_proxies", False))
         self.proxy_checkbox.setChecked(use_proxies)
+        # Auto-upload
+        auto_upload = bool(self._settings.get("auto_upload", False))
+        self.auto_upload_checkbox.setChecked(auto_upload)
 
         # Persist on simple changes
         self.league_combo.currentTextChanged.connect(lambda _=None: self._save_current_settings())
         self.listing_count_spin.valueChanged.connect(lambda _=None: self._save_current_settings())
         self.proxy_checkbox.stateChanged.connect(lambda _=None: self._save_current_settings())
+        self.auto_upload_checkbox.stateChanged.connect(lambda _=None: self._save_current_settings())
 
     def _collect_current_settings(self):
         return {
@@ -1524,6 +1719,7 @@ class PriceFetcher(QWidget):
             "listing_count": int(self.listing_count_spin.value()),
             "divine_to_chaos_rate": float(self.divine_rate),
             "use_proxies": bool(self.proxy_checkbox.isChecked()),
+            "auto_upload": bool(self.auto_upload_checkbox.isChecked()),
             "proxy_files": list(self._settings.get("proxy_files") or ["Webshare 10 proxies.txt", "Oxylabs proxies.txt"]),
         }
 

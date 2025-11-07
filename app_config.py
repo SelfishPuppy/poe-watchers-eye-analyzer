@@ -14,6 +14,7 @@ DEFAULTS: Dict[str, Any] = {
     "listing_count": 5,
     "divine_to_chaos_rate": 100.0,
     "use_proxies": False,
+    "auto_upload": False,
     "proxy_files": [
         "Webshare 10 proxies.txt",
         "Oxylabs proxies.txt",
@@ -47,4 +48,3 @@ def save_settings(settings: Dict[str, Any]) -> None:
     CONFIG_DIR.mkdir(parents=True, exist_ok=True)
     with CONFIG_PATH.open("w", encoding="utf-8") as f:
         json.dump(cfg, f, ensure_ascii=False, indent=2)
-
