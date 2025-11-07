@@ -1,0 +1,565 @@
+[2025-11-07 22:14:46] Starting new batch 20251107-201446-single-6604 for league=Keepers.
+[2025-11-07 22:14:46] Prepared run with 0 previously completed modifiers (single_mode=True, rate=142.0).
+[2025-11-07 22:14:46] Queue populated with 87 items
+[2025-11-07 22:14:46] Opened database connection at data\watchers_eye.db.
+[2025-11-07 22:14:46] Batch 20251107-201446-single-6604 recorded in database.
+[2025-11-07 22:14:47] Loaded 10 proxies from Webshare 10 proxies.txt.
+[2025-11-07 22:14:47] Loaded 5 proxies from Oxylabs proxies.txt.
+[2025-11-07 22:14:47] Loaded 15 proxies from configured lists.
+[2025-11-07 22:14:47] Started 15 proxy workers
+[2025-11-07 22:14:47] Run started for 87 modifiers (single_mode=True, proxies=on, rate=142.0).
+[2025-11-07 22:14:47] Proxy worker 0 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 0 (142.111.48.253:7030)
+[2025-11-07 22:14:47] Proxy 0 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=0 +#% to Critical Strike Multiplier while affected by Precision
+[2025-11-07 22:14:47] Proxy worker 1 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 1 (31.59.20.176:6754)
+[2025-11-07 22:14:47] Proxy 1 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=1 #% increased Attack Speed while affected by Precision
+[2025-11-07 22:14:47] Proxy worker 2 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 2 (23.95.150.145:6114)
+[2025-11-07 22:14:47] Proxy 2 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=2 #% increased Attack Damage while affected by Precision
+[2025-11-07 22:14:47] Proxy worker 3 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 3 (198.23.239.134:6540)
+[2025-11-07 22:14:47] Proxy 3 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=3 #% increased Lightning Damage while affected by Wrath
+[2025-11-07 22:14:47] Proxy worker 4 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 4 (45.38.107.97:6014)
+[2025-11-07 22:14:47] Proxy 4 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=4 #% of Physical Damage Converted to Lightning Damage while affected by Wrath
+[2025-11-07 22:14:47] Proxy worker 5 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 5 (107.172.163.27:6543)
+[2025-11-07 22:14:47] Proxy 5 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=5 #% increased Critical Strike Chance while affected by Wrath
+[2025-11-07 22:14:47] Proxy worker 6 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 6 (64.137.96.74:6641)
+[2025-11-07 22:14:47] Proxy 6 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=6 Damage Penetrates #% Lightning Resistance while affected by Wrath
+[2025-11-07 22:14:47] Proxy worker 7 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 7 (216.10.27.159:6837)
+[2025-11-07 22:14:47] Proxy 7 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=7 Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath
+[2025-11-07 22:14:47] Proxy worker 8 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 8 (142.111.67.146:5611)
+[2025-11-07 22:14:47] Proxy 8 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=8 +#% to Critical Strike Chance while affected by Hatred
+[2025-11-07 22:14:47] Proxy worker 9 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 9 (142.147.128.93:6593)
+[2025-11-07 22:14:47] Proxy 9 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=9 Adds # to # Cold Damage while affected by Hatred
+[2025-11-07 22:14:47] Proxy worker 10 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 10 (dc.oxylabs.io:8001)
+[2025-11-07 22:14:47] Proxy 10 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=10 #% increased Cold Damage while affected by Hatred
+[2025-11-07 22:14:47] Proxy worker 11 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 11 (dc.oxylabs.io:8002)
+[2025-11-07 22:14:47] Proxy 11 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=11 Damage Penetrates #% Cold Resistance while affected by Hatred
+[2025-11-07 22:14:47] Proxy worker 12 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 12 (dc.oxylabs.io:8003)
+[2025-11-07 22:14:47] Proxy 12 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=12 #% of Physical Damage Converted to Cold Damage while affected by Hatred
+[2025-11-07 22:14:47] Proxy worker 13 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 13 (dc.oxylabs.io:8004)
+[2025-11-07 22:14:47] Proxy 13 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=13 You take #% reduced Extra Damage from Critical Strikes while affected by Determination
+[2025-11-07 22:14:47] Proxy worker 14 starting. Loop period=12s
+[2025-11-07 22:14:47] Created persistent session for proxy 14 (dc.oxylabs.io:8005)
+[2025-11-07 22:14:47] Proxy 14 state -> ok
+[2025-11-07 22:14:47] [SEARCH SINGLE] proxy=14 +# to Armour while affected by Determination
+[2025-11-07 22:14:47] Network error (search single) for Adds # to # Cold Damage while affected by Hatred: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:14:47] Query single exception for Adds # to # Cold Damage while affected by Hatred: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:14:47] Proxy 9 task error for explicit.stat_2643562209: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:14:47] Proxy 9 encountered error: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:14:47] Proxy 9 session closed and marked dead.
+[2025-11-07 22:14:47] Requeued job explicit.stat_2643562209 after proxy 9 error.
+[2025-11-07 22:14:47] [SEARCH SINGLE RESP] proxy=4 status=200 for #% of Physical Damage Converted to Lightning Damage while affected by Wrath
+[2025-11-07 22:14:47] [SEARCH SINGLE RESP] proxy=1 status=200 for #% increased Attack Speed while affected by Precision
+[2025-11-07 22:14:47] [FETCH SINGLE RESP] proxy=4 status=200 for #% of Physical Damage Converted to Lightning Damage while affected by Wrath
+[2025-11-07 22:14:47] [AVG SINGLE] #% of Physical Damage Converted to Lightning Damage while affected by Wrath: 0.93 div (131.6 chaos)
+[2025-11-07 22:14:47] Proxy 4 completed fetch for #% of Physical Damage Converted to Lightning Damage while affected by Wrath with result: 0.93 div.
+[2025-11-07 22:14:47] [SEARCH SINGLE RESP] proxy=6 status=200 for Damage Penetrates #% Lightning Resistance while affected by Wrath
+[2025-11-07 22:14:47] [FETCH SINGLE RESP] proxy=1 status=200 for #% increased Attack Speed while affected by Precision
+[2025-11-07 22:14:47] [AVG SINGLE] #% increased Attack Speed while affected by Precision: 2.00 div (284.0 chaos)
+[2025-11-07 22:14:47] Proxy 1 completed fetch for #% increased Attack Speed while affected by Precision with result: 2.00 div.
+[2025-11-07 22:14:47] [SEARCH SINGLE RESP] proxy=3 status=200 for #% increased Lightning Damage while affected by Wrath
+[2025-11-07 22:14:48] [SEARCH SINGLE RESP] proxy=2 status=200 for #% increased Attack Damage while affected by Precision
+[2025-11-07 22:14:48] [SEARCH SINGLE RESP] proxy=12 status=200 for #% of Physical Damage Converted to Cold Damage while affected by Hatred
+[2025-11-07 22:14:48] [SEARCH SINGLE RESP] proxy=13 status=200 for You take #% reduced Extra Damage from Critical Strikes while affected by Determination
+[2025-11-07 22:14:48] [SEARCH SINGLE RESP] proxy=11 status=200 for Damage Penetrates #% Cold Resistance while affected by Hatred
+[2025-11-07 22:14:48] [SEARCH SINGLE RESP] proxy=14 status=200 for +# to Armour while affected by Determination
+[2025-11-07 22:14:48] [FETCH SINGLE RESP] proxy=6 status=200 for Damage Penetrates #% Lightning Resistance while affected by Wrath
+[2025-11-07 22:14:48] [AVG SINGLE] Damage Penetrates #% Lightning Resistance while affected by Wrath: 1.30 div (184.6 chaos)
+[2025-11-07 22:14:48] Proxy 6 completed fetch for Damage Penetrates #% Lightning Resistance while affected by Wrath with result: 1.30 div.
+[2025-11-07 22:14:48] [FETCH SINGLE RESP] proxy=3 status=200 for #% increased Lightning Damage while affected by Wrath
+[2025-11-07 22:14:48] [AVG SINGLE] #% increased Lightning Damage while affected by Wrath: 1.00 div (142.0 chaos)
+[2025-11-07 22:14:48] Proxy 3 completed fetch for #% increased Lightning Damage while affected by Wrath with result: 1.00 div.
+[2025-11-07 22:14:48] [SEARCH SINGLE RESP] proxy=7 status=200 for Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath
+[2025-11-07 22:14:48] [SEARCH SINGLE RESP] proxy=5 status=200 for #% increased Critical Strike Chance while affected by Wrath
+[2025-11-07 22:14:48] [FETCH SINGLE RESP] proxy=2 status=200 for #% increased Attack Damage while affected by Precision
+[2025-11-07 22:14:48] [AVG SINGLE] #% increased Attack Damage while affected by Precision: 2.00 div (284.0 chaos)
+[2025-11-07 22:14:48] Proxy 2 completed fetch for #% increased Attack Damage while affected by Precision with result: 2.00 div.
+[2025-11-07 22:14:48] [FETCH SINGLE RESP] proxy=12 status=200 for #% of Physical Damage Converted to Cold Damage while affected by Hatred
+[2025-11-07 22:14:48] [AVG SINGLE] #% of Physical Damage Converted to Cold Damage while affected by Hatred: 1.00 div (142.0 chaos)
+[2025-11-07 22:14:48] Proxy 12 completed fetch for #% of Physical Damage Converted to Cold Damage while affected by Hatred with result: 1.00 div.
+[2025-11-07 22:14:48] [FETCH SINGLE RESP] proxy=13 status=200 for You take #% reduced Extra Damage from Critical Strikes while affected by Determination
+[2025-11-07 22:14:48] [AVG SINGLE] You take #% reduced Extra Damage from Critical Strikes while affected by Determination: 0.88 div (125.6 chaos)
+[2025-11-07 22:14:48] Proxy 13 completed fetch for You take #% reduced Extra Damage from Critical Strikes while affected by Determination with result: 0.88 div.
+[2025-11-07 22:14:48] [SEARCH SINGLE RESP] proxy=10 status=200 for #% increased Cold Damage while affected by Hatred
+[2025-11-07 22:14:48] [FETCH SINGLE RESP] proxy=14 status=200 for +# to Armour while affected by Determination
+[2025-11-07 22:14:48] [AVG SINGLE] +# to Armour while affected by Determination: 1.00 div (142.0 chaos)
+[2025-11-07 22:14:48] Proxy 14 completed fetch for +# to Armour while affected by Determination with result: 1.00 div.
+[2025-11-07 22:14:48] [FETCH SINGLE RESP] proxy=11 status=200 for Damage Penetrates #% Cold Resistance while affected by Hatred
+[2025-11-07 22:14:48] [AVG SINGLE] Damage Penetrates #% Cold Resistance while affected by Hatred: 1.00 div (142.0 chaos)
+[2025-11-07 22:14:48] Proxy 11 completed fetch for Damage Penetrates #% Cold Resistance while affected by Hatred with result: 1.00 div.
+[2025-11-07 22:14:48] [FETCH SINGLE RESP] proxy=5 status=200 for #% increased Critical Strike Chance while affected by Wrath
+[2025-11-07 22:14:48] [AVG SINGLE] #% increased Critical Strike Chance while affected by Wrath: 1.00 div (142.0 chaos)
+[2025-11-07 22:14:48] Proxy 5 completed fetch for #% increased Critical Strike Chance while affected by Wrath with result: 1.00 div.
+[2025-11-07 22:14:48] [FETCH SINGLE RESP] proxy=7 status=200 for Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath
+[2025-11-07 22:14:48] [AVG SINGLE] Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath: 0.84 div (119.2 chaos)
+[2025-11-07 22:14:48] Proxy 7 completed fetch for Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath with result: 0.84 div.
+[2025-11-07 22:14:48] [SEARCH SINGLE RESP] proxy=0 status=200 for +#% to Critical Strike Multiplier while affected by Precision
+[2025-11-07 22:14:48] [FETCH SINGLE RESP] proxy=10 status=200 for #% increased Cold Damage while affected by Hatred
+[2025-11-07 22:14:48] [AVG SINGLE] #% increased Cold Damage while affected by Hatred: 1.00 div (142.0 chaos)
+[2025-11-07 22:14:48] Proxy 10 completed fetch for #% increased Cold Damage while affected by Hatred with result: 1.00 div.
+[2025-11-07 22:14:48] [SEARCH SINGLE RESP] proxy=8 status=200 for +#% to Critical Strike Chance while affected by Hatred
+[2025-11-07 22:14:48] [FETCH SINGLE RESP] proxy=0 status=200 for +#% to Critical Strike Multiplier while affected by Precision
+[2025-11-07 22:14:48] [AVG SINGLE] +#% to Critical Strike Multiplier while affected by Precision: 3.00 div (426.0 chaos)
+[2025-11-07 22:14:48] Proxy 0 completed fetch for +#% to Critical Strike Multiplier while affected by Precision with result: 3.00 div.
+[2025-11-07 22:14:49] [FETCH SINGLE RESP] proxy=8 status=200 for +#% to Critical Strike Chance while affected by Hatred
+[2025-11-07 22:14:49] [AVG SINGLE] +#% to Critical Strike Chance while affected by Hatred: 2.00 div (284.0 chaos)
+[2025-11-07 22:14:49] Proxy 8 completed fetch for +#% to Critical Strike Chance while affected by Hatred with result: 2.00 div.
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=0 #% additional Physical Damage Reduction while affected by Determination
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=1 +#% Chance to Block Attack Damage while affected by Determination
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=2 Impales you inflict last # additional Hits while using Pride
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=3 #% chance to deal Double Damage while using Pride
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=4 #% chance to Impale Enemies on Hit with Attacks while using Pride
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=5 #% increased Physical Damage while using Pride
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=6 Your Hits Intimidate Enemies for 4 seconds while you are using Pride
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=7 +#% chance to Evade Attack Hits while affected by Grace
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=8 +#% chance to Suppress Spell Damage while affected by Grace
+[2025-11-07 22:14:59] Created persistent session for proxy 9 (142.147.128.93:6593)
+[2025-11-07 22:14:59] Proxy 9 state -> ok
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=9 #% increased Movement Speed while affected by Grace
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=10 Gain # Life per Enemy Hit while affected by Vitality
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=11 Gain # Energy Shield per Enemy Hit while affected by Discipline
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=12 +#% Chance to Block Spell Damage while affected by Discipline
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=13 Regenerate #% of Energy Shield per Second while affected by Discipline
+[2025-11-07 22:14:59] [SEARCH SINGLE] proxy=14 You gain Onslaught for # seconds on Kill while affected by Haste
+[2025-11-07 22:14:59] [SEARCH SINGLE RESP] proxy=2 status=200 for Impales you inflict last # additional Hits while using Pride
+[2025-11-07 22:14:59] [SEARCH SINGLE RESP] proxy=4 status=200 for #% chance to Impale Enemies on Hit with Attacks while using Pride
+[2025-11-07 22:14:59] [SEARCH SINGLE RESP] proxy=3 status=200 for #% chance to deal Double Damage while using Pride
+[2025-11-07 22:14:59] [SEARCH SINGLE RESP] proxy=1 status=200 for +#% Chance to Block Attack Damage while affected by Determination
+[2025-11-07 22:14:59] [SEARCH SINGLE RESP] proxy=7 status=200 for +#% chance to Evade Attack Hits while affected by Grace
+[2025-11-07 22:14:59] Network error (search single) for #% increased Movement Speed while affected by Grace: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:14:59] Query single exception for #% increased Movement Speed while affected by Grace: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:14:59] Proxy 9 task error for explicit.stat_3329402420: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:14:59] Proxy 9 encountered error: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:14:59] Proxy 9 session closed and marked dead.
+[2025-11-07 22:14:59] Requeued job explicit.stat_3329402420 after proxy 9 error.
+[2025-11-07 22:14:59] [SEARCH SINGLE RESP] proxy=12 status=200 for +#% Chance to Block Spell Damage while affected by Discipline
+[2025-11-07 22:14:59] [SEARCH SINGLE RESP] proxy=10 status=200 for Gain # Life per Enemy Hit while affected by Vitality
+[2025-11-07 22:14:59] [SEARCH SINGLE RESP] proxy=6 status=200 for Your Hits Intimidate Enemies for 4 seconds while you are using Pride
+[2025-11-07 22:14:59] [SEARCH SINGLE RESP] proxy=0 status=200 for #% additional Physical Damage Reduction while affected by Determination
+[2025-11-07 22:14:59] [SEARCH SINGLE RESP] proxy=14 status=200 for You gain Onslaught for # seconds on Kill while affected by Haste
+[2025-11-07 22:14:59] [FETCH SINGLE RESP] proxy=2 status=200 for Impales you inflict last # additional Hits while using Pride
+[2025-11-07 22:14:59] [SEARCH SINGLE RESP] proxy=8 status=200 for +#% chance to Suppress Spell Damage while affected by Grace
+[2025-11-07 22:14:59] [AVG SINGLE] Impales you inflict last # additional Hits while using Pride: 1.00 div (142.0 chaos)
+[2025-11-07 22:14:59] Proxy 2 completed fetch for Impales you inflict last # additional Hits while using Pride with result: 1.00 div.
+[2025-11-07 22:14:59] [FETCH SINGLE RESP] proxy=4 status=200 for #% chance to Impale Enemies on Hit with Attacks while using Pride
+[2025-11-07 22:14:59] [AVG SINGLE] #% chance to Impale Enemies on Hit with Attacks while using Pride: 0.91 div (129.6 chaos)
+[2025-11-07 22:14:59] Proxy 4 completed fetch for #% chance to Impale Enemies on Hit with Attacks while using Pride with result: 0.91 div.
+[2025-11-07 22:14:59] [FETCH SINGLE RESP] proxy=1 status=200 for +#% Chance to Block Attack Damage while affected by Determination
+[2025-11-07 22:14:59] [AVG SINGLE] +#% Chance to Block Attack Damage while affected by Determination: 0.93 div (131.6 chaos)
+[2025-11-07 22:14:59] Proxy 1 completed fetch for +#% Chance to Block Attack Damage while affected by Determination with result: 0.93 div.
+[2025-11-07 22:14:59] [SEARCH SINGLE RESP] proxy=5 status=200 for #% increased Physical Damage while using Pride
+[2025-11-07 22:14:59] [SEARCH SINGLE RESP] proxy=13 status=200 for Regenerate #% of Energy Shield per Second while affected by Discipline
+[2025-11-07 22:14:59] [SEARCH SINGLE RESP] proxy=11 status=200 for Gain # Energy Shield per Enemy Hit while affected by Discipline
+[2025-11-07 22:14:59] [FETCH SINGLE RESP] proxy=3 status=200 for #% chance to deal Double Damage while using Pride
+[2025-11-07 22:14:59] [AVG SINGLE] #% chance to deal Double Damage while using Pride: 0.93 div (132.6 chaos)
+[2025-11-07 22:14:59] Proxy 3 completed fetch for #% chance to deal Double Damage while using Pride with result: 0.93 div.
+[2025-11-07 22:14:59] [FETCH SINGLE RESP] proxy=7 status=200 for +#% chance to Evade Attack Hits while affected by Grace
+[2025-11-07 22:14:59] [AVG SINGLE] +#% chance to Evade Attack Hits while affected by Grace: 0.92 div (130.6 chaos)
+[2025-11-07 22:14:59] Proxy 7 completed fetch for +#% chance to Evade Attack Hits while affected by Grace with result: 0.92 div.
+[2025-11-07 22:14:59] [FETCH SINGLE RESP] proxy=12 status=200 for +#% Chance to Block Spell Damage while affected by Discipline
+[2025-11-07 22:14:59] [AVG SINGLE] +#% Chance to Block Spell Damage while affected by Discipline: 0.92 div (130.6 chaos)
+[2025-11-07 22:14:59] Proxy 12 completed fetch for +#% Chance to Block Spell Damage while affected by Discipline with result: 0.92 div.
+[2025-11-07 22:14:59] [FETCH SINGLE RESP] proxy=6 status=200 for Your Hits Intimidate Enemies for 4 seconds while you are using Pride
+[2025-11-07 22:14:59] [AVG SINGLE] Your Hits Intimidate Enemies for 4 seconds while you are using Pride: 0.93 div (132.6 chaos)
+[2025-11-07 22:14:59] Proxy 6 completed fetch for Your Hits Intimidate Enemies for 4 seconds while you are using Pride with result: 0.93 div.
+[2025-11-07 22:14:59] [FETCH SINGLE RESP] proxy=10 status=200 for Gain # Life per Enemy Hit while affected by Vitality
+[2025-11-07 22:14:59] [AVG SINGLE] Gain # Life per Enemy Hit while affected by Vitality: 3.40 div (482.8 chaos)
+[2025-11-07 22:14:59] Proxy 10 completed fetch for Gain # Life per Enemy Hit while affected by Vitality with result: 3.40 div.
+[2025-11-07 22:14:59] [FETCH SINGLE RESP] proxy=14 status=200 for You gain Onslaught for # seconds on Kill while affected by Haste
+[2025-11-07 22:14:59] [AVG SINGLE] You gain Onslaught for # seconds on Kill while affected by Haste: 0.84 div (119.2 chaos)
+[2025-11-07 22:14:59] Proxy 14 completed fetch for You gain Onslaught for # seconds on Kill while affected by Haste with result: 0.84 div.
+[2025-11-07 22:14:59] [FETCH SINGLE RESP] proxy=0 status=200 for #% additional Physical Damage Reduction while affected by Determination
+[2025-11-07 22:14:59] [AVG SINGLE] #% additional Physical Damage Reduction while affected by Determination: 1.00 div (142.0 chaos)
+[2025-11-07 22:14:59] Proxy 0 completed fetch for #% additional Physical Damage Reduction while affected by Determination with result: 1.00 div.
+[2025-11-07 22:15:00] [FETCH SINGLE RESP] proxy=5 status=200 for #% increased Physical Damage while using Pride
+[2025-11-07 22:15:00] [AVG SINGLE] #% increased Physical Damage while using Pride: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:00] Proxy 5 completed fetch for #% increased Physical Damage while using Pride with result: 1.00 div.
+[2025-11-07 22:15:00] [FETCH SINGLE RESP] proxy=13 status=200 for Regenerate #% of Energy Shield per Second while affected by Discipline
+[2025-11-07 22:15:00] [AVG SINGLE] Regenerate #% of Energy Shield per Second while affected by Discipline: 0.92 div (130.6 chaos)
+[2025-11-07 22:15:00] Proxy 13 completed fetch for Regenerate #% of Energy Shield per Second while affected by Discipline with result: 0.92 div.
+[2025-11-07 22:15:00] [FETCH SINGLE RESP] proxy=11 status=200 for Gain # Energy Shield per Enemy Hit while affected by Discipline
+[2025-11-07 22:15:00] [AVG SINGLE] Gain # Energy Shield per Enemy Hit while affected by Discipline: 3.00 div (426.0 chaos)
+[2025-11-07 22:15:00] Proxy 11 completed fetch for Gain # Energy Shield per Enemy Hit while affected by Discipline with result: 3.00 div.
+[2025-11-07 22:15:00] [FETCH SINGLE RESP] proxy=8 status=200 for +#% chance to Suppress Spell Damage while affected by Grace
+[2025-11-07 22:15:00] [AVG SINGLE] +#% chance to Suppress Spell Damage while affected by Grace: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:00] Proxy 8 completed fetch for +#% chance to Suppress Spell Damage while affected by Grace with result: 1.00 div.
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=0 You have Phasing while affected by Haste
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=1 Debuffs on you expire #% faster while affected by Haste
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=2 Non-Channelling Skills have +# to Total Mana Cost while affected by Clarity
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=3 Gain #% of Maximum Mana as Extra Maximum Energy Shield while affected by Clarity
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=4 +#% to Chaos Resistance while affected by Purity of Elements
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=5 +#% to Damage over Time Multiplier while affected by Malevolence
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=6 Unaffected by Burning Ground while affected by Purity of Fire
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=7 Unaffected by Bleeding while affected by Malevolence
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=8 Unaffected by Poison while affected by Malevolence
+[2025-11-07 22:15:11] Created persistent session for proxy 9 (142.147.128.93:6593)
+[2025-11-07 22:15:11] Proxy 9 state -> ok
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=9 #% increased Recovery rate of Life and Energy Shield while affected by Malevolence
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=10 Damaging Ailments you inflict deal Damage #% faster while affected by Malevolence
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=11 Unaffected by Vulnerability while affected by Determination
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=12 Unaffected by Temporal Chains while affected by Haste
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=13 Unaffected by Shocked Ground while affected by Purity of Lightning
+[2025-11-07 22:15:11] [SEARCH SINGLE] proxy=14 Unaffected by Frostbite while affected by Purity of Ice
+[2025-11-07 22:15:11] [SEARCH SINGLE RESP] proxy=1 status=200 for Debuffs on you expire #% faster while affected by Haste
+[2025-11-07 22:15:11] Network error (search single) for #% increased Recovery rate of Life and Energy Shield while affected by Malevolence: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:11] Query single exception for #% increased Recovery rate of Life and Energy Shield while affected by Malevolence: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:11] Proxy 9 task error for explicit.stat_3643449791: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:11] Proxy 9 encountered error: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:11] Proxy 9 session closed and marked dead.
+[2025-11-07 22:15:11] Requeued job explicit.stat_3643449791 after proxy 9 error.
+[2025-11-07 22:15:11] [SEARCH SINGLE RESP] proxy=2 status=200 for Non-Channelling Skills have +# to Total Mana Cost while affected by Clarity
+[2025-11-07 22:15:11] [SEARCH SINGLE RESP] proxy=5 status=200 for +#% to Damage over Time Multiplier while affected by Malevolence
+[2025-11-07 22:15:11] [SEARCH SINGLE RESP] proxy=7 status=200 for Unaffected by Bleeding while affected by Malevolence
+[2025-11-07 22:15:11] [SEARCH SINGLE RESP] proxy=11 status=200 for Unaffected by Vulnerability while affected by Determination
+[2025-11-07 22:15:11] [SEARCH SINGLE RESP] proxy=6 status=200 for Unaffected by Burning Ground while affected by Purity of Fire
+[2025-11-07 22:15:11] [SEARCH SINGLE RESP] proxy=13 status=200 for Unaffected by Shocked Ground while affected by Purity of Lightning
+[2025-11-07 22:15:11] [SEARCH SINGLE RESP] proxy=3 status=200 for Gain #% of Maximum Mana as Extra Maximum Energy Shield while affected by Clarity
+[2025-11-07 22:15:11] [SEARCH SINGLE RESP] proxy=0 status=200 for You have Phasing while affected by Haste
+[2025-11-07 22:15:11] [SEARCH SINGLE RESP] proxy=4 status=200 for +#% to Chaos Resistance while affected by Purity of Elements
+[2025-11-07 22:15:11] [SEARCH SINGLE RESP] proxy=14 status=200 for Unaffected by Frostbite while affected by Purity of Ice
+[2025-11-07 22:15:11] [SEARCH SINGLE RESP] proxy=10 status=200 for Damaging Ailments you inflict deal Damage #% faster while affected by Malevolence
+[2025-11-07 22:15:11] [SEARCH SINGLE RESP] proxy=12 status=200 for Unaffected by Temporal Chains while affected by Haste
+[2025-11-07 22:15:11] [FETCH SINGLE RESP] proxy=1 status=200 for Debuffs on you expire #% faster while affected by Haste
+[2025-11-07 22:15:11] [AVG SINGLE] Debuffs on you expire #% faster while affected by Haste: 0.69 div (97.8 chaos)
+[2025-11-07 22:15:11] Proxy 1 completed fetch for Debuffs on you expire #% faster while affected by Haste with result: 0.69 div.
+[2025-11-07 22:15:11] [FETCH SINGLE RESP] proxy=2 status=200 for Non-Channelling Skills have +# to Total Mana Cost while affected by Clarity
+[2025-11-07 22:15:11] [AVG SINGLE] Non-Channelling Skills have +# to Total Mana Cost while affected by Clarity: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:11] Proxy 2 completed fetch for Non-Channelling Skills have +# to Total Mana Cost while affected by Clarity with result: 1.00 div.
+[2025-11-07 22:15:11] [SEARCH SINGLE RESP] proxy=8 status=200 for Unaffected by Poison while affected by Malevolence
+[2025-11-07 22:15:11] [FETCH SINGLE RESP] proxy=5 status=200 for +#% to Damage over Time Multiplier while affected by Malevolence
+[2025-11-07 22:15:11] [AVG SINGLE] +#% to Damage over Time Multiplier while affected by Malevolence: 5.90 div (837.8 chaos)
+[2025-11-07 22:15:11] Proxy 5 completed fetch for +#% to Damage over Time Multiplier while affected by Malevolence with result: 5.90 div.
+[2025-11-07 22:15:11] [FETCH SINGLE RESP] proxy=3 status=200 for Gain #% of Maximum Mana as Extra Maximum Energy Shield while affected by Clarity
+[2025-11-07 22:15:11] [AVG SINGLE] Gain #% of Maximum Mana as Extra Maximum Energy Shield while affected by Clarity: 8.00 div (1136.0 chaos)
+[2025-11-07 22:15:11] Proxy 3 completed fetch for Gain #% of Maximum Mana as Extra Maximum Energy Shield while affected by Clarity with result: 8.00 div.
+[2025-11-07 22:15:11] [FETCH SINGLE RESP] proxy=4 status=200 for +#% to Chaos Resistance while affected by Purity of Elements
+[2025-11-07 22:15:11] [AVG SINGLE] +#% to Chaos Resistance while affected by Purity of Elements: 2.80 div (397.6 chaos)
+[2025-11-07 22:15:11] Proxy 4 completed fetch for +#% to Chaos Resistance while affected by Purity of Elements with result: 2.80 div.
+[2025-11-07 22:15:11] [FETCH SINGLE RESP] proxy=7 status=200 for Unaffected by Bleeding while affected by Malevolence
+[2025-11-07 22:15:11] [AVG SINGLE] Unaffected by Bleeding while affected by Malevolence: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:11] Proxy 7 completed fetch for Unaffected by Bleeding while affected by Malevolence with result: 1.00 div.
+[2025-11-07 22:15:11] [FETCH SINGLE RESP] proxy=6 status=200 for Unaffected by Burning Ground while affected by Purity of Fire
+[2025-11-07 22:15:11] [AVG SINGLE] Unaffected by Burning Ground while affected by Purity of Fire: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:11] Proxy 6 completed fetch for Unaffected by Burning Ground while affected by Purity of Fire with result: 1.00 div.
+[2025-11-07 22:15:11] [FETCH SINGLE RESP] proxy=13 status=200 for Unaffected by Shocked Ground while affected by Purity of Lightning
+[2025-11-07 22:15:11] [AVG SINGLE] Unaffected by Shocked Ground while affected by Purity of Lightning: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:11] Proxy 13 completed fetch for Unaffected by Shocked Ground while affected by Purity of Lightning with result: 1.00 div.
+[2025-11-07 22:15:11] [FETCH SINGLE RESP] proxy=14 status=200 for Unaffected by Frostbite while affected by Purity of Ice
+[2025-11-07 22:15:11] [AVG SINGLE] Unaffected by Frostbite while affected by Purity of Ice: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:11] Proxy 14 completed fetch for Unaffected by Frostbite while affected by Purity of Ice with result: 1.00 div.
+[2025-11-07 22:15:11] [FETCH SINGLE RESP] proxy=0 status=200 for You have Phasing while affected by Haste
+[2025-11-07 22:15:11] [AVG SINGLE] You have Phasing while affected by Haste: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:11] Proxy 0 completed fetch for You have Phasing while affected by Haste with result: 1.00 div.
+[2025-11-07 22:15:11] [FETCH SINGLE RESP] proxy=10 status=200 for Damaging Ailments you inflict deal Damage #% faster while affected by Malevolence
+[2025-11-07 22:15:11] [AVG SINGLE] Damaging Ailments you inflict deal Damage #% faster while affected by Malevolence: 1.80 div (255.6 chaos)
+[2025-11-07 22:15:11] Proxy 10 completed fetch for Damaging Ailments you inflict deal Damage #% faster while affected by Malevolence with result: 1.80 div.
+[2025-11-07 22:15:12] [FETCH SINGLE RESP] proxy=12 status=200 for Unaffected by Temporal Chains while affected by Haste
+[2025-11-07 22:15:12] [AVG SINGLE] Unaffected by Temporal Chains while affected by Haste: 0.93 div (132.6 chaos)
+[2025-11-07 22:15:12] Proxy 12 completed fetch for Unaffected by Temporal Chains while affected by Haste with result: 0.93 div.
+[2025-11-07 22:15:12] [FETCH SINGLE RESP] proxy=11 status=200 for Unaffected by Vulnerability while affected by Determination
+[2025-11-07 22:15:12] [AVG SINGLE] Unaffected by Vulnerability while affected by Determination: 0.85 div (121.2 chaos)
+[2025-11-07 22:15:12] Proxy 11 completed fetch for Unaffected by Vulnerability while affected by Determination with result: 0.85 div.
+[2025-11-07 22:15:12] [FETCH SINGLE RESP] proxy=8 status=200 for Unaffected by Poison while affected by Malevolence
+[2025-11-07 22:15:12] [AVG SINGLE] Unaffected by Poison while affected by Malevolence: 0.93 div (132.6 chaos)
+[2025-11-07 22:15:12] Proxy 8 completed fetch for Unaffected by Poison while affected by Malevolence with result: 0.93 div.
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=0 Unaffected by Flammability while affected by Purity of Fire
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=1 Unaffected by Enfeeble while affected by Grace
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=2 Unaffected by Elemental Weakness while affected by Purity of Elements
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=3 Unaffected by Conductivity while affected by Purity of Lightning
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=4 Unaffected by Chilled Ground while affected by Purity of Ice
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=5 Regenerate #% of Life per second while affected by Vitality
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=6 Immune to Ignite while affected by Purity of Fire
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=7 Immune to Freeze while affected by Purity of Ice
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=8 Gain Arcane Surge for 4 seconds when you create Consecrated Ground while affected by Zealotry
+[2025-11-07 22:15:23] Created persistent session for proxy 9 (142.147.128.93:6593)
+[2025-11-07 22:15:23] Proxy 9 state -> ok
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=9 Gain a Flask Charge when you deal a Critical Strike while affected by Precision
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=10 Gain #% of Physical Damage as Extra Fire Damage while affected by Anger
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=11 Effects of Consecrated Ground you create while affected by Zealotry Linger for # seconds
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=12 Damage Penetrates #% Fire Resistance while affected by Anger
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=13 Consecrated Ground you create while affected by Zealotry causes enemies to take #% increased Damage
+[2025-11-07 22:15:23] [SEARCH SINGLE] proxy=14 Cannot be Blinded while affected by Precision
+[2025-11-07 22:15:23] [SEARCH SINGLE RESP] proxy=2 status=200 for Unaffected by Elemental Weakness while affected by Purity of Elements
+[2025-11-07 22:15:23] [SEARCH SINGLE RESP] proxy=1 status=200 for Unaffected by Enfeeble while affected by Grace
+[2025-11-07 22:15:23] [SEARCH SINGLE RESP] proxy=5 status=200 for Regenerate #% of Life per second while affected by Vitality
+[2025-11-07 22:15:23] [SEARCH SINGLE RESP] proxy=13 status=200 for Consecrated Ground you create while affected by Zealotry causes enemies to take #% increased Damage
+[2025-11-07 22:15:23] [SEARCH SINGLE RESP] proxy=4 status=200 for Unaffected by Chilled Ground while affected by Purity of Ice
+[2025-11-07 22:15:23] [SEARCH SINGLE RESP] proxy=6 status=200 for Immune to Ignite while affected by Purity of Fire
+[2025-11-07 22:15:23] [SEARCH SINGLE RESP] proxy=7 status=200 for Immune to Freeze while affected by Purity of Ice
+[2025-11-07 22:15:23] [SEARCH SINGLE RESP] proxy=14 status=200 for Cannot be Blinded while affected by Precision
+[2025-11-07 22:15:23] [SEARCH SINGLE RESP] proxy=10 status=200 for Gain #% of Physical Damage as Extra Fire Damage while affected by Anger
+[2025-11-07 22:15:23] Network error (search single) for Gain a Flask Charge when you deal a Critical Strike while affected by Precision: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:23] Query single exception for Gain a Flask Charge when you deal a Critical Strike while affected by Precision: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:23] Proxy 9 task error for explicit.stat_3772841281: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:23] Proxy 9 encountered error: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:23] Proxy 9 session closed and marked dead.
+[2025-11-07 22:15:23] Requeued job explicit.stat_3772841281 after proxy 9 error.
+[2025-11-07 22:15:23] [SEARCH SINGLE RESP] proxy=3 status=200 for Unaffected by Conductivity while affected by Purity of Lightning
+[2025-11-07 22:15:23] [SEARCH SINGLE RESP] proxy=0 status=200 for Unaffected by Flammability while affected by Purity of Fire
+[2025-11-07 22:15:23] [SEARCH SINGLE RESP] proxy=12 status=200 for Damage Penetrates #% Fire Resistance while affected by Anger
+[2025-11-07 22:15:23] [SEARCH SINGLE RESP] proxy=11 status=200 for Effects of Consecrated Ground you create while affected by Zealotry Linger for # seconds
+[2025-11-07 22:15:23] [SEARCH SINGLE RESP] proxy=8 status=200 for Gain Arcane Surge for 4 seconds when you create Consecrated Ground while affected by Zealotry
+[2025-11-07 22:15:23] [FETCH SINGLE RESP] proxy=2 status=200 for Unaffected by Elemental Weakness while affected by Purity of Elements
+[2025-11-07 22:15:23] [AVG SINGLE] Unaffected by Elemental Weakness while affected by Purity of Elements: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:23] Proxy 2 completed fetch for Unaffected by Elemental Weakness while affected by Purity of Elements with result: 1.00 div.
+[2025-11-07 22:15:23] [FETCH SINGLE RESP] proxy=1 status=200 for Unaffected by Enfeeble while affected by Grace
+[2025-11-07 22:15:23] [AVG SINGLE] Unaffected by Enfeeble while affected by Grace: 0.76 div (108.2 chaos)
+[2025-11-07 22:15:23] Proxy 1 completed fetch for Unaffected by Enfeeble while affected by Grace with result: 0.76 div.
+[2025-11-07 22:15:23] [FETCH SINGLE RESP] proxy=5 status=200 for Regenerate #% of Life per second while affected by Vitality
+[2025-11-07 22:15:23] [FETCH SINGLE RESP] proxy=4 status=200 for Unaffected by Chilled Ground while affected by Purity of Ice
+[2025-11-07 22:15:23] [AVG SINGLE] Regenerate #% of Life per second while affected by Vitality: 0.92 div (130.6 chaos)
+[2025-11-07 22:15:23] Proxy 5 completed fetch for Regenerate #% of Life per second while affected by Vitality with result: 0.92 div.
+[2025-11-07 22:15:23] [AVG SINGLE] Unaffected by Chilled Ground while affected by Purity of Ice: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:23] Proxy 4 completed fetch for Unaffected by Chilled Ground while affected by Purity of Ice with result: 1.00 div.
+[2025-11-07 22:15:23] [FETCH SINGLE RESP] proxy=13 status=200 for Consecrated Ground you create while affected by Zealotry causes enemies to take #% increased Damage
+[2025-11-07 22:15:23] [AVG SINGLE] Consecrated Ground you create while affected by Zealotry causes enemies to take #% increased Damage: 0.86 div (122.2 chaos)
+[2025-11-07 22:15:23] Proxy 13 completed fetch for Consecrated Ground you create while affected by Zealotry causes enemies to take #% increased Damage with result: 0.86 div.
+[2025-11-07 22:15:23] [FETCH SINGLE RESP] proxy=7 status=200 for Immune to Freeze while affected by Purity of Ice
+[2025-11-07 22:15:23] [FETCH SINGLE RESP] proxy=6 status=200 for Immune to Ignite while affected by Purity of Fire
+[2025-11-07 22:15:23] [FETCH SINGLE RESP] proxy=3 status=200 for Unaffected by Conductivity while affected by Purity of Lightning
+[2025-11-07 22:15:23] [AVG SINGLE] Immune to Ignite while affected by Purity of Fire: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:23] Proxy 6 completed fetch for Immune to Ignite while affected by Purity of Fire with result: 1.00 div.
+[2025-11-07 22:15:23] [AVG SINGLE] Immune to Freeze while affected by Purity of Ice: 0.84 div (119.2 chaos)
+[2025-11-07 22:15:23] Proxy 7 completed fetch for Immune to Freeze while affected by Purity of Ice with result: 0.84 div.
+[2025-11-07 22:15:23] [AVG SINGLE] Unaffected by Conductivity while affected by Purity of Lightning: 0.68 div (96.8 chaos)
+[2025-11-07 22:15:23] Proxy 3 completed fetch for Unaffected by Conductivity while affected by Purity of Lightning with result: 0.68 div.
+[2025-11-07 22:15:23] [FETCH SINGLE RESP] proxy=10 status=200 for Gain #% of Physical Damage as Extra Fire Damage while affected by Anger
+[2025-11-07 22:15:23] [AVG SINGLE] Gain #% of Physical Damage as Extra Fire Damage while affected by Anger: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:23] Proxy 10 completed fetch for Gain #% of Physical Damage as Extra Fire Damage while affected by Anger with result: 1.00 div.
+[2025-11-07 22:15:23] [FETCH SINGLE RESP] proxy=0 status=200 for Unaffected by Flammability while affected by Purity of Fire
+[2025-11-07 22:15:23] [AVG SINGLE] Unaffected by Flammability while affected by Purity of Fire: 0.92 div (130.6 chaos)
+[2025-11-07 22:15:23] Proxy 0 completed fetch for Unaffected by Flammability while affected by Purity of Fire with result: 0.92 div.
+[2025-11-07 22:15:23] [FETCH SINGLE RESP] proxy=11 status=200 for Effects of Consecrated Ground you create while affected by Zealotry Linger for # seconds
+[2025-11-07 22:15:23] [AVG SINGLE] Effects of Consecrated Ground you create while affected by Zealotry Linger for # seconds: 0.62 div (88.4 chaos)
+[2025-11-07 22:15:23] Proxy 11 completed fetch for Effects of Consecrated Ground you create while affected by Zealotry Linger for # seconds with result: 0.62 div.
+[2025-11-07 22:15:24] [FETCH SINGLE RESP] proxy=14 status=200 for Cannot be Blinded while affected by Precision
+[2025-11-07 22:15:24] [AVG SINGLE] Cannot be Blinded while affected by Precision: 0.93 div (132.6 chaos)
+[2025-11-07 22:15:24] Proxy 14 completed fetch for Cannot be Blinded while affected by Precision with result: 0.93 div.
+[2025-11-07 22:15:24] [FETCH SINGLE RESP] proxy=12 status=200 for Damage Penetrates #% Fire Resistance while affected by Anger
+[2025-11-07 22:15:24] [AVG SINGLE] Damage Penetrates #% Fire Resistance while affected by Anger: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:24] Proxy 12 completed fetch for Damage Penetrates #% Fire Resistance while affected by Anger with result: 1.00 div.
+[2025-11-07 22:15:24] [FETCH SINGLE RESP] proxy=8 status=200 for Gain Arcane Surge for 4 seconds when you create Consecrated Ground while affected by Zealotry
+[2025-11-07 22:15:24] [AVG SINGLE] Gain Arcane Surge for 4 seconds when you create Consecrated Ground while affected by Zealotry: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:24] Proxy 8 completed fetch for Gain Arcane Surge for 4 seconds when you create Consecrated Ground while affected by Zealotry with result: 1.00 div.
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=0 #% increased Maximum total Energy Shield Recovery per second from Leech while affected by Zealotry
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=1 +#% to all maximum Elemental Resistances while affected by Purity of Elements
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=2 +#% to Critical Strike Multiplier while affected by Anger
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=3 Critical Strikes Penetrate #% of Enemy Elemental Resistances while affected by Zealotry
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=4 #% increased Critical Strike Chance against Enemies on Consecrated Ground while affected by Zealotry
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=5 #% increased Life Recovery from Flasks while affected by Vitality
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=6 #% reduced Reflected Physical Damage taken while affected by Determination
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=7 #% reduced Reflected Elemental Damage taken while affected by Purity of Elements
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=8 #% increased Fire Damage while affected by Anger
+[2025-11-07 22:15:35] Created persistent session for proxy 9 (142.147.128.93:6593)
+[2025-11-07 22:15:35] Proxy 9 state -> ok
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=9 #% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=10 #% chance to Blind Enemies which Hit you while affected by Grace
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=11 #% faster start of Energy Shield Recharge while affected by Discipline
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=12 #% of Physical Damage Converted to Fire Damage while affected by Anger
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=13 #% of Damage taken while affected by Clarity Recouped as Mana
+[2025-11-07 22:15:35] [SEARCH SINGLE] proxy=14 #% of Fire and Lightning Damage taken as Cold Damage while affected by Purity of Ice
+[2025-11-07 22:15:35] Network error (search single) for #% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:35] Query single exception for #% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:35] Proxy 9 task error for explicit.stat_3332055899: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:35] Proxy 9 encountered error: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:35] Proxy 9 session closed and marked dead.
+[2025-11-07 22:15:35] Requeued job explicit.stat_3332055899 after proxy 9 error.
+[2025-11-07 22:15:35] [SEARCH SINGLE RESP] proxy=2 status=200 for +#% to Critical Strike Multiplier while affected by Anger
+[2025-11-07 22:15:35] [SEARCH SINGLE RESP] proxy=12 status=200 for #% of Physical Damage Converted to Fire Damage while affected by Anger
+[2025-11-07 22:15:35] [SEARCH SINGLE RESP] proxy=1 status=200 for +#% to all maximum Elemental Resistances while affected by Purity of Elements
+[2025-11-07 22:15:35] [SEARCH SINGLE RESP] proxy=4 status=200 for #% increased Critical Strike Chance against Enemies on Consecrated Ground while affected by Zealotry
+[2025-11-07 22:15:35] [SEARCH SINGLE RESP] proxy=5 status=200 for #% increased Life Recovery from Flasks while affected by Vitality
+[2025-11-07 22:15:35] [SEARCH SINGLE RESP] proxy=14 status=200 for #% of Fire and Lightning Damage taken as Cold Damage while affected by Purity of Ice
+[2025-11-07 22:15:35] [SEARCH SINGLE RESP] proxy=7 status=200 for #% reduced Reflected Elemental Damage taken while affected by Purity of Elements
+[2025-11-07 22:15:35] [SEARCH SINGLE RESP] proxy=13 status=200 for #% of Damage taken while affected by Clarity Recouped as Mana
+[2025-11-07 22:15:35] [SEARCH SINGLE RESP] proxy=10 status=200 for #% chance to Blind Enemies which Hit you while affected by Grace
+[2025-11-07 22:15:35] [SEARCH SINGLE RESP] proxy=6 status=200 for #% reduced Reflected Physical Damage taken while affected by Determination
+[2025-11-07 22:15:35] [SEARCH SINGLE RESP] proxy=0 status=200 for #% increased Maximum total Energy Shield Recovery per second from Leech while affected by Zealotry
+[2025-11-07 22:15:35] [SEARCH SINGLE RESP] proxy=11 status=200 for #% faster start of Energy Shield Recharge while affected by Discipline
+[2025-11-07 22:15:35] [SEARCH SINGLE RESP] proxy=3 status=200 for Critical Strikes Penetrate #% of Enemy Elemental Resistances while affected by Zealotry
+[2025-11-07 22:15:35] [SEARCH SINGLE RESP] proxy=8 status=200 for #% increased Fire Damage while affected by Anger
+[2025-11-07 22:15:35] [FETCH SINGLE RESP] proxy=2 status=200 for +#% to Critical Strike Multiplier while affected by Anger
+[2025-11-07 22:15:35] [AVG SINGLE] +#% to Critical Strike Multiplier while affected by Anger: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:35] Proxy 2 completed fetch for +#% to Critical Strike Multiplier while affected by Anger with result: 1.00 div.
+[2025-11-07 22:15:35] [FETCH SINGLE RESP] proxy=4 status=200 for #% increased Critical Strike Chance against Enemies on Consecrated Ground while affected by Zealotry
+[2025-11-07 22:15:35] [AVG SINGLE] #% increased Critical Strike Chance against Enemies on Consecrated Ground while affected by Zealotry: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:35] Proxy 4 completed fetch for #% increased Critical Strike Chance against Enemies on Consecrated Ground while affected by Zealotry with result: 1.00 div.
+[2025-11-07 22:15:35] [FETCH SINGLE RESP] proxy=1 status=200 for +#% to all maximum Elemental Resistances while affected by Purity of Elements
+[2025-11-07 22:15:35] [AVG SINGLE] +#% to all maximum Elemental Resistances while affected by Purity of Elements: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:35] Proxy 1 completed fetch for +#% to all maximum Elemental Resistances while affected by Purity of Elements with result: 1.00 div.
+[2025-11-07 22:15:35] [FETCH SINGLE RESP] proxy=12 status=200 for #% of Physical Damage Converted to Fire Damage while affected by Anger
+[2025-11-07 22:15:35] [AVG SINGLE] #% of Physical Damage Converted to Fire Damage while affected by Anger: 0.93 div (132.6 chaos)
+[2025-11-07 22:15:35] Proxy 12 completed fetch for #% of Physical Damage Converted to Fire Damage while affected by Anger with result: 0.93 div.
+[2025-11-07 22:15:35] [FETCH SINGLE RESP] proxy=14 status=200 for #% of Fire and Lightning Damage taken as Cold Damage while affected by Purity of Ice
+[2025-11-07 22:15:35] [AVG SINGLE] #% of Fire and Lightning Damage taken as Cold Damage while affected by Purity of Ice: 0.85 div (121.2 chaos)
+[2025-11-07 22:15:35] Proxy 14 completed fetch for #% of Fire and Lightning Damage taken as Cold Damage while affected by Purity of Ice with result: 0.85 div.
+[2025-11-07 22:15:35] [FETCH SINGLE RESP] proxy=10 status=200 for #% chance to Blind Enemies which Hit you while affected by Grace
+[2025-11-07 22:15:35] [AVG SINGLE] #% chance to Blind Enemies which Hit you while affected by Grace: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:35] Proxy 10 completed fetch for #% chance to Blind Enemies which Hit you while affected by Grace with result: 1.00 div.
+[2025-11-07 22:15:35] [FETCH SINGLE RESP] proxy=7 status=200 for #% reduced Reflected Elemental Damage taken while affected by Purity of Elements
+[2025-11-07 22:15:35] [AVG SINGLE] #% reduced Reflected Elemental Damage taken while affected by Purity of Elements: 0.92 div (130.6 chaos)
+[2025-11-07 22:15:35] Proxy 7 completed fetch for #% reduced Reflected Elemental Damage taken while affected by Purity of Elements with result: 0.92 div.
+[2025-11-07 22:15:35] [FETCH SINGLE RESP] proxy=5 status=200 for #% increased Life Recovery from Flasks while affected by Vitality
+[2025-11-07 22:15:35] [AVG SINGLE] #% increased Life Recovery from Flasks while affected by Vitality: 0.84 div (119.2 chaos)
+[2025-11-07 22:15:35] Proxy 5 completed fetch for #% increased Life Recovery from Flasks while affected by Vitality with result: 0.84 div.
+[2025-11-07 22:15:36] [FETCH SINGLE RESP] proxy=6 status=200 for #% reduced Reflected Physical Damage taken while affected by Determination
+[2025-11-07 22:15:36] [AVG SINGLE] #% reduced Reflected Physical Damage taken while affected by Determination: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:36] Proxy 6 completed fetch for #% reduced Reflected Physical Damage taken while affected by Determination with result: 1.00 div.
+[2025-11-07 22:15:36] [FETCH SINGLE RESP] proxy=3 status=200 for Critical Strikes Penetrate #% of Enemy Elemental Resistances while affected by Zealotry
+[2025-11-07 22:15:36] [AVG SINGLE] Critical Strikes Penetrate #% of Enemy Elemental Resistances while affected by Zealotry: 0.75 div (105.8 chaos)
+[2025-11-07 22:15:36] Proxy 3 completed fetch for Critical Strikes Penetrate #% of Enemy Elemental Resistances while affected by Zealotry with result: 0.75 div.
+[2025-11-07 22:15:36] [FETCH SINGLE RESP] proxy=11 status=200 for #% faster start of Energy Shield Recharge while affected by Discipline
+[2025-11-07 22:15:36] [AVG SINGLE] #% faster start of Energy Shield Recharge while affected by Discipline: 0.92 div (130.6 chaos)
+[2025-11-07 22:15:36] Proxy 11 completed fetch for #% faster start of Energy Shield Recharge while affected by Discipline with result: 0.92 div.
+[2025-11-07 22:15:36] [FETCH SINGLE RESP] proxy=0 status=200 for #% increased Maximum total Energy Shield Recovery per second from Leech while affected by Zealotry
+[2025-11-07 22:15:36] [AVG SINGLE] #% increased Maximum total Energy Shield Recovery per second from Leech while affected by Zealotry: 0.84 div (119.2 chaos)
+[2025-11-07 22:15:36] Proxy 0 completed fetch for #% increased Maximum total Energy Shield Recovery per second from Leech while affected by Zealotry with result: 0.84 div.
+[2025-11-07 22:15:36] [FETCH SINGLE RESP] proxy=8 status=200 for #% increased Fire Damage while affected by Anger
+[2025-11-07 22:15:36] [AVG SINGLE] #% increased Fire Damage while affected by Anger: 0.89 div (126.6 chaos)
+[2025-11-07 22:15:36] Proxy 8 completed fetch for #% increased Fire Damage while affected by Anger with result: 0.89 div.
+[2025-11-07 22:15:36] [FETCH SINGLE RESP] proxy=13 status=200 for #% of Damage taken while affected by Clarity Recouped as Mana
+[2025-11-07 22:15:36] [AVG SINGLE] #% of Damage taken while affected by Clarity Recouped as Mana: 0.92 div (130.6 chaos)
+[2025-11-07 22:15:36] Proxy 13 completed fetch for #% of Damage taken while affected by Clarity Recouped as Mana with result: 0.92 div.
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=0 #% of Fire and Cold Damage taken as Lightning Damage while affected by Purity of Lightning
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=1 #% of Cold and Lightning Damage taken as Fire Damage while affected by Purity of Fire
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=2 #% increased Mana Recovery Rate while affected by Clarity
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=3 #% increased Life Recovery Rate while affected by Vitality
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=4 #% increased Energy Shield Recovery Rate while affected by Discipline
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=5 #% increased Cast Speed while affected by Zealotry
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=6 #% chance to Recover 10% of Mana when you use a Skill while affected by Clarity
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=7 #% of Damage taken from Mana before Life while affected by Clarity
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=8 #% of Lightning Damage is Leeched as Energy Shield while affected by Wrath
+[2025-11-07 22:15:47] Created persistent session for proxy 9 (142.147.128.93:6593)
+[2025-11-07 22:15:47] Proxy 9 state -> ok
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=9 #% of Fire Damage Leeched as Life while affected by Anger
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=10 #% of Damage leeched as Life while affected by Vitality
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=11 Immune to Shock while affected by Purity of Lightning
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=12 Adds # to # Cold Damage while affected by Hatred
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=13 #% increased Movement Speed while affected by Grace
+[2025-11-07 22:15:47] [SEARCH SINGLE] proxy=14 #% increased Recovery rate of Life and Energy Shield while affected by Malevolence
+[2025-11-07 22:15:47] Network error (search single) for #% of Fire Damage Leeched as Life while affected by Anger: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:47] Query single exception for #% of Fire Damage Leeched as Life while affected by Anger: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:47] Proxy 9 task error for explicit.stat_2312747856: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:47] Proxy 9 encountered error: 407, message='Proxy Authentication Required', url='http://tssjqimv:58j61r2wzs7n@142.147.128.93:6593'
+[2025-11-07 22:15:47] Proxy 9 session closed and marked dead.
+[2025-11-07 22:15:47] Requeued job explicit.stat_2312747856 after proxy 9 error.
+[2025-11-07 22:15:47] [SEARCH SINGLE RESP] proxy=1 status=200 for #% of Cold and Lightning Damage taken as Fire Damage while affected by Purity of Fire
+[2025-11-07 22:15:47] [SEARCH SINGLE RESP] proxy=4 status=200 for #% increased Energy Shield Recovery Rate while affected by Discipline
+[2025-11-07 22:15:47] [SEARCH SINGLE RESP] proxy=2 status=200 for #% increased Mana Recovery Rate while affected by Clarity
+[2025-11-07 22:15:47] [SEARCH SINGLE RESP] proxy=3 status=200 for #% increased Life Recovery Rate while affected by Vitality
+[2025-11-07 22:15:47] [SEARCH SINGLE RESP] proxy=7 status=200 for #% of Damage taken from Mana before Life while affected by Clarity
+[2025-11-07 22:15:47] [SEARCH SINGLE RESP] proxy=5 status=200 for #% increased Cast Speed while affected by Zealotry
+[2025-11-07 22:15:47] [SEARCH SINGLE RESP] proxy=11 status=200 for Immune to Shock while affected by Purity of Lightning
+[2025-11-07 22:15:47] [SEARCH SINGLE RESP] proxy=14 status=200 for #% increased Recovery rate of Life and Energy Shield while affected by Malevolence
+[2025-11-07 22:15:47] [SEARCH SINGLE RESP] proxy=10 status=200 for #% of Damage leeched as Life while affected by Vitality
+[2025-11-07 22:15:47] [SEARCH SINGLE RESP] proxy=13 status=200 for #% increased Movement Speed while affected by Grace
+[2025-11-07 22:15:47] [SEARCH SINGLE RESP] proxy=12 status=200 for Adds # to # Cold Damage while affected by Hatred
+[2025-11-07 22:15:47] [SEARCH SINGLE RESP] proxy=6 status=200 for #% chance to Recover 10% of Mana when you use a Skill while affected by Clarity
+[2025-11-07 22:15:47] [SEARCH SINGLE RESP] proxy=0 status=200 for #% of Fire and Cold Damage taken as Lightning Damage while affected by Purity of Lightning
+[2025-11-07 22:15:47] [FETCH SINGLE RESP] proxy=1 status=200 for #% of Cold and Lightning Damage taken as Fire Damage while affected by Purity of Fire
+[2025-11-07 22:15:47] [AVG SINGLE] #% of Cold and Lightning Damage taken as Fire Damage while affected by Purity of Fire: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:47] Proxy 1 completed fetch for #% of Cold and Lightning Damage taken as Fire Damage while affected by Purity of Fire with result: 1.00 div.
+[2025-11-07 22:15:47] [FETCH SINGLE RESP] proxy=2 status=200 for #% increased Mana Recovery Rate while affected by Clarity
+[2025-11-07 22:15:47] [AVG SINGLE] #% increased Mana Recovery Rate while affected by Clarity: 0.66 div (94.2 chaos)
+[2025-11-07 22:15:47] Proxy 2 completed fetch for #% increased Mana Recovery Rate while affected by Clarity with result: 0.66 div.
+[2025-11-07 22:15:47] [SEARCH SINGLE RESP] proxy=8 status=200 for #% of Lightning Damage is Leeched as Energy Shield while affected by Wrath
+[2025-11-07 22:15:47] [FETCH SINGLE RESP] proxy=3 status=200 for #% increased Life Recovery Rate while affected by Vitality
+[2025-11-07 22:15:47] [AVG SINGLE] #% increased Life Recovery Rate while affected by Vitality: 0.92 div (130.6 chaos)
+[2025-11-07 22:15:47] Proxy 3 completed fetch for #% increased Life Recovery Rate while affected by Vitality with result: 0.92 div.
+[2025-11-07 22:15:47] [FETCH SINGLE RESP] proxy=4 status=200 for #% increased Energy Shield Recovery Rate while affected by Discipline
+[2025-11-07 22:15:47] [AVG SINGLE] #% increased Energy Shield Recovery Rate while affected by Discipline: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:47] Proxy 4 completed fetch for #% increased Energy Shield Recovery Rate while affected by Discipline with result: 1.00 div.
+[2025-11-07 22:15:47] [FETCH SINGLE RESP] proxy=7 status=200 for #% of Damage taken from Mana before Life while affected by Clarity
+[2025-11-07 22:15:47] [AVG SINGLE] #% of Damage taken from Mana before Life while affected by Clarity: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:47] Proxy 7 completed fetch for #% of Damage taken from Mana before Life while affected by Clarity with result: 1.00 div.
+[2025-11-07 22:15:47] [FETCH SINGLE RESP] proxy=10 status=200 for #% of Damage leeched as Life while affected by Vitality
+[2025-11-07 22:15:47] [AVG SINGLE] #% of Damage leeched as Life while affected by Vitality: 0.92 div (130.6 chaos)
+[2025-11-07 22:15:47] Proxy 10 completed fetch for #% of Damage leeched as Life while affected by Vitality with result: 0.92 div.
+[2025-11-07 22:15:47] [FETCH SINGLE RESP] proxy=5 status=200 for #% increased Cast Speed while affected by Zealotry
+[2025-11-07 22:15:47] [AVG SINGLE] #% increased Cast Speed while affected by Zealotry: 0.93 div (132.6 chaos)
+[2025-11-07 22:15:47] Proxy 5 completed fetch for #% increased Cast Speed while affected by Zealotry with result: 0.93 div.
+[2025-11-07 22:15:47] [FETCH SINGLE RESP] proxy=11 status=200 for Immune to Shock while affected by Purity of Lightning
+[2025-11-07 22:15:47] [AVG SINGLE] Immune to Shock while affected by Purity of Lightning: 0.84 div (119.2 chaos)
+[2025-11-07 22:15:47] Proxy 11 completed fetch for Immune to Shock while affected by Purity of Lightning with result: 0.84 div.
+[2025-11-07 22:15:47] [FETCH SINGLE RESP] proxy=13 status=200 for #% increased Movement Speed while affected by Grace
+[2025-11-07 22:15:47] [AVG SINGLE] #% increased Movement Speed while affected by Grace: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:47] Proxy 13 completed fetch for #% increased Movement Speed while affected by Grace with result: 1.00 div.
+[2025-11-07 22:15:47] [FETCH SINGLE RESP] proxy=14 status=200 for #% increased Recovery rate of Life and Energy Shield while affected by Malevolence
+[2025-11-07 22:15:47] [AVG SINGLE] #% increased Recovery rate of Life and Energy Shield while affected by Malevolence: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:47] Proxy 14 completed fetch for #% increased Recovery rate of Life and Energy Shield while affected by Malevolence with result: 1.00 div.
+[2025-11-07 22:15:48] [FETCH SINGLE RESP] proxy=6 status=200 for #% chance to Recover 10% of Mana when you use a Skill while affected by Clarity
+[2025-11-07 22:15:48] [AVG SINGLE] #% chance to Recover 10% of Mana when you use a Skill while affected by Clarity: 3.80 div (539.6 chaos)
+[2025-11-07 22:15:48] Proxy 6 completed fetch for #% chance to Recover 10% of Mana when you use a Skill while affected by Clarity with result: 3.80 div.
+[2025-11-07 22:15:48] [FETCH SINGLE RESP] proxy=12 status=200 for Adds # to # Cold Damage while affected by Hatred
+[2025-11-07 22:15:48] [AVG SINGLE] Adds # to # Cold Damage while affected by Hatred: 0.93 div (132.6 chaos)
+[2025-11-07 22:15:48] Proxy 12 completed fetch for Adds # to # Cold Damage while affected by Hatred with result: 0.93 div.
+[2025-11-07 22:15:48] [FETCH SINGLE RESP] proxy=0 status=200 for #% of Fire and Cold Damage taken as Lightning Damage while affected by Purity of Lightning
+[2025-11-07 22:15:48] [AVG SINGLE] #% of Fire and Cold Damage taken as Lightning Damage while affected by Purity of Lightning: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:48] Proxy 0 completed fetch for #% of Fire and Cold Damage taken as Lightning Damage while affected by Purity of Lightning with result: 1.00 div.
+[2025-11-07 22:15:48] [FETCH SINGLE RESP] proxy=8 status=200 for #% of Lightning Damage is Leeched as Energy Shield while affected by Wrath
+[2025-11-07 22:15:48] [AVG SINGLE] #% of Lightning Damage is Leeched as Energy Shield while affected by Wrath: 0.92 div (130.6 chaos)
+[2025-11-07 22:15:48] Proxy 8 completed fetch for #% of Lightning Damage is Leeched as Energy Shield while affected by Wrath with result: 0.92 div.
+[2025-11-07 22:15:59] [SEARCH SINGLE] proxy=0 Gain a Flask Charge when you deal a Critical Strike while affected by Precision
+[2025-11-07 22:15:59] [SEARCH SINGLE] proxy=1 #% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste
+[2025-11-07 22:15:59] [SEARCH SINGLE] proxy=2 #% of Fire Damage Leeched as Life while affected by Anger
+[2025-11-07 22:15:59] Created persistent session for proxy 9 (142.147.128.93:6593)
+[2025-11-07 22:15:59] Proxy 9 state -> ok
+[2025-11-07 22:15:59] [SEARCH SINGLE RESP] proxy=1 status=200 for #% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste
+[2025-11-07 22:15:59] [SEARCH SINGLE RESP] proxy=2 status=200 for #% of Fire Damage Leeched as Life while affected by Anger
+[2025-11-07 22:15:59] [SEARCH SINGLE RESP] proxy=0 status=200 for Gain a Flask Charge when you deal a Critical Strike while affected by Precision
+[2025-11-07 22:15:59] [FETCH SINGLE RESP] proxy=1 status=200 for #% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste
+[2025-11-07 22:15:59] [AVG SINGLE] #% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste: 1.00 div (142.0 chaos)
+[2025-11-07 22:15:59] Proxy 1 completed fetch for #% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste with result: 1.00 div.
+[2025-11-07 22:15:59] [FETCH SINGLE RESP] proxy=2 status=200 for #% of Fire Damage Leeched as Life while affected by Anger
+[2025-11-07 22:15:59] [AVG SINGLE] #% of Fire Damage Leeched as Life while affected by Anger: 0.81 div (115.2 chaos)
+[2025-11-07 22:15:59] Proxy 2 completed fetch for #% of Fire Damage Leeched as Life while affected by Anger with result: 0.81 div.
+[2025-11-07 22:15:59] [FETCH SINGLE RESP] proxy=0 status=200 for Gain a Flask Charge when you deal a Critical Strike while affected by Precision
+[2025-11-07 22:15:59] [AVG SINGLE] Gain a Flask Charge when you deal a Critical Strike while affected by Precision: 0.93 div (132.6 chaos)
+[2025-11-07 22:15:59] Proxy 0 completed fetch for Gain a Flask Charge when you deal a Critical Strike while affected by Precision with result: 0.93 div.
+[2025-11-07 22:16:00] All queued modifiers processed.
+[2025-11-07 22:16:00] Proxy 0 session closed and marked dead.
+[2025-11-07 22:16:00] Proxy 1 session closed and marked dead.
+[2025-11-07 22:16:00] Proxy 2 session closed and marked dead.
+[2025-11-07 22:16:00] Proxy 3 session closed and marked dead.
+[2025-11-07 22:16:00] Proxy 4 session closed and marked dead.
+[2025-11-07 22:16:00] Proxy 5 session closed and marked dead.
+[2025-11-07 22:16:00] Proxy 6 session closed and marked dead.
+[2025-11-07 22:16:00] Proxy 7 session closed and marked dead.
+[2025-11-07 22:16:00] Proxy 8 session closed and marked dead.
+[2025-11-07 22:16:00] Proxy 10 session closed and marked dead.
+[2025-11-07 22:16:00] Proxy 11 session closed and marked dead.
+[2025-11-07 22:16:00] Proxy 12 session closed and marked dead.
+[2025-11-07 22:16:00] Proxy 13 session closed and marked dead.
+[2025-11-07 22:16:00] Proxy 14 session closed and marked dead.
+[2025-11-07 22:16:00] Proxy 9 session closed and marked dead.
+[2025-11-07 22:16:00] Worker stopped and sessions closed
+[2025-11-07 22:16:00] Batch 20251107-201446-single-6604 finalized at 2025-11-07T20:16:00.269444.
+[2025-11-07 22:16:00] Database connection closed.
+[2025-11-07 22:16:00] Exported batch 20251107-201446-single-6604 to exports\20251107-201446-single-6604_single.csv.
+[2025-11-07 22:16:06] Uploaded exports\20251107-201446-single-6604_single.csv to Google Sheets (single sheet).

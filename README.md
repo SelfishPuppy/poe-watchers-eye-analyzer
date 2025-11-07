@@ -7,7 +7,7 @@ A GUI tool to fetch and analyze 2-mod Watcher's Eye prices using the official Pa
 - Async fetching of trade prices
 - Averages first 5 online listings in Divine Orbs
 - Shows results in a PyQt5 GUI table
-- Built for the `Mercenaries` league
+- Built for the `Keepers` league
 
 ## Setup
 
