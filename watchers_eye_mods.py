@@ -17,6 +17,9 @@ MOD_COMBOS = [
     ("explicit.stat_1817023621", "explicit.stat_1873457881"),
     ("explicit.stat_1817023621", "explicit.stat_3692646597"),
     ("explicit.stat_1817023621", "explicit.stat_1011863394"),
+    ("explicit.stat_2312747856", "explicit.stat_281949611"),
+    ("explicit.stat_3656959867", "explicit.stat_281949611"),
+    
     ("explicit.stat_1817023621", "explicit.stat_3371719014"),
     ("explicit.stat_1817023621", "explicit.stat_4173751044"),
     ("explicit.stat_1817023621", "explicit.stat_576528026"),
@@ -3739,8 +3742,6 @@ MOD_COMBOS = [
     ("explicit.stat_121436064", "explicit.stat_3656959867"),
     ("explicit.stat_121436064", "explicit.stat_281949611"),
     ("explicit.stat_2312747856", "explicit.stat_3656959867"),
-    ("explicit.stat_2312747856", "explicit.stat_281949611"),
-    ("explicit.stat_3656959867", "explicit.stat_281949611"),
 ]
 
 # Mapping of mod IDs to readable names

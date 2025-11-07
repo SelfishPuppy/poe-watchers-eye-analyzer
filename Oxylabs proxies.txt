@@ -1,0 +1,6 @@
+# Host:Port
+dc.oxylabs.io:8001:user-stikleb_7uLNq-country-US:Oxylabs_passw0rd
+dc.oxylabs.io:8002:user-stikleb_7uLNq-country-US:Oxylabs_passw0rd
+dc.oxylabs.io:8003:user-stikleb_7uLNq-country-US:Oxylabs_passw0rd
+dc.oxylabs.io:8004:user-stikleb_7uLNq-country-US:Oxylabs_passw0rd
+dc.oxylabs.io:8005:user-stikleb_7uLNq-country-US:Oxylabs_passw0rd

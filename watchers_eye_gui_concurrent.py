@@ -19,7 +19,7 @@ from pathlib import Path
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QPushButton,
     QTableWidget, QTableWidgetItem, QLabel, QMessageBox, QTextEdit, QHBoxLayout,
-    QComboBox, QSpinBox, QFormLayout, QCheckBox, QInputDialog
+    QComboBox, QSpinBox, QFormLayout, QCheckBox, QInputDialog, QFileDialog
 )
 from PyQt5.QtCore import QThread, pyqtSignal, QObject, Qt
 from PyQt5.QtGui import QColor
@@ -32,6 +32,10 @@ NAME_TO_MOD_ID = {name: mod_id for mod_id, name in MOD_NAMES.items()}
 DATABASE_PATH = Path("data/watchers_eye.db")
 EXPORT_DIR = Path("exports")
 UPLOAD_ERROR_LOG = Path("watcher_upload_errors.log")
+DEFAULT_PROXY_FILES = [
+    Path("Webshare 10 proxies.txt"),
+    Path("Oxylabs proxies.txt"),
+]
 
 class PriceWorker(QObject):
     result_ready = pyqtSignal(float, float, str, str, int)
@@ -53,7 +57,7 @@ class PriceWorker(QObject):
         self.proxies = []
         self.proxy_cooldown = 60  # seconds to wait before retrying dead proxy
         self.proxy_retry_delay = 60
-        self.proxy_loop_period = 10  # each proxy must perform request every 8 seconds
+        self.proxy_loop_period = 12  # each proxy must perform request every 8 seconds
 
         # internal
         self.proxy_sessions = {}  # idx -> aiohttp session or None
@@ -81,6 +85,7 @@ class PriceWorker(QObject):
         self.batch_started_at = None
         self._db_conn = None
         self._batch_finalized = False
+        self._batch_completed = False
         self.export_dir = EXPORT_DIR
         self.upload_error_log = UPLOAD_ERROR_LOG
         self.single_price_lookup = {}
@@ -97,6 +102,7 @@ class PriceWorker(QObject):
         self.batch_id = self._generate_batch_id()
         self.batch_started_at = datetime.utcnow().isoformat()
         self._batch_finalized = False
+        self._batch_completed = False
         if not self.single_mode:
             self._load_latest_single_prices()
         else:
@@ -498,24 +504,45 @@ class PriceWorker(QObject):
         return float(divine), float(chaos)
 
     def load_proxies(self):
+        proxy_list = []
+        seen = set()
+        for file_path in DEFAULT_PROXY_FILES:
+            entries = self._parse_proxy_file(file_path)
+            for proxy in entries:
+                if proxy not in seen:
+                    proxy_list.append(proxy)
+                    seen.add(proxy)
+        self.proxies = proxy_list
+        self._emit_debug(f"Loaded {len(self.proxies)} proxies from configured lists.")
+        return len(self.proxies) > 0
+
+    def _parse_proxy_file(self, file_path):
+        path = Path(file_path)
+        if not path.exists():
+            return []
+        parsed = []
         try:
-            with open("Webshare 10 proxies.txt", "r", encoding="utf-8") as f:
-                lines = f.readlines()
-            self.proxies = []
-            for line in lines:
-                line = line.strip()
-                if not line:
-                    continue
-                parts = line.split(":")
-                if len(parts) == 4:
-                    ip, port, username, password = parts
-                    proxy_url = f"http://{username}:{password}@{ip}:{port}"
-                    self.proxies.append(proxy_url)
-            self._emit_debug(f"Loaded {len(self.proxies)} proxies")
-            return len(self.proxies) > 0
-        except Exception as e:
-            self._emit_debug(f"Failed to load proxies: {e}")
-            return False
+            with path.open("r", encoding="utf-8") as handle:
+                for raw_line in handle:
+                    line = raw_line.strip()
+                    if not line or line.startswith("#"):
+                        continue
+                    parts = line.split(":")
+                    proxy_url = None
+                    if len(parts) == 4:
+                        host, port, username, password = parts
+                        proxy_url = f"http://{username}:{password}@{host}:{port}"
+                    elif len(parts) == 2:
+                        host, port = parts
+                        proxy_url = f"http://{host}:{port}"
+                    else:
+                        self._emit_debug(f"Skipping unrecognized proxy format in {path}: {line}")
+                        continue
+                    parsed.append(proxy_url)
+            self._emit_debug(f"Loaded {len(parsed)} proxies from {path}.")
+        except Exception as exc:
+            self._emit_debug(f"Failed to load proxies from {path}: {exc}")
+        return parsed
 
     async def _ensure_proxy_session(self, idx):
         """Create session for proxy idx if missing or closed."""
@@ -796,6 +823,7 @@ class PriceWorker(QObject):
                     self._emit_debug("All queued modifiers processed.")
                     self.status_update.emit("Completed.")
                     self.running = False
+                    self._batch_completed = True
                     if not self._stop_tokens_sent:
                         self._stop_tokens_sent = True
                         await self._inject_stop_tokens()
@@ -814,12 +842,18 @@ class PriceWorker(QObject):
                 except Exception:
                     pass
             self._emit_debug("Worker stopped and sessions closed")
-            self._finalize_batch_record()
+            if self._batch_completed:
+                self._finalize_batch_record()
+            else:
+                self._emit_debug("Batch incomplete; leaving record unfinished.")
             self._close_db_connection()
-            export_path = self._export_batch_results()
-            if export_path:
-                self.status_update.emit(f"Exported batch data to {export_path}")
-                self._sync_to_google_sheets(export_path)
+            if self._batch_completed:
+                export_path = self._export_batch_results()
+                if export_path:
+                    self.status_update.emit(f"Exported batch data to {export_path}")
+                    self._sync_to_google_sheets(export_path)
+            else:
+                self._emit_debug("Skipped export/upload because batch did not finish.")
 
     def start(self):
         # create and set event loop for thread
@@ -1191,6 +1225,10 @@ class PriceFetcher(QWidget):
         self.debug_button.clicked.connect(self.show_debug_info)
         layout.addWidget(self.debug_button)
 
+        self.upload_button = QPushButton("Upload CSV to Sheets")
+        self.upload_button.clicked.connect(self.manual_upload_to_sheets)
+        layout.addWidget(self.upload_button)
+
         self.status_label = QLabel("Ready.")
         layout.addWidget(self.status_label)
 
@@ -1459,6 +1497,71 @@ class PriceFetcher(QWidget):
     def closeEvent(self, event):
         self._cleanup_thread()
         super().closeEvent(event)
+
+    def manual_upload_to_sheets(self):
+        try:
+            from google_drive_sync import (
+                GoogleSheetsConfigError,
+                upload_csv_to_google_sheet,
+            )
+        except ImportError as exc:
+            QMessageBox.critical(
+                self,
+                "Upload Error",
+                f"Google client libraries missing: {exc}",
+            )
+            return
+
+        start_dir = str(EXPORT_DIR.resolve())
+        csv_path, _ = QFileDialog.getOpenFileName(
+            self,
+            "Select CSV Export",
+            start_dir,
+            "CSV Files (*.csv)",
+        )
+        if not csv_path:
+            return
+
+        mode = self._infer_mode_from_filename(csv_path)
+        if mode is None:
+            mode, ok = QInputDialog.getItem(
+                self,
+                "Select Mode",
+                "Choose which sheet to update:",
+                ["single", "double"],
+                0,
+                False,
+            )
+            if not ok:
+                return
+
+        try:
+            upload_csv_to_google_sheet(Path(csv_path), mode)
+            QMessageBox.information(
+                self,
+                "Upload Complete",
+                f"Uploaded {csv_path} to the {mode} sheet.",
+            )
+        except GoogleSheetsConfigError as exc:
+            QMessageBox.critical(
+                self,
+                "Configuration Error",
+                str(exc),
+            )
+        except Exception as exc:
+            QMessageBox.critical(
+                self,
+                "Upload Failed",
+                str(exc),
+            )
+
+    def _infer_mode_from_filename(self, path):
+        lower = Path(path).name.lower()
+        if "single" in lower:
+            return "single"
+        if "double" in lower:
+            return "double"
+        return None
 
 def main():
     app = QApplication(sys.argv)
