@@ -24,6 +24,7 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import QThread, pyqtSignal, QObject, Qt
 from PyQt5.QtGui import QColor
 from mod_data import MOD_COMBOS, MOD_NAMES
+from app_config import load_settings, save_settings
 from watchers_eye_db import ensure_database, export_batch_to_csv
 
 DIVINE_TO_CHAOS_RATE = 100.0
@@ -55,6 +56,7 @@ class PriceWorker(QObject):
         # proxies
         self.use_proxies = False
         self.proxies = []
+        self.proxy_files = [str(p) for p in DEFAULT_PROXY_FILES]
         self.proxy_cooldown = 60  # seconds to wait before retrying dead proxy
         self.proxy_retry_delay = 60
         self.proxy_loop_period = 12  # each proxy must perform request every 8 seconds
@@ -506,7 +508,7 @@ class PriceWorker(QObject):
     def load_proxies(self):
         proxy_list = []
         seen = set()
-        for file_path in DEFAULT_PROXY_FILES:
+        for file_path in (self.proxy_files or []):
             entries = self._parse_proxy_file(file_path)
             for proxy in entries:
                 if proxy not in seen:
@@ -1270,6 +1272,10 @@ class PriceFetcher(QWidget):
         self.is_running = False
         self.proxy_states = {}
 
+        # Load and apply persisted settings
+        self._settings = load_settings()
+        self._apply_settings_to_ui()
+
     def start_fetching(self):
         self._start_worker(single=False)
 
@@ -1305,6 +1311,9 @@ class PriceFetcher(QWidget):
         self.worker.listing_count = self.listing_count_spin.value()
         self.worker.use_proxies = self.proxy_checkbox.isChecked()
         self.worker.divine_to_chaos_rate = self.divine_rate
+        # pass configured proxy files into worker
+        proxy_files = self._settings.get("proxy_files") or ["Webshare 10 proxies.txt", "Oxylabs proxies.txt"]
+        self.worker.proxy_files = list(proxy_files)
         existing_results = self.worker.prepare_for_run()
         if existing_results:
             self._populate_cached_results(existing_results)
@@ -1428,6 +1437,11 @@ class PriceFetcher(QWidget):
             self.divine_rate_button.setText(self._divine_rate_button_text())
             if self.worker and self.is_running:
                 self.status_label.setText("New rate will apply on next fetch.")
+            # Save setting immediately
+            try:
+                self._save_current_settings()
+            except Exception:
+                pass
 
     def on_proxy_status_update(self, proxy_idx, state):
         self.proxy_states[proxy_idx] = state
@@ -1475,6 +1489,48 @@ class PriceFetcher(QWidget):
         else:
             proxy_item.setToolTip("")
 
+    # === Settings helpers ===
+    def _apply_settings_to_ui(self):
+        # League
+        league = self._settings.get("league", "Keepers")
+        idx = self.league_combo.findText(league)
+        if idx >= 0:
+            self.league_combo.setCurrentIndex(idx)
+        # Listing count
+        try:
+            listings = int(self._settings.get("listing_count", 5))
+        except Exception:
+            listings = 5
+        self.listing_count_spin.setValue(max(1, min(50, listings)))
+        # Divine rate
+        try:
+            rate = float(self._settings.get("divine_to_chaos_rate", DIVINE_TO_CHAOS_RATE))
+        except Exception:
+            rate = DIVINE_TO_CHAOS_RATE
+        self.divine_rate = rate
+        self.divine_rate_button.setText(self._divine_rate_button_text())
+        # Use proxies
+        use_proxies = bool(self._settings.get("use_proxies", False))
+        self.proxy_checkbox.setChecked(use_proxies)
+
+        # Persist on simple changes
+        self.league_combo.currentTextChanged.connect(lambda _=None: self._save_current_settings())
+        self.listing_count_spin.valueChanged.connect(lambda _=None: self._save_current_settings())
+        self.proxy_checkbox.stateChanged.connect(lambda _=None: self._save_current_settings())
+
+    def _collect_current_settings(self):
+        return {
+            "league": self.league_combo.currentText(),
+            "listing_count": int(self.listing_count_spin.value()),
+            "divine_to_chaos_rate": float(self.divine_rate),
+            "use_proxies": bool(self.proxy_checkbox.isChecked()),
+            "proxy_files": list(self._settings.get("proxy_files") or ["Webshare 10 proxies.txt", "Oxylabs proxies.txt"]),
+        }
+
+    def _save_current_settings(self):
+        self._settings.update(self._collect_current_settings())
+        save_settings(self._settings)
+
     def _populate_cached_results(self, results):
         for entry in results:
             if not isinstance(entry, dict):
@@ -1495,6 +1551,11 @@ class PriceFetcher(QWidget):
             self.update_table(price_div, price_chaos, mod1, mod2, proxy_idx)
 
     def closeEvent(self, event):
+        # Persist settings on exit
+        try:
+            self._save_current_settings()
+        except Exception:
+            pass
         self._cleanup_thread()
         super().closeEvent(event)
 

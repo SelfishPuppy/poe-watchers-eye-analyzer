@@ -1,0 +1,10 @@
+{
+  "league": "Keepers",
+  "listing_count": 5,
+  "divine_to_chaos_rate": 146.0,
+  "use_proxies": true,
+  "proxy_files": [
+    "Webshare 10 proxies.txt",
+    "Oxylabs proxies.txt"
+  ]
+}
